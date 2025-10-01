@@ -30,14 +30,14 @@ export async function countUnits(completedCourses: Course[], currentCourses: Cou
   result['その他'] = 0
   
   for (const category in completedUnitCounts) {
-    let lastCategories: string | undefined = undefined;
-    for (const categories in requiredUnits) {
-      if (categories.split(',').includes(category)) {
-        const aaa = Math.min(requiredUnits[categories] - result[categories], completedUnitCounts[category]);
-        result[categories] += aaa
-        completedUnitCounts[category] -= aaa;
+    let matchedCategoryKey: string | undefined = undefined;
+    for (const categoryKey in requiredUnits) {
+      if (categoryKey.split(',').includes(category)) {
+        const allocatableUnits = Math.min(requiredUnits[categoryKey] - result[categoryKey], completedUnitCounts[category]);
+        result[categoryKey] += allocatableUnits
+        completedUnitCounts[category] -= allocatableUnits;
 
-        lastCategories = categories
+        matchedCategoryKey = categoryKey
       }
 
       if (completedUnitCounts[category] === 0) {
@@ -45,24 +45,24 @@ export async function countUnits(completedCourses: Course[], currentCourses: Cou
       }
     }
 
-    if (lastCategories && completedUnitCounts[category] !== 0) {
-      result[lastCategories] += completedUnitCounts[category]
-    } else if (lastCategories === undefined && completedUnitCounts[category] !== 0) {
+    if (matchedCategoryKey && completedUnitCounts[category] !== 0) {
+      result[matchedCategoryKey] += completedUnitCounts[category]
+    } else if (matchedCategoryKey === undefined && completedUnitCounts[category] !== 0) {
       result['その他'] += completedUnitCounts[category]
     }
   }
 
-  const willResult: Record<string, number> = structuredClone(result)
+  const futureResult: Record<string, number> = structuredClone(result)
 
   for (const category in currentUnitCounts) {
-    let lastCategories: string | undefined = undefined;
-    for (const categories in requiredUnits) {
-      if (categories.split(',').includes(category)) {
-        const aaa = Math.min(requiredUnits[categories] - willResult[categories], currentUnitCounts[category]);
-        willResult[categories] += aaa
-        currentUnitCounts[category] -= aaa;
+    let matchedCategoryKey: string | undefined = undefined;
+    for (const categoryKey in requiredUnits) {
+      if (categoryKey.split(',').includes(category)) {
+        const allocatableUnits = Math.min(requiredUnits[categoryKey] - futureResult[categoryKey], currentUnitCounts[category]);
+        futureResult[categoryKey] += allocatableUnits
+        currentUnitCounts[category] -= allocatableUnits;
 
-        lastCategories = categories
+        matchedCategoryKey = categoryKey
       }
 
       if (currentUnitCounts[category] === 0) {
@@ -70,27 +70,27 @@ export async function countUnits(completedCourses: Course[], currentCourses: Cou
       }
     }
 
-    if (lastCategories && currentUnitCounts[category] !== 0) {
-      willResult[lastCategories] += currentUnitCounts[category]
+    if (matchedCategoryKey && currentUnitCounts[category] !== 0) {
+      futureResult[matchedCategoryKey] += currentUnitCounts[category]
     }
   }
 
   if (currentUnitCounts['その他']) {
     console.log(currentUnitCounts['その他'])
-    willResult['その他'] += currentUnitCounts['その他']
+    futureResult['その他'] += currentUnitCounts['その他']
   }
 
-  const trueResult: Record<string, string> = {};
-  for (const categories in result) {
-    const alias = categories.split(',').at(-1)
-    if (alias) {
-      if (alias === 'その他') {
-        trueResult[alias] = `${result[categories]}(${willResult[categories]})`
+  const formattedResult: Record<string, string> = {};
+  for (const categoryKey in result) {
+    const displayName = categoryKey.split(',').at(-1)
+    if (displayName) {
+      if (displayName === 'その他') {
+        formattedResult[displayName] = `${result[categoryKey]}(${futureResult[categoryKey]})`
       } else {
-        trueResult[alias] = `${result[categories]}(${willResult[categories]}) / ${requiredUnits[categories]}`
+        formattedResult[displayName] = `${result[categoryKey]}(${futureResult[categoryKey]}) / ${requiredUnits[categoryKey]}`
       }
     }
   }
   
-  return trueResult;
+  return formattedResult;
 }
