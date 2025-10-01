@@ -12,13 +12,13 @@ export async function countUnits(completedCourses: Course[], currentCourses: Cou
   
   // 取得済み単位数をカウント
   completedCourses.forEach(course => {
-    const category = course.category || '情報なし';
+    const category = course.category || 'その他';
     completedUnitCounts[category] = (completedUnitCounts[category] || 0) + (course.category ? course.units : 1);
   });
   
   // 履修中の単位数をカウント
   currentCourses.forEach(course => {
-    const category = course.category || '情報なし';
+    const category = course.category || 'その他';
     currentUnitCounts[category] = (currentUnitCounts[category] || 0) + (course.category ? course.units : 1);
   });
   
@@ -30,6 +30,7 @@ export async function countUnits(completedCourses: Course[], currentCourses: Cou
   for (const key in requiredUnits) {
     result[key] = 0;
   }
+  result['その他'] = 0
   
   for (const category in completedUnitCounts) {
     let lastCategories: string | undefined = undefined;
@@ -49,6 +50,8 @@ export async function countUnits(completedCourses: Course[], currentCourses: Cou
 
     if (lastCategories && completedUnitCounts[category] !== 0) {
       result[lastCategories] += completedUnitCounts[category]
+    } else if (lastCategories === undefined && completedUnitCounts[category] !== 0) {
+      result['その他'] += completedUnitCounts[category]
     }
   }
 
@@ -75,11 +78,20 @@ export async function countUnits(completedCourses: Course[], currentCourses: Cou
     }
   }
 
+  if (currentUnitCounts['その他']) {
+    console.log(currentUnitCounts['その他'])
+    willResult['その他'] += currentUnitCounts['その他']
+  }
+
   const trueResult: Record<string, string> = {};
   for (const categories in result) {
     const alias = categories.split(',').at(-1)
     if (alias) {
-      trueResult[alias] = `${result[categories]}(${willResult[categories]}) / ${requiredUnits[categories]}`
+      if (alias === 'その他') {
+        trueResult[alias] = `${result[categories]}(${willResult[categories]})`
+      } else {
+        trueResult[alias] = `${result[categories]}(${willResult[categories]}) / ${requiredUnits[categories]}`
+      }
     }
   }
   

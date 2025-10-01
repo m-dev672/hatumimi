@@ -44,7 +44,7 @@ export function AfterLogin() {
           }
           return <p key={key}>{`${key}: ${value}`}</p>;
         })}
-        <p style={{ color: '#666', fontSize: '0.9em'}}>※情報なしについては科目数を表示しています。</p>
+        <p style={{ color: '#666', fontSize: '0.9em'}}>※単位数が不明な科目については1単位で換算しています。</p>
       <Button variant='solid' mt={4} onClick={() => {
         auth.logout()
       }}>ログアウト</Button>
