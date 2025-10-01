@@ -3,7 +3,7 @@ import { useAuth } from '@/hook/useAuth';
 import { Button, Center, Spinner, Text, VStack } from '@chakra-ui/react';
 import { Tooltip } from '@/components/ui/tooltip';
 import { activateSession, deactivateSession } from '@/context/Auth/authCookie';
-import { getCompletedCourses } from './getCompletedCourses';
+import { getCompletedCourses, type Course } from './getCompletedCourses';
 import { getCurrentCourses } from './getCurrentCourses';
 import { countUnits } from './countUnits';
 
@@ -11,7 +11,7 @@ export function AfterLogin() {
   const auth = useAuth()
 
   const [units, setUnits] = useState<Record<string, string[]>>();
-  const [otherCourses, setOtherCourses] = useState<any[]>();
+  const [otherCourses, setOtherCourses] = useState<{completed: Course[], current: Course[]}>();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -24,9 +24,12 @@ export function AfterLogin() {
 
       if (sessionActivated) {
         const result = await countUnits(await getCompletedCourses(), await getCurrentCourses());
-        const { その他_courses, ...unitsData } = result;
+        const { other_completed_courses, other_current_courses, ...unitsData } = result;
         setUnits(unitsData as Record<string, string[]>);
-        setOtherCourses(その他_courses as any[]);
+        setOtherCourses({
+          completed: other_completed_courses as Course[],
+          current: other_current_courses as Course[]
+        });
         setLoading(false);
       }
     })();
@@ -57,12 +60,29 @@ export function AfterLogin() {
       {units && Object.entries(units).map(([key, value]) => {
         if (Array.isArray(value) && value.length > 2) {
           if (key === 'その他') {
-            const tooltipContent = otherCourses && otherCourses.length > 0 
+            const tooltipContent = otherCourses && (otherCourses.completed.length > 0 || otherCourses.current.length > 0)
               ? (
                   <div>
-                    {otherCourses.map((course, index) => (
-                      <div key={index}>{course.courseName}（{course.units}単位）</div>
-                    ))}
+                    {otherCourses.completed.length > 0 && (
+                      <div>
+                        <div style={{ fontWeight: 'bold', marginBottom: '4px' }}>取得済み:</div>
+                        {otherCourses.completed.map((course, index) => (
+                          <div key={`completed-${index}`} style={{ marginLeft: '8px' }}>
+                            {course.courseName}（{course.units}単位）
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    {otherCourses.current.length > 0 && (
+                      <div style={{ marginTop: otherCourses.completed.length > 0 ? '8px' : '0' }}>
+                        <div style={{ fontWeight: 'bold', marginBottom: '4px' }}>履修中:</div>
+                        {otherCourses.current.map((course, index) => (
+                          <div key={`current-${index}`} style={{ marginLeft: '8px' }}>
+                            {course.courseName}（{course.units}単位）
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 )
               : '科目がありません';
@@ -95,12 +115,29 @@ export function AfterLogin() {
           }
         } else if (Array.isArray(value)) {
           if (key === 'その他') {
-            const tooltipContent = otherCourses && otherCourses.length > 0 
+            const tooltipContent = otherCourses && (otherCourses.completed.length > 0 || otherCourses.current.length > 0)
               ? (
                   <div>
-                    {otherCourses.map((course, index) => (
-                      <div key={index}>{course.courseName}（{course.units}単位）</div>
-                    ))}
+                    {otherCourses.completed.length > 0 && (
+                      <div>
+                        <div style={{ fontWeight: 'bold', marginBottom: '4px' }}>取得済み:</div>
+                        {otherCourses.completed.map((course, index) => (
+                          <div key={`completed-${index}`} style={{ marginLeft: '8px' }}>
+                            {course.courseName}（{course.units}単位）
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    {otherCourses.current.length > 0 && (
+                      <div style={{ marginTop: otherCourses.completed.length > 0 ? '8px' : '0' }}>
+                        <div style={{ fontWeight: 'bold', marginBottom: '4px' }}>履修中:</div>
+                        {otherCourses.current.map((course, index) => (
+                          <div key={`current-${index}`} style={{ marginLeft: '8px' }}>
+                            {course.courseName}（{course.units}単位）
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 )
               : '科目がありません';

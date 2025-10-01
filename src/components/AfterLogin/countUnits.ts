@@ -68,15 +68,13 @@ export async function countUnits(completedCourses: Course[], currentCourses: Cou
 
   const formattedResult: Record<string, string[] | Course[]> = {};
   
-  // 全ての「その他」科目をまとめる
-  const allOtherCourses = [...completedOtherCourses, ...currentOtherCourses];
-  
   for (const categoryKey in result) {
     const displayName = categoryKey.split(',').at(-1)
     if (displayName) {
       if (displayName === 'その他') {
         formattedResult[displayName] = [`${result[categoryKey]}`, `(${futureResult[categoryKey]})`]
-        formattedResult[`${displayName}_courses`] = allOtherCourses
+        formattedResult['other_completed_courses'] = completedOtherCourses
+        formattedResult['other_current_courses'] = currentOtherCourses
       } else {
         formattedResult[displayName] = [`${result[categoryKey]}`, `(${futureResult[categoryKey]})`, " / ", `${requiredUnits[categoryKey]}`]
       }
