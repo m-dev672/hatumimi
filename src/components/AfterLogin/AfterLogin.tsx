@@ -22,11 +22,15 @@ export function AfterLogin() {
 
       if (sessionActivated) {
         setUnits(await countUnits(await getCompletedCourses(), await getCurrentCourses()))
-        await deactivateSession();
-
         setLoading(false);
       }
     })();
+
+    return () => {
+      if (sessionActivated) {
+        deactivateSession();
+      }
+    };
   }, [auth.user])
 
   if (loading) {
