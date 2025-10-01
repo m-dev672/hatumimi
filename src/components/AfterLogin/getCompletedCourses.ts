@@ -9,7 +9,6 @@ export interface Course {
  * 成績情報を学内ポータルから取得してパースする
  */
 export async function getCompletedCourses(): Promise<Course[]> {
-  await fetch('/campusweb/campussquare.do')
   const initResponse = await fetch('/campusweb/campussquare.do?_flowId=SIW0001300-flow&link=menu-link-mf-135122')
 
   const url = new URL(initResponse.url);
