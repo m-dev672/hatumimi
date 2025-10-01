@@ -1,21 +1,20 @@
 import {type Course} from './getCompletedCourses'
 
 /**
- * 
+ * 現在履修中の授業を学内ポータルの出欠状況参照ページから取得してパースする
  */
 export async function getCurrentCourses(): Promise<Course[]> {
-  const attendancesTableResponse = await fetch('/campusweb/campussquare.do?_flowId=AAW0001000-flow&link=menu-link-mf-135117')
+  const attendancesPage = await fetch('/campusweb/campussquare.do?_flowId=AAW0001000-flow&link=menu-link-mf-135117')
 
-  const attendancesTableHtml = await attendancesTableResponse.text()
+  const attendancesPageHtml = await attendancesPage.text()
 
   const parser = new DOMParser();
-  const document = parser.parseFromString(attendancesTableHtml, 'text/html');
+  const document = parser.parseFromString(attendancesPageHtml, 'text/html');
 
   const currentMonth = new Date().getMonth();
   const currentTerms = 3 <= currentMonth && currentMonth <= 8 ? ['前学期', '集中', '通年'] : ['後学期', '通年'];
 
   const attendancesTable = Array.from(document.querySelectorAll('tbody')).at(-2);
-  //console.log(attendancesTable)
 
   const kyoyoJsonResponse = await fetch('human_science_2024_kyoyo.json');
   const senkoJsonResponse = await fetch('human_science_2024_senko.json');
