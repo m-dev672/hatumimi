@@ -58,12 +58,22 @@ export function AfterLogin() {
         if (Array.isArray(value) && value.length > 2) {
           if (key === 'その他') {
             const tooltipContent = otherCourses && otherCourses.length > 0 
-              ? otherCourses.map(course => course.courseName).join(', ')
+              ? (
+                  <div>
+                    {otherCourses.map((course, index) => (
+                      <div key={index}>{course.courseName}（{course.units}単位）</div>
+                    ))}
+                  </div>
+                )
               : '科目がありません';
             
             return (
               <Tooltip key={key} content={tooltipContent}>
-                <p style={{ cursor: 'pointer' }}>
+                <p style={{ 
+                  cursor: 'pointer',
+                  textDecoration: 'underline',
+                  textDecorationStyle: 'dotted'
+                }}>
                   {key}: {value[0]}
                   <span style={{ color: '#999', fontSize: '0.8em' }}>
                     {value[1]}
@@ -86,12 +96,22 @@ export function AfterLogin() {
         } else if (Array.isArray(value)) {
           if (key === 'その他') {
             const tooltipContent = otherCourses && otherCourses.length > 0 
-              ? otherCourses.map(course => course.courseName).join(', ')
+              ? (
+                  <div>
+                    {otherCourses.map((course, index) => (
+                      <div key={index}>{course.courseName}（{course.units}単位）</div>
+                    ))}
+                  </div>
+                )
               : '科目がありません';
             
             return (
               <Tooltip key={key} content={tooltipContent}>
-                <p style={{ cursor: 'pointer' }}>
+                <p style={{ 
+                  cursor: 'pointer',
+                  textDecoration: 'underline',
+                  textDecorationStyle: 'dotted'
+                }}>
                   {key}: {value[0]}
                   <span style={{ color: '#999', fontSize: '0.8em' }}>
                     {value[1]}
