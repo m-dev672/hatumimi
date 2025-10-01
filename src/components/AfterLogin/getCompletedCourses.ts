@@ -9,22 +9,21 @@ export interface Course {
  * 成績情報を学内ポータルから取得してパースする
  */
 export async function getCompletedCourses(): Promise<Course[]> {
-  const initResponse = await fetch('/campusweb/campussquare.do?_flowId=SIW0001300-flow&link=menu-link-mf-135122')
+  const initialResponse = await fetch('/campusweb/campussquare.do?_flowId=SIW0001300-flow&link=menu-link-mf-135122')
 
-  const url = new URL(initResponse.url);
-  const flowExecKey = url.searchParams.get('_flowExecutionKey');
-  if (flowExecKey === null) {
-    //console.log('flowExecKey get fail')
+  const url = new URL(initialResponse.url);
+  const firstFlowExecutionKey = url.searchParams.get('_flowExecutionKey');
+  if (firstFlowExecutionKey === null) {
     return [];
   }
 
-  const midResponse = await fetch('/campusweb/campussquare.do', {
+  const csvDownloadPage = await fetch('/campusweb/campussquare.do', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
     body: new URLSearchParams({
-      '_flowExecutionKey': flowExecKey,
+      '_flowExecutionKey': firstFlowExecutionKey,
       '_eventId': 'fileOutput',
       'spanType': '0',  // 過去を含めた全成績
       'nendo': '2025',
@@ -32,36 +31,33 @@ export async function getCompletedCourses(): Promise<Course[]> {
     }),
   });
 
-  const midResponseText = await midResponse.text()
-  //console.log(midResponseText)
-
+  const csvDownloadPageHtml = await csvDownloadPage.text()
   const parser = new DOMParser();
-  const doc = parser.parseFromString(midResponseText, 'text/html');
+  const doc = parser.parseFromString(csvDownloadPageHtml, 'text/html');
 
   const form = doc.getElementById('taniReferListForm');
   if (form === null) {
     return [];
   }
 
-  const flowExecKey2 = (form as HTMLFormElement)._flowExecutionKey.value as string | null;
-  //console.log(flowExecKey2);
+  const secondFlowExecutionKey = (form as HTMLFormElement)._flowExecutionKey.value as string | null;
 
-  if (flowExecKey2 === null) {
+  if (secondFlowExecutionKey === null) {
     return [];
   }
 
-  const finalResponse = await fetch('/campusweb/campussquare.do', {
+  const csvResponse = await fetch('/campusweb/campussquare.do', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
     body: new URLSearchParams({
-      '_flowExecutionKey': flowExecKey2,
+      '_flowExecutionKey': secondFlowExecutionKey,
       '_eventId': 'execCsv'
     }),
   })
 
-  const buffer = await finalResponse.arrayBuffer();
+  const buffer = await csvResponse.arrayBuffer();
   const decoder = new TextDecoder('shift-jis');
   const csvContent = decoder.decode(buffer);
 
@@ -73,9 +69,7 @@ export async function getCompletedCourses(): Promise<Course[]> {
     if (line.includes('"No."')) {
       isDataSection = true;
       continue;
-    }
-
-    if (!isDataSection) {
+    } else if (!isDataSection) {
       continue;
     }
 
@@ -84,9 +78,9 @@ export async function getCompletedCourses(): Promise<Course[]> {
     const courseName = columns[4];
     const category = columns[2];
     const units = columns[6];
-    const grade = columns[9];
+    const evaluation = columns[9];
 
-    if (courseName && grade !== '不可') {
+    if (courseName && evaluation !== '不可') {
       completedCourses.push({
         courseName: courseName,
         category: category,
