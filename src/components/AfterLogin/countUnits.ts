@@ -1,9 +1,41 @@
 import {type Course} from './getCompletedCourses'
 
 /**
+ * コースを必要単位数に割り当てる
+ */
+function allocateCoursesToCategories(
+  courseUnitCounts: Record<string, number>,
+  requiredUnits: Record<string, number>,
+  result: Record<string, number>
+): void {
+  for (const category in courseUnitCounts) {
+    let matchedCategoryKey: string | undefined = undefined;
+    for (const categoryKey in requiredUnits) {
+      if (categoryKey.split(',').includes(category)) {
+        const allocatableUnits = Math.min(requiredUnits[categoryKey] - result[categoryKey], courseUnitCounts[category]);
+        result[categoryKey] += allocatableUnits;
+        courseUnitCounts[category] -= allocatableUnits;
+
+        matchedCategoryKey = categoryKey;
+      }
+
+      if (courseUnitCounts[category] === 0) {
+        break;
+      }
+    }
+
+    if (matchedCategoryKey && courseUnitCounts[category] !== 0) {
+      result[matchedCategoryKey] += courseUnitCounts[category];
+    } else if (matchedCategoryKey === undefined && courseUnitCounts[category] !== 0) {
+      result['その他'] += courseUnitCounts[category];
+    }
+  }
+}
+
+/**
  * カテゴリーごとの単位数をカウントする
  */
-export async function countUnits(completedCourses: Course[], currentCourses: Course[]): Promise<Record<string, string>> {
+export async function countUnits(completedCourses: Course[], currentCourses: Course[]): Promise<Record<string, string[]>> {
   const completedUnitCounts: Record<string, number> = {};
   const currentUnitCounts: Record<string, number> = {};
   
@@ -19,7 +51,6 @@ export async function countUnits(completedCourses: Course[], currentCourses: Cou
     currentUnitCounts[category] = (currentUnitCounts[category] || 0) + (course.category ? course.units : 1);
   });
   
-  // 結果を文字列形式で作成
   const sotsugyoResponse = await fetch('human_science_2024_sotsugyo.json');
   const requiredUnits: Record<string, number> = await sotsugyoResponse.json();
   
@@ -29,65 +60,20 @@ export async function countUnits(completedCourses: Course[], currentCourses: Cou
   }
   result['その他'] = 0
   
-  for (const category in completedUnitCounts) {
-    let matchedCategoryKey: string | undefined = undefined;
-    for (const categoryKey in requiredUnits) {
-      if (categoryKey.split(',').includes(category)) {
-        const allocatableUnits = Math.min(requiredUnits[categoryKey] - result[categoryKey], completedUnitCounts[category]);
-        result[categoryKey] += allocatableUnits
-        completedUnitCounts[category] -= allocatableUnits;
-
-        matchedCategoryKey = categoryKey
-      }
-
-      if (completedUnitCounts[category] === 0) {
-        break
-      }
-    }
-
-    if (matchedCategoryKey && completedUnitCounts[category] !== 0) {
-      result[matchedCategoryKey] += completedUnitCounts[category]
-    } else if (matchedCategoryKey === undefined && completedUnitCounts[category] !== 0) {
-      result['その他'] += completedUnitCounts[category]
-    }
-  }
+  allocateCoursesToCategories(completedUnitCounts, requiredUnits, result);
 
   const futureResult: Record<string, number> = structuredClone(result)
 
-  for (const category in currentUnitCounts) {
-    let matchedCategoryKey: string | undefined = undefined;
-    for (const categoryKey in requiredUnits) {
-      if (categoryKey.split(',').includes(category)) {
-        const allocatableUnits = Math.min(requiredUnits[categoryKey] - futureResult[categoryKey], currentUnitCounts[category]);
-        futureResult[categoryKey] += allocatableUnits
-        currentUnitCounts[category] -= allocatableUnits;
+  allocateCoursesToCategories(currentUnitCounts, requiredUnits, futureResult);
 
-        matchedCategoryKey = categoryKey
-      }
-
-      if (currentUnitCounts[category] === 0) {
-        break
-      }
-    }
-
-    if (matchedCategoryKey && currentUnitCounts[category] !== 0) {
-      futureResult[matchedCategoryKey] += currentUnitCounts[category]
-    }
-  }
-
-  if (currentUnitCounts['その他']) {
-    console.log(currentUnitCounts['その他'])
-    futureResult['その他'] += currentUnitCounts['その他']
-  }
-
-  const formattedResult: Record<string, string> = {};
+  const formattedResult: Record<string, string[]> = {};
   for (const categoryKey in result) {
     const displayName = categoryKey.split(',').at(-1)
     if (displayName) {
       if (displayName === 'その他') {
-        formattedResult[displayName] = `${result[categoryKey]}(${futureResult[categoryKey]})`
+        formattedResult[displayName] = [`${result[categoryKey]}`, `(${futureResult[categoryKey]})`]
       } else {
-        formattedResult[displayName] = `${result[categoryKey]}(${futureResult[categoryKey]}) / ${requiredUnits[categoryKey]}`
+        formattedResult[displayName] = [`${result[categoryKey]}`, `(${futureResult[categoryKey]})`, " / ", `${requiredUnits[categoryKey]}`]
       }
     }
   }
