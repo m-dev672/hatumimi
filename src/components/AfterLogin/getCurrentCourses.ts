@@ -27,10 +27,27 @@ export async function getCurrentCourses(): Promise<Course[]> {
   Array.from(attendancesTable!.rows).forEach((row) => {
     const term = row.children[1]!.textContent!.trim()
     if (currentTerms.includes(term)) {
-      const courseName = (row.children[3].textContent!.split('／').at(0) || '').trim()
-      const result = courses.find(c => c.courseName === courseName)
+      const fullCourseName = row.children[3].textContent!.trim()
+      const courseNameParts = fullCourseName.split('／')
+      
+      let result: Course | undefined = undefined
+      
+      // 前半部分でマッチを試す
+      const firstPart = courseNameParts[0]?.trim()
+      if (firstPart) {
+        result = courses.find(c => c.courseName === firstPart)
+      }
+      
+      // 前半でマッチしなかった場合、後半部分でマッチを試す
+      if (result === undefined && courseNameParts.length > 1) {
+        const secondPart = courseNameParts[1]?.trim()
+        if (secondPart) {
+          result = courses.find(c => c.courseName === secondPart)
+        }
+      }
+      
       if (result === undefined) {
-        currentCourses.push({courseName: courseName, category: undefined, units: undefined} as Course)
+        currentCourses.push({courseName: firstPart || fullCourseName, category: undefined, units: undefined} as Course)
       } else {
         currentCourses.push(result)
       }
