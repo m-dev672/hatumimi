@@ -25,9 +25,9 @@ export async function getCurrentCourses(): Promise<Course[]> {
   const currentCourses: Course[] = []
 
   Array.from(attendancesTable!.rows).forEach((row) => {
-    const term = row.children[1].textContent.trim()
+    const term = row.children[1]!.textContent!.trim()
     if (currentTerms.includes(term)) {
-      const courseName = (row.children[3].textContent.split('／').at(0) || '').trim()
+      const courseName = (row.children[3].textContent!.split('／').at(0) || '').trim()
       const result = courses.find(c => c.courseName === courseName)
       if (result === undefined) {
         currentCourses.push({courseName: courseName, category: undefined, units: 0} as Course)

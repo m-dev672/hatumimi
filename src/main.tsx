@@ -6,7 +6,7 @@ import { AuthProvider } from '@/context/Auth/AuthProvider.tsx'
 import { FirebaseUserProvider } from './context/FirebaseUser/FirebaseUserProvider.tsx'
 
 createRoot(document.getElementById('root')!).render(
-  //<StrictMode>
+  <StrictMode>
     <Provider>
       <FirebaseUserProvider>
         <AuthProvider>
@@ -14,5 +14,5 @@ createRoot(document.getElementById('root')!).render(
         </AuthProvider>
       </FirebaseUserProvider>
     </Provider>
-  //</StrictMode>,
+  </StrictMode>,
 )

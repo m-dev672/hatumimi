@@ -25,6 +25,9 @@ export async function activateSession(userCredentials: User): Promise<boolean> {
   if (match) {
     const title = match[1];
     if (title.includes('Please Wait While Redirecting to console')) {
+      await fetch('/campusweb/portal.do?page=main', {
+          credentials: 'include'
+        });
       return true;
     }
   }

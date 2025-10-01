@@ -17,7 +17,6 @@ export function AfterLogin() {
     let sessionActivated = false;
 
     (async () => {
-      await deactivateSession();
       sessionActivated = await activateSession(auth.user);
       
       if (sessionActivated) {
