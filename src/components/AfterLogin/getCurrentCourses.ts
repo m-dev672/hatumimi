@@ -1,7 +1,7 @@
 import {type Course} from './getCompletedCourses'
 
 /**
- * 現在履修中の授業を学内ポータルの出欠状況参照ページから取得してパースする
+ * 現在履修中の授業を学内ポータルの出欠状況参照ページから取得する
  */
 export async function getCurrentCourses(): Promise<Course[]> {
   const attendancesPage = await fetch('/campusweb/campussquare.do?_flowId=AAW0001000-flow&link=menu-link-mf-135117')

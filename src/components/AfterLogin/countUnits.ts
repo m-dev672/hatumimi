@@ -2,9 +2,6 @@ import {type Course} from './getCompletedCourses'
 
 /**
  * カテゴリーごとの単位数をカウントする
- * @param completedCourses 取得済みの科目
- * @param currentCourses 履修中の科目
- * @returns 現在までに取得した単位数（今季が終了した際に取得予定の単位数 + 現在までに取得した単位数）
  */
 export async function countUnits(completedCourses: Course[], currentCourses: Course[]): Promise<Record<string, string>> {
   const completedUnitCounts: Record<string, number> = {};

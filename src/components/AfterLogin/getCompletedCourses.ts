@@ -6,7 +6,7 @@ export interface Course {
 };
 
 /**
- * 成績情報を学内ポータルから取得してパースする
+ * 過去履修した授業を学内ポータルの成績情報ページから取得する
  */
 export async function getCompletedCourses(): Promise<Course[]> {
   const initialResponse = await fetch('/campusweb/campussquare.do?_flowId=SIW0001300-flow&link=menu-link-mf-135122')
