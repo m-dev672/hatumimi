@@ -35,11 +35,14 @@ export function AfterLogin() {
 
   if (loading) {
     return (
-      <Center h='100vh'>
+      <Center h='100vh' flexDirection="column" alignItems="center" mx={4}>
         <VStack>
           <Spinner size="xl" />
           <Text mt={4}>単位数を計算中</Text>
         </VStack>
+        <Button variant='solid' mt={4} onClick={() => {
+          auth.logout()
+        }}>ログアウト</Button>
       </Center>
     )
   }
