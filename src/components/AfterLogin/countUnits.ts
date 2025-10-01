@@ -35,7 +35,7 @@ function allocateCoursesToCategories(
 /**
  * カテゴリーごとの単位数をカウントする
  */
-export async function countUnits(completedCourses: Course[], currentCourses: Course[]): Promise<Record<string, string[]>> {
+export async function countUnits(completedCourses: Course[], currentCourses: Course[]): Promise<Record<string, string[] | Course[]>> {
   const completedUnitCounts: Record<string, number> = {};
   const currentUnitCounts: Record<string, number> = {};
   
@@ -66,12 +66,27 @@ export async function countUnits(completedCourses: Course[], currentCourses: Cou
 
   allocateCoursesToCategories(currentUnitCounts, requiredUnits, futureResult);
 
-  const formattedResult: Record<string, string[]> = {};
+  const formattedResult: Record<string, string[] | Course[]> = {};
+  
+  // その他科目を収集
+  const otherCourses: Course[] = [];
+  completedCourses.forEach(course => {
+    if (!course.category) {
+      otherCourses.push(course);
+    }
+  });
+  currentCourses.forEach(course => {
+    if (!course.category) {
+      otherCourses.push(course);
+    }
+  });
+  
   for (const categoryKey in result) {
     const displayName = categoryKey.split(',').at(-1)
     if (displayName) {
       if (displayName === 'その他') {
         formattedResult[displayName] = [`${result[categoryKey]}`, `(${futureResult[categoryKey]})`]
+        formattedResult[`${displayName}_courses`] = otherCourses
       } else {
         formattedResult[displayName] = [`${result[categoryKey]}`, `(${futureResult[categoryKey]})`, " / ", `${requiredUnits[categoryKey]}`]
       }
