@@ -1,11 +1,15 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useAuth } from '@/hook/useAuth';
 import { Button, Center } from '@chakra-ui/react';
-import { getPerformance } from './getPerformance';
 import { activateSession, deactivateSession } from '@/context/Auth/authCookie';
+import { getCompletedCourses } from './getCompletedCourses';
+import { getCurrentCourses } from './getCurrentCourses';
+import { countUnits} from './countUnits';
 
 export function AfterLogin() {
   const auth = useAuth()
+
+  const [units, setUnits] = useState<Record<string, number>>();
 
   useEffect(() => {
     if (!auth.user.id) return;
@@ -14,7 +18,10 @@ export function AfterLogin() {
 
     async function updateDailyInfo() {
       sessionActivated = await activateSession(auth.user);
-      await getPerformance();
+      
+      const courses = [...(await getCompletedCourses()), ...(await getCurrentCourses())]
+
+      setUnits(countUnits(courses))
     }
 
     updateDailyInfo();
@@ -26,6 +33,9 @@ export function AfterLogin() {
 
   return (
     <Center h='100vh' flexDirection="column" alignItems="center" mx={4}>
+        {units && Object.entries(units).map(([key, value]) => (
+          <p key={key}>{`${key}: ${value}`}</p>
+        ))}
       <Button variant='solid' mt={4} onClick={() => {
         auth.logout()
       }}>ログアウト</Button>

@@ -1,0 +1,1072 @@
+[
+  {
+    "courseName": "人間科学概論",
+    "category": "基礎科目",
+    "units": 2
+  },
+  {
+    "courseName": "人間形成論",
+    "category": "基礎科目",
+    "units": 2
+  },
+  {
+    "courseName": "人間関係論",
+    "category": "基礎科目",
+    "units": 2
+  },
+  {
+    "courseName": "健康学概論",
+    "category": "基礎科目",
+    "units": 2
+  },
+  {
+    "courseName": "心理学概論",
+    "category": "基礎科目",
+    "units": 2
+  },
+  {
+    "courseName": "教育学概論",
+    "category": "基礎科目",
+    "units": 2
+  },
+  {
+    "courseName": "社会学概論",
+    "category": "基礎科目",
+    "units": 2
+  },
+  {
+    "courseName": "社会福祉学概論",
+    "category": "基礎科目",
+    "units": 2
+  },
+  {
+    "courseName": "人間科学基礎ゼミナール",
+    "category": "基礎科目",
+    "units": 2
+  },
+  {
+    "courseName": "情報処理I",
+    "category": "基礎科目",
+    "units": 2
+  },
+  {
+    "courseName": "情報処理II",
+    "category": "基礎科目",
+    "units": 2
+  },
+  {
+    "courseName": "ライフデザインの心理学",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "心理学実験I",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "心理学実験II",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "知覚・認知心理学",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "感覚知覚心理学",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "生涯発達心理学I",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "生涯発達心理学II",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "臨床心理学概論",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "心理的アセスメント",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "心理学研究法",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "心理学研究法特別講義",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "異文化間教育学",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "学習・言語心理学",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "司法・犯罪心理学",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "教育人間学",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "教育社会学",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "感情・人格心理学",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "応用社会心理学",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "心理学統計法I",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "心理学統計法II",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "スポーツ社会学",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "スポーツ実践I",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "スポーツ実践II",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "人体生理学",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "スポーツ心理学",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "栄養管理学",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "公衆衛生学",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "ヒューマンマインド学",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "解剖学",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "統計と調査",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "スポーツマネジメント",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "身体計測と情報処理",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "社会調査論I",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "社会調査論II",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "現代社会論I",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "現代社会論II",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "ジェンダー研究",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "現代社会心理学",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "国際社会論Ａ",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "景観地理学",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "人口地理学",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "データ分析法I",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "データ分析法II",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "社会統計学I",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "社会統計学II",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "現代文化人類学",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "フィールドワーク入門I",
+    "category": "基幹科目",
+    "units": 1
+  },
+  {
+    "courseName": "フィールドワーク入門II",
+    "category": "基幹科目",
+    "units": 1
+  },
+  {
+    "courseName": "家族社会学",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "都市空間と社会",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "公認心理師の職責",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "精神疾患とその治療",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "環境心理学",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "臨床発達心理学",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "人体の構造と機能及び疾病",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "関係行政論",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "教育・学校心理学",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "心理学的支援法",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "発達心理学",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "ボランティア学習論",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "ジェンダー心理学",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "健康・医療心理学",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "社会・集団・家族心理学",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "障害者・障害児心理学",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "心理演習I",
+    "category": "展開科目",
+    "units": 1
+  },
+  {
+    "courseName": "心理演習II",
+    "category": "展開科目",
+    "units": 1
+  },
+  {
+    "courseName": "家族心理学",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "色彩心理学",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "福祉心理学",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "被害者心理学",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "神経・生理心理学",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "心理療法",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "コミュニティー心理学",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "組織心理学",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "教育哲学",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "青年心理学",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "産業・組織心理学",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "心理実習I",
+    "category": "展開科目",
+    "units": 1
+  },
+  {
+    "courseName": "心理実習II",
+    "category": "展開科目",
+    "units": 1
+  },
+  {
+    "courseName": "スポーツ実技種目(球技①)",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "スポーツ実技種目(球技②)",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "スポーツ実技種目(球技③)",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "スポーツ実技種目(陸上競技)",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "スポーツ実技種目(器械運動)",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "スポーツ実技種目(ダンス)",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "スポーツ実技種目(武道)",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "スポーツ実技種目(水泳)",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "ロールモデル論",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "スポーツ医学",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "学校保健",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "救急法",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "運動処方論",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "野外実習(サマー)",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "野外実習(ウィンター)",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "バイオメカニクス",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "スポーツ産業論",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "生涯スポーツ論",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "スポーツ哲学",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "ライフアカデミックスキル",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "スポーツ実践III",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "スポーツ実践IV",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "トレーニング実技",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "トレーナー実習",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "コーチング論",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "コーチング心理学",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "スポーツと経済",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "スポーツの行政と公共政策",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "保健体育専門教養I",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "保健体育専門教養II",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "保健体育指導実践I",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "保健体育指導実践II",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "スポーツ文化",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "身体科学実験実習",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "身体運動の計算科学とシミュレーション",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "睡眠と生体リズム",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "機能解剖学実習",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "健康システム管理論",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "実践英語",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "地域社会学",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "高齢社会論",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "異文化社会論Ａ",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "異文化社会論Ｂ",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "地域情報論",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "法女性学",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "市民社会論",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "現代メディア論",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "産業地理学",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "地理情報システム論",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "環境計画論",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "気象学",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "地域防災論",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "国際社会論Ｂ",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "社会調査法(含む実習)ＡI",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "社会調査法(含む実習)ＡII",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "社会調査法(含む実習)ＢI",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "社会調査法(含む実習)ＢII",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "高齢者福祉論",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "地域福祉論",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "外国語文献講読I",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "外国語文献講読II",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "外国語文献講読III",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "ヨーロッパ政治",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "ヨーロッパ政治史",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "労働法I",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "労働法II",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "地方自治論I",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "地方自治論II",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "形質人類学",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "世界地誌",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "横浜学I",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "地域社会貢献論",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "横浜学II",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "環境社会論",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "人間科学特別講義",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "プログラミング演習",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "障害者福祉論",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "児童福祉論",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "キャリア特別講義",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "レジャーと産業",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "日本政治",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "日本政治史",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "自然地理学概論I",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "自然地理学概論II",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "比較政治学I",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "比較政治学II",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "国際政治学I",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "国際政治学II",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "地誌学概論",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "憲法概説I",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "憲法概説II",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "刑法概説",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "政治学入門",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "民法概説",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "哲学概論I",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "哲学概論II",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "金融論",
+    "category": "関連科目",
+    "units": 4
+  },
+  {
+    "courseName": "経済史I",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "経済史II",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "財政学I",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "財政学II",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "世界経済論I",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "世界経済論II",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "経済政策",
+    "category": "関連科目",
+    "units": 4
+  },
+  {
+    "courseName": "地理学(含地誌)",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "西洋経済史I",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "西洋経済史II",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "人文地理学概論I",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "人文地理学概論II",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "国際法I",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "国際法II",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "行政法I",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "行政法II",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "経済地理I",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "経済地理II",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "日本史概論I",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "日本史概論II",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "日本経済史I",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "日本経済史II",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "外国史概論I",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "外国史概論II",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "人間科学専門ゼミナールI",
+    "category": "総合演習",
+    "units": 4
+  },
+  {
+    "courseName": "人間科学専門ゼミナールII",
+    "category": "総合演習",
+    "units": 4
+  },
+  {
+    "courseName": "卒業研究",
+    "category": "総合演習",
+    "units": 4
+  }
+]

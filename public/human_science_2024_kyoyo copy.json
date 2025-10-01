@@ -1,0 +1,1282 @@
+[
+  {
+    "courseName": "ＦＹＳ",
+    "category": "初年次ゼミナール",
+    "units": 2
+  },
+  {
+    "courseName": "文章表現基礎演習",
+    "category": "教養基礎演習",
+    "units": 2
+  },
+  {
+    "courseName": "教養データサイエンス",
+    "category": "教養基礎演習",
+    "units": 2
+  },
+  {
+    "courseName": "哲学",
+    "category": "人文の分野",
+    "units": 2
+  },
+  {
+    "courseName": "倫理学",
+    "category": "人文の分野",
+    "units": 2
+  },
+  {
+    "courseName": "宗教学",
+    "category": "人文の分野",
+    "units": 2
+  },
+  {
+    "courseName": "心理学",
+    "category": "人文の分野",
+    "units": 2
+  },
+  {
+    "courseName": "文学",
+    "category": "人文の分野",
+    "units": 2
+  },
+  {
+    "courseName": "日本語学",
+    "category": "人文の分野",
+    "units": 2
+  },
+  {
+    "courseName": "言語学",
+    "category": "人文の分野",
+    "units": 2
+  },
+  {
+    "courseName": "世界史",
+    "category": "人文の分野",
+    "units": 2
+  },
+  {
+    "courseName": "日本史",
+    "category": "人文の分野",
+    "units": 2
+  },
+  {
+    "courseName": "民俗学",
+    "category": "人文の分野",
+    "units": 2
+  },
+  {
+    "courseName": "考古学",
+    "category": "人文の分野",
+    "units": 2
+  },
+  {
+    "courseName": "文化人類学",
+    "category": "人文の分野",
+    "units": 2
+  },
+  {
+    "courseName": "社会学",
+    "category": "社会の分野",
+    "units": 2
+  },
+  {
+    "courseName": "人文地理学",
+    "category": "社会の分野",
+    "units": 2
+  },
+  {
+    "courseName": "国際関係概論",
+    "category": "社会の分野",
+    "units": 2
+  },
+  {
+    "courseName": "法学",
+    "category": "社会の分野",
+    "units": 2
+  },
+  {
+    "courseName": "日本国憲法",
+    "category": "社会の分野",
+    "units": 2
+  },
+  {
+    "courseName": "政治学",
+    "category": "社会の分野",
+    "units": 2
+  },
+  {
+    "courseName": "社会心理学",
+    "category": "社会の分野",
+    "units": 2
+  },
+  {
+    "courseName": "経済学",
+    "category": "社会の分野",
+    "units": 2
+  },
+  {
+    "courseName": "ジェンダー論",
+    "category": "社会の分野",
+    "units": 2
+  },
+  {
+    "courseName": "ボランティア論",
+    "category": "社会の分野",
+    "units": 2
+  },
+  {
+    "courseName": "経営学",
+    "category": "社会の分野",
+    "units": 2
+  },
+  {
+    "courseName": "生涯学習論",
+    "category": "社会の分野",
+    "units": 2
+  },
+  {
+    "courseName": "日本事情",
+    "category": "社会の分野",
+    "units": 2
+  },
+  {
+    "courseName": "基礎数学",
+    "category": "自然の分野",
+    "units": 2
+  },
+  {
+    "courseName": "数学",
+    "category": "自然の分野",
+    "units": 2
+  },
+  {
+    "courseName": "統計学",
+    "category": "自然の分野",
+    "units": 2
+  },
+  {
+    "courseName": "基礎物理学",
+    "category": "自然の分野",
+    "units": 2
+  },
+  {
+    "courseName": "物理学",
+    "category": "自然の分野",
+    "units": 2
+  },
+  {
+    "courseName": "基礎化学",
+    "category": "自然の分野",
+    "units": 2
+  },
+  {
+    "courseName": "化学",
+    "category": "自然の分野",
+    "units": 2
+  },
+  {
+    "courseName": "基礎生物学",
+    "category": "自然の分野",
+    "units": 2
+  },
+  {
+    "courseName": "生物学",
+    "category": "自然の分野",
+    "units": 2
+  },
+  {
+    "courseName": "教養デジタルテクノロジ",
+    "category": "自然の分野",
+    "units": 2
+  },
+  {
+    "courseName": "物理科学",
+    "category": "自然の分野",
+    "units": 2
+  },
+  {
+    "courseName": "生命科学",
+    "category": "自然の分野",
+    "units": 2
+  },
+  {
+    "courseName": "科学技術史",
+    "category": "自然の分野",
+    "units": 2
+  },
+  {
+    "courseName": "AIの実践と社会への展開",
+    "category": "自然の分野",
+    "units": 1
+  },
+  {
+    "courseName": "キャリアデザイン",
+    "category": "人間形成の分野",
+    "units": 2
+  },
+  {
+    "courseName": "国内インターンシップ",
+    "category": "人間形成の分野",
+    "units": 2
+  },
+  {
+    "courseName": "海外インターンシップ",
+    "category": "人間形成の分野",
+    "units": 2
+  },
+  {
+    "courseName": "体験型研修",
+    "category": "人間形成の分野",
+    "units": 2
+  },
+  {
+    "courseName": "手話入門",
+    "category": "人間形成の分野",
+    "units": 2
+  },
+  {
+    "courseName": "神奈川大学の歴史",
+    "category": "人間形成の分野",
+    "units": 2
+  },
+  {
+    "courseName": "健康科学とスポーツI",
+    "category": "人間形成の分野",
+    "units": 1
+  },
+  {
+    "courseName": "健康科学とスポーツII",
+    "category": "人間形成の分野",
+    "units": 1
+  },
+  {
+    "courseName": "教養スポーツ",
+    "category": "人間形成の分野",
+    "units": 1
+  },
+  {
+    "courseName": "公衆衛生",
+    "category": "人間形成の分野",
+    "units": 2
+  },
+  {
+    "courseName": "芸術",
+    "category": "人間形成の分野",
+    "units": 2
+  },
+  {
+    "courseName": "社会と人間",
+    "category": "共通テーマ科目",
+    "units": 2
+  },
+  {
+    "courseName": "科学技術と社会",
+    "category": "共通テーマ科目",
+    "units": 2
+  },
+  {
+    "courseName": "世界の中の日本",
+    "category": "共通テーマ科目",
+    "units": 2
+  },
+  {
+    "courseName": "公共の新しいかたちをもとめて",
+    "category": "共通テーマ科目",
+    "units": 2
+  },
+  {
+    "courseName": "社会生活とスポーツ",
+    "category": "共通テーマ科目",
+    "units": 2
+  },
+  {
+    "courseName": "環境と社会",
+    "category": "共通テーマ科目",
+    "units": 2
+  },
+  {
+    "courseName": "科学の世界",
+    "category": "共通テーマ科目",
+    "units": 2
+  },
+  {
+    "courseName": "英語I（基礎）",
+    "category": "外国語科目（英語）",
+    "units": 2
+  },
+  {
+    "courseName": "英語I（初級）",
+    "category": "外国語科目（英語）",
+    "units": 2
+  },
+  {
+    "courseName": "英語I（中級）",
+    "category": "外国語科目（英語）",
+    "units": 2
+  },
+  {
+    "courseName": "英語I（上級）",
+    "category": "外国語科目（英語）",
+    "units": 2
+  },
+  {
+    "courseName": "英語II（基礎）",
+    "category": "外国語科目（英語）",
+    "units": 2
+  },
+  {
+    "courseName": "英語II（初級）",
+    "category": "外国語科目（英語）",
+    "units": 2
+  },
+  {
+    "courseName": "英語II（中級）",
+    "category": "外国語科目（英語）",
+    "units": 2
+  },
+  {
+    "courseName": "英語II（上級）",
+    "category": "外国語科目（英語）",
+    "units": 2
+  },
+  {
+    "courseName": "英語III（基礎）",
+    "category": "外国語科目（英語）",
+    "units": 2
+  },
+  {
+    "courseName": "英語III（初級）",
+    "category": "外国語科目（英語）",
+    "units": 2
+  },
+  {
+    "courseName": "英語III（中級）",
+    "category": "外国語科目（英語）",
+    "units": 2
+  },
+  {
+    "courseName": "英語III（上級）",
+    "category": "外国語科目（英語）",
+    "units": 2
+  },
+  {
+    "courseName": "英語IV（基礎）",
+    "category": "外国語科目（英語）",
+    "units": 2
+  },
+  {
+    "courseName": "英語IV（初級）",
+    "category": "外国語科目（英語）",
+    "units": 2
+  },
+  {
+    "courseName": "英語IV（中級）",
+    "category": "外国語科目（英語）",
+    "units": 2
+  },
+  {
+    "courseName": "英語IV（上級）",
+    "category": "外国語科目（英語）",
+    "units": 2
+  },
+  {
+    "courseName": "英語I（Listening）",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "英語II（Listening）",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "英語I（Speaking）",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "英語II（Speaking）",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "英語I（Reading）",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "英語II（Reading）",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "英語I（Writing）",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "英語II（Writing）",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "英語I（総合）",
+    "category": "外国語科目（英語）",
+    "units": 2
+  },
+  {
+    "courseName": "英語II（総合）",
+    "category": "外国語科目（英語）",
+    "units": 2
+  },
+  {
+    "courseName": "英語III（総合）",
+    "category": "外国語科目（英語）",
+    "units": 2
+  },
+  {
+    "courseName": "英語IV（総合）",
+    "category": "外国語科目（英語）",
+    "units": 2
+  },
+  {
+    "courseName": "英語I（再入門）",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "英語II（再入門）",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "英語III（再入門）",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "英語IV（再入門）",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "実用英語I",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "実用英語II",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "実用英語III",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "実用英語IV",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "科学技術英語I",
+    "category": "外国語科目（英語）",
+    "units": 2
+  },
+  {
+    "courseName": "科学技術英語II",
+    "category": "外国語科目（英語）",
+    "units": 2
+  },
+  {
+    "courseName": "英語会話（初級I）",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "英語会話（初級II）",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "英語会話（中級I）",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "英語会話（中級II）",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "英語会話（上級I）",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "英語会話（上級II）",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "TOEIC演習（初級I）",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "TOEIC演習（初級II）",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "TOEIC演習（中級I）",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "TOEIC演習（中級II）",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "TOEIC演習（上級I）",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "TOEIC演習（上級II）",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "TOEFL演習（初級I）",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "TOEFL演習（初級II）",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "特修英語（中級I）",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "特修英語（中級II）",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "特修英語（中級III）",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "特修英語（中級IV）",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "特修英語（上級I）",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "特修英語（上級II）",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "特修英語（上級III）",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "特修英語（上級IV）",
+    "category": "外国語科目（英語）",
+    "units": 1
+  },
+  {
+    "courseName": "留学英語準備講座I",
+    "category": "外国語科目（英語）",
+    "units": 2
+  },
+  {
+    "courseName": "留学英語準備講座II",
+    "category": "外国語科目（英語）",
+    "units": 2
+  },
+  {
+    "courseName": "留学英語準備講座III",
+    "category": "外国語科目（英語）",
+    "units": 2
+  },
+  {
+    "courseName": "留学英語準備講座IV",
+    "category": "外国語科目（英語）",
+    "units": 2
+  },
+  {
+    "courseName": "初級韓国語Ia",
+    "category": "外国語科目（韓国語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級韓国語Ib",
+    "category": "外国語科目（韓国語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級韓国語IIa",
+    "category": "外国語科目（韓国語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級韓国語IIb",
+    "category": "外国語科目（韓国語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級韓国語IIIa",
+    "category": "外国語科目（韓国語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級韓国語IIIb",
+    "category": "外国語科目（韓国語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級韓国語IVa",
+    "category": "外国語科目（韓国語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級韓国語IVb",
+    "category": "外国語科目（韓国語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級韓国語Ia",
+    "category": "外国語科目（韓国語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級韓国語Ib",
+    "category": "外国語科目（韓国語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級韓国語IIa",
+    "category": "外国語科目（韓国語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級韓国語IIb",
+    "category": "外国語科目（韓国語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級韓国語IIIa",
+    "category": "外国語科目（韓国語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級韓国語IIIb",
+    "category": "外国語科目（韓国語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級韓国語IVa",
+    "category": "外国語科目（韓国語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級韓国語IVb",
+    "category": "外国語科目（韓国語）",
+    "units": 1
+  },
+  {
+    "courseName": "上級韓国語I",
+    "category": "外国語科目（韓国語）",
+    "units": 1
+  },
+  {
+    "courseName": "上級韓国語II",
+    "category": "外国語科目（韓国語）",
+    "units": 1
+  },
+  {
+    "courseName": "上級韓国語III",
+    "category": "外国語科目（韓国語）",
+    "units": 1
+  },
+  {
+    "courseName": "上級韓国語IV",
+    "category": "外国語科目（韓国語）",
+    "units": 1
+  },
+  {
+    "courseName": "特修韓国語I",
+    "category": "外国語科目（韓国語）",
+    "units": 1
+  },
+  {
+    "courseName": "特修韓国語II",
+    "category": "外国語科目（韓国語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級スペイン語Ia",
+    "category": "外国語科目（スペイン語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級スペイン語Ib",
+    "category": "外国語科目（スペイン語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級スペイン語IIa",
+    "category": "外国語科目（スペイン語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級スペイン語IIb",
+    "category": "外国語科目（スペイン語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級スペイン語IIIa",
+    "category": "外国語科目（スペイン語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級スペイン語IIIb",
+    "category": "外国語科目（スペイン語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級スペイン語IVa",
+    "category": "外国語科目（スペイン語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級スペイン語IVb",
+    "category": "外国語科目（スペイン語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級スペイン語Ia",
+    "category": "外国語科目（スペイン語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級スペイン語Ib",
+    "category": "外国語科目（スペイン語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級スペイン語IIa",
+    "category": "外国語科目（スペイン語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級スペイン語IIb",
+    "category": "外国語科目（スペイン語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級スペイン語IIIa",
+    "category": "外国語科目（スペイン語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級スペイン語IIIb",
+    "category": "外国語科目（スペイン語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級スペイン語IVa",
+    "category": "外国語科目（スペイン語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級スペイン語IVb",
+    "category": "外国語科目（スペイン語）",
+    "units": 1
+  },
+  {
+    "courseName": "上級スペイン語I",
+    "category": "外国語科目（スペイン語）",
+    "units": 1
+  },
+  {
+    "courseName": "上級スペイン語II",
+    "category": "外国語科目（スペイン語）",
+    "units": 1
+  },
+  {
+    "courseName": "上級スペイン語III",
+    "category": "外国語科目（スペイン語）",
+    "units": 1
+  },
+  {
+    "courseName": "上級スペイン語IV",
+    "category": "外国語科目（スペイン語）",
+    "units": 1
+  },
+  {
+    "courseName": "特修スペイン語I",
+    "category": "外国語科目（スペイン語）",
+    "units": 1
+  },
+  {
+    "courseName": "特修スペイン語II",
+    "category": "外国語科目（スペイン語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級中国語Ia",
+    "category": "外国語科目（中国語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級中国語Ib",
+    "category": "外国語科目（中国語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級中国語IIa",
+    "category": "外国語科目（中国語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級中国語IIb",
+    "category": "外国語科目（中国語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級中国語IIIa",
+    "category": "外国語科目（中国語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級中国語IIIb",
+    "category": "外国語科目（中国語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級中国語IVa",
+    "category": "外国語科目（中国語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級中国語IVb",
+    "category": "外国語科目（中国語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級中国語Ia",
+    "category": "外国語科目（中国語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級中国語Ib",
+    "category": "外国語科目（中国語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級中国語IIa",
+    "category": "外国語科目（中国語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級中国語IIb",
+    "category": "外国語科目（中国語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級中国語IIIa",
+    "category": "外国語科目（中国語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級中国語IIIb",
+    "category": "外国語科目（中国語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級中国語IVa",
+    "category": "外国語科目（中国語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級中国語IVb",
+    "category": "外国語科目（中国語）",
+    "units": 1
+  },
+  {
+    "courseName": "上級中国語I",
+    "category": "外国語科目（中国語）",
+    "units": 1
+  },
+  {
+    "courseName": "上級中国語II",
+    "category": "外国語科目（中国語）",
+    "units": 1
+  },
+  {
+    "courseName": "上級中国語III",
+    "category": "外国語科目（中国語）",
+    "units": 1
+  },
+  {
+    "courseName": "上級中国語IV",
+    "category": "外国語科目（中国語）",
+    "units": 1
+  },
+  {
+    "courseName": "特修中国語I",
+    "category": "外国語科目（中国語）",
+    "units": 1
+  },
+  {
+    "courseName": "特修中国語II",
+    "category": "外国語科目（中国語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級ドイツ語Ia",
+    "category": "外国語科目（ドイツ語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級ドイツ語Ib",
+    "category": "外国語科目（ドイツ語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級ドイツ語IIa",
+    "category": "外国語科目（ドイツ語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級ドイツ語IIb",
+    "category": "外国語科目（ドイツ語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級ドイツ語IIIa",
+    "category": "外国語科目（ドイツ語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級ドイツ語IIIb",
+    "category": "外国語科目（ドイツ語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級ドイツ語IVa",
+    "category": "外国語科目（ドイツ語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級ドイツ語IVb",
+    "category": "外国語科目（ドイツ語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級ドイツ語Ia",
+    "category": "外国語科目（ドイツ語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級ドイツ語Ib",
+    "category": "外国語科目（ドイツ語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級ドイツ語IIa",
+    "category": "外国語科目（ドイツ語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級ドイツ語IIb",
+    "category": "外国語科目（ドイツ語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級ドイツ語IIIa",
+    "category": "外国語科目（ドイツ語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級ドイツ語IIIb",
+    "category": "外国語科目（ドイツ語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級ドイツ語IVa",
+    "category": "外国語科目（ドイツ語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級ドイツ語IVb",
+    "category": "外国語科目（ドイツ語）",
+    "units": 1
+  },
+  {
+    "courseName": "上級ドイツ語I",
+    "category": "外国語科目（ドイツ語）",
+    "units": 1
+  },
+  {
+    "courseName": "上級ドイツ語II",
+    "category": "外国語科目（ドイツ語）",
+    "units": 1
+  },
+  {
+    "courseName": "上級ドイツ語III",
+    "category": "外国語科目（ドイツ語）",
+    "units": 1
+  },
+  {
+    "courseName": "上級ドイツ語IV",
+    "category": "外国語科目（ドイツ語）",
+    "units": 1
+  },
+  {
+    "courseName": "特修ドイツ語I",
+    "category": "外国語科目（ドイツ語）",
+    "units": 1
+  },
+  {
+    "courseName": "特修ドイツ語II",
+    "category": "外国語科目（ドイツ語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級フランス語Ia",
+    "category": "外国語科目（フランス語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級フランス語Ib",
+    "category": "外国語科目（フランス語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級フランス語IIa",
+    "category": "外国語科目（フランス語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級フランス語IIb",
+    "category": "外国語科目（フランス語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級フランス語IIIa",
+    "category": "外国語科目（フランス語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級フランス語IIIb",
+    "category": "外国語科目（フランス語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級フランス語IVa",
+    "category": "外国語科目（フランス語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級フランス語IVb",
+    "category": "外国語科目（フランス語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級フランス語Ia",
+    "category": "外国語科目（フランス語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級フランス語Ib",
+    "category": "外国語科目（フランス語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級フランス語IIa",
+    "category": "外国語科目（フランス語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級フランス語IIb",
+    "category": "外国語科目（フランス語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級フランス語IIIa",
+    "category": "外国語科目（フランス語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級フランス語IIIb",
+    "category": "外国語科目（フランス語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級フランス語IVa",
+    "category": "外国語科目（フランス語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級フランス語IVb",
+    "category": "外国語科目（フランス語）",
+    "units": 1
+  },
+  {
+    "courseName": "上級フランス語I",
+    "category": "外国語科目（フランス語）",
+    "units": 1
+  },
+  {
+    "courseName": "上級フランス語II",
+    "category": "外国語科目（フランス語）",
+    "units": 1
+  },
+  {
+    "courseName": "上級フランス語III",
+    "category": "外国語科目（フランス語）",
+    "units": 1
+  },
+  {
+    "courseName": "上級フランス語IV",
+    "category": "外国語科目（フランス語）",
+    "units": 1
+  },
+  {
+    "courseName": "特修フランス語I",
+    "category": "外国語科目（フランス語）",
+    "units": 1
+  },
+  {
+    "courseName": "特修フランス語II",
+    "category": "外国語科目（フランス語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級ロシア語Ia",
+    "category": "外国語科目（ロシア語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級ロシア語Ib",
+    "category": "外国語科目（ロシア語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級ロシア語IIa",
+    "category": "外国語科目（ロシア語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級ロシア語IIb",
+    "category": "外国語科目（ロシア語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級ロシア語IIIa",
+    "category": "外国語科目（ロシア語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級ロシア語IIIb",
+    "category": "外国語科目（ロシア語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級ロシア語IVa",
+    "category": "外国語科目（ロシア語）",
+    "units": 1
+  },
+  {
+    "courseName": "初級ロシア語IVb",
+    "category": "外国語科目（ロシア語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級ロシア語Ia",
+    "category": "外国語科目（ロシア語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級ロシア語Ib",
+    "category": "外国語科目（ロシア語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級ロシア語IIa",
+    "category": "外国語科目（ロシア語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級ロシア語IIb",
+    "category": "外国語科目（ロシア語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級ロシア語IIIa",
+    "category": "外国語科目（ロシア語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級ロシア語IIIb",
+    "category": "外国語科目（ロシア語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級ロシア語IVa",
+    "category": "外国語科目（ロシア語）",
+    "units": 1
+  },
+  {
+    "courseName": "中級ロシア語IVb",
+    "category": "外国語科目（ロシア語）",
+    "units": 1
+  },
+  {
+    "courseName": "上級ロシア語I",
+    "category": "外国語科目（ロシア語）",
+    "units": 1
+  },
+  {
+    "courseName": "上級ロシア語II",
+    "category": "外国語科目（ロシア語）",
+    "units": 1
+  },
+  {
+    "courseName": "上級ロシア語III",
+    "category": "外国語科目（ロシア語）",
+    "units": 1
+  },
+  {
+    "courseName": "上級ロシア語IV",
+    "category": "外国語科目（ロシア語）",
+    "units": 1
+  },
+  {
+    "courseName": "特修ロシア語I",
+    "category": "外国語科目（ロシア語）",
+    "units": 1
+  },
+  {
+    "courseName": "特修ロシア語II",
+    "category": "外国語科目（ロシア語）",
+    "units": 1
+  }
+]
