@@ -68,7 +68,7 @@ export function AfterLogin() {
                         <div style={{ fontWeight: 'bold', marginBottom: '4px' }}>取得済み:</div>
                         {otherCourses.completed.map((course, index) => (
                           <div key={`completed-${index}`} style={{ marginLeft: '8px' }}>
-                            {course.courseName}（{course.units}単位）
+                            {course.courseName}{course.units ? `（${course.units}単位）` : '（不明）'}
                           </div>
                         ))}
                       </div>
@@ -78,7 +78,7 @@ export function AfterLogin() {
                         <div style={{ fontWeight: 'bold', marginBottom: '4px' }}>履修中:</div>
                         {otherCourses.current.map((course, index) => (
                           <div key={`current-${index}`} style={{ marginLeft: '8px' }}>
-                            {course.courseName}（{course.units}単位）
+                            {course.courseName}{course.units ? `（${course.units}単位）` : '（不明）'}
                           </div>
                         ))}
                       </div>
@@ -123,7 +123,7 @@ export function AfterLogin() {
                         <div style={{ fontWeight: 'bold', marginBottom: '4px' }}>取得済み:</div>
                         {otherCourses.completed.map((course, index) => (
                           <div key={`completed-${index}`} style={{ marginLeft: '8px' }}>
-                            {course.courseName}（{course.units}単位）
+                            {course.courseName}{course.units ? `（${course.units}単位）` : '（不明）'}
                           </div>
                         ))}
                       </div>
@@ -133,7 +133,7 @@ export function AfterLogin() {
                         <div style={{ fontWeight: 'bold', marginBottom: '4px' }}>履修中:</div>
                         {otherCourses.current.map((course, index) => (
                           <div key={`current-${index}`} style={{ marginLeft: '8px' }}>
-                            {course.courseName}（{course.units}単位）
+                            {course.courseName}{course.units ? `（${course.units}単位）` : '（不明）'}
                           </div>
                         ))}
                       </div>

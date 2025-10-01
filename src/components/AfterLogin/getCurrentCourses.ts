@@ -30,7 +30,7 @@ export async function getCurrentCourses(): Promise<Course[]> {
       const courseName = (row.children[3].textContent!.split('／').at(0) || '').trim()
       const result = courses.find(c => c.courseName === courseName)
       if (result === undefined) {
-        currentCourses.push({courseName: courseName, category: undefined, units: 0} as Course)
+        currentCourses.push({courseName: courseName, category: undefined, units: undefined} as Course)
       } else {
         currentCourses.push(result)
       }

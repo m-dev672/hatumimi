@@ -2,7 +2,7 @@
 export interface Course {
   courseName: string;
   category: string | undefined;
-  units: number;
+  units: number | undefined;
 };
 
 /**

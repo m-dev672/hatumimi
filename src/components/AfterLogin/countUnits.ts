@@ -20,7 +20,8 @@ function allocateCoursesToRequiredUnits(
         if (categoryKey.split(',').includes(category)) {
           matchedCategoryKey = categoryKey;
           if (result[categoryKey] < requiredUnits[categoryKey]) {
-            const allocatableUnits = Math.min(requiredUnits[categoryKey] - result[categoryKey], course.units);
+            const courseUnits = course.units || 1; // undefinedの場合は1単位として扱う
+            const allocatableUnits = Math.min(requiredUnits[categoryKey] - result[categoryKey], courseUnits);
             result[categoryKey] += allocatableUnits;
             allocated = true;
             break;
@@ -30,14 +31,16 @@ function allocateCoursesToRequiredUnits(
 
       // 対応するカテゴリーがあったが満たされていた場合、そのカテゴリーに超過算入
       if (!allocated && matchedCategoryKey) {
-        result[matchedCategoryKey] += course.units;
+        const courseUnits = course.units || 1; // undefinedの場合は1単位として扱う
+        result[matchedCategoryKey] += courseUnits;
         allocated = true;
       }
     }
 
     // 割り当てできなかった場合は「その他」に追加
     if (!allocated) {
-      result['その他'] += course.units;
+      const courseUnits = course.units || 1; // undefinedの場合は1単位として扱う
+      result['その他'] += courseUnits;
       otherCourses.push(course);
     }
   }
