@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useAuth } from '@/hook/useAuth';
-import { Button, Center, Spinner, Text, VStack, Popover, Portal } from '@chakra-ui/react';
+import { Button, Center, Spinner, Text, VStack, Popover, Portal, Link } from '@chakra-ui/react';
 import { activateSession, deactivateSession } from '@/context/Auth/authCookie';
 import { getCompletedCourses, type Course } from './getCompletedCourses';
 import { getCurrentCourses } from './getCurrentCourses';
@@ -57,7 +57,7 @@ export function AfterLogin() {
   return (
     <Center h='100vh' flexDirection="column" alignItems="center" mx={4}>
       {units && Object.entries(units).map(([key, value]) => {
-        if (Array.isArray(value) && value.length > 2) {
+        if (Array.isArray(value)) {
           if (key === 'その他') {
             const tooltipContent = otherCourses && (otherCourses.completed.length > 0 || otherCourses.current.length > 0)
               ? (
@@ -89,7 +89,7 @@ export function AfterLogin() {
             return (
               <Popover.Root key={key}>
                 <Popover.Trigger asChild>
-                  <Button variant="ghost" p={0} onClick={(e) => e.preventDefault()}>
+                  <Link cursor="pointer">
                     <Text style={{ 
                       cursor: 'pointer',
                       textDecoration: 'underline',
@@ -100,7 +100,7 @@ export function AfterLogin() {
                         {value[1]}
                       </span>
                     </Text>
-                  </Button>
+                  </Link>
                 </Popover.Trigger>
                 <Portal>
                   <Popover.Positioner>
@@ -121,71 +121,6 @@ export function AfterLogin() {
                 </span>
                 {value[2]}
                 {value[3]}
-              </p>
-            )
-          }
-        } else if (Array.isArray(value)) {
-          if (key === 'その他') {
-            const tooltipContent = otherCourses && (otherCourses.completed.length > 0 || otherCourses.current.length > 0)
-              ? (
-                  <div>
-                    {otherCourses.completed.length > 0 && (
-                      <div>
-                        <div style={{ fontWeight: 'bold', marginBottom: '4px' }}>取得済み:</div>
-                        {otherCourses.completed.map((course, index) => (
-                          <div key={`completed-${index}`} style={{ marginLeft: '8px' }}>
-                            {course.courseName}{course.units ? `（${course.units}単位）` : '（不明）'}
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                    {otherCourses.current.length > 0 && (
-                      <div style={{ marginTop: otherCourses.completed.length > 0 ? '8px' : '0' }}>
-                        <div style={{ fontWeight: 'bold', marginBottom: '4px' }}>履修中:</div>
-                        {otherCourses.current.map((course, index) => (
-                          <div key={`current-${index}`} style={{ marginLeft: '8px' }}>
-                            {course.courseName}{course.units ? `（${course.units}単位）` : '（不明）'}
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                )
-              : '科目がありません';
-            
-            return (
-              <Popover.Root key={key}>
-                <Popover.Trigger asChild>
-                  <Button variant="ghost" p={0} onClick={(e) => e.preventDefault()}>
-                    <Text style={{ 
-                      cursor: 'pointer',
-                      textDecoration: 'underline',
-                      textDecorationStyle: 'dotted'
-                    }}>
-                      {key}: {value[0]}
-                      <span style={{ color: '#999', fontSize: '0.8em' }}>
-                        {value[1]}
-                      </span>
-                    </Text>
-                  </Button>
-                </Popover.Trigger>
-                <Portal>
-                  <Popover.Positioner>
-                    <Popover.Content>
-                      <Popover.Arrow />
-                      {tooltipContent}
-                    </Popover.Content>
-                  </Popover.Positioner>
-                </Portal>
-              </Popover.Root>
-            )
-          } else {
-            return (
-              <p key={key}>
-                {key}: {value[0]}
-                <span style={{ color: '#999', fontSize: '0.8em' }}>
-                  {value[1]}
-                </span>
               </p>
             )
           }

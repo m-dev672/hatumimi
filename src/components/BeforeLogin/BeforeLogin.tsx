@@ -1,7 +1,7 @@
 import { useAuth } from '@/hook/useAuth';
 import { type User } from '@/context/Auth/AuthContext';
 import { useRef } from 'react';
-import { Button, Card, Center, Checkbox, Field, Input, Popover, Portal, Stack, Text } from '@chakra-ui/react';
+import { Button, Card, Center, Checkbox, Field, Input, Link, Popover, Portal, Stack, Text } from '@chakra-ui/react';
 import { PasswordInput } from '@/components/ui/password-input';
 
 import { signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
@@ -62,11 +62,11 @@ export const BeforeLogin = () => {
         <Center>
           <Popover.Root>
             <Popover.Trigger asChild>
-              <Button variant="ghost" textAlign="center" onClick={(e) => e.preventDefault()}>
+              <Link textAlign="center" cursor="pointer">
                 <Text color='gray.500'>
                   Continue with Google について
                 </Text>
-              </Button>
+              </Link>
             </Popover.Trigger>
             <Portal>
               <Popover.Positioner>
