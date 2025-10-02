@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useAuth } from '@/hook/useAuth';
-import { Button, Center, Spinner, Text, VStack } from '@chakra-ui/react';
-import { Tooltip } from '@/components/ui/tooltip';
+import { Button, Center, Spinner, Text, VStack, Popover, Portal } from '@chakra-ui/react';
 import { activateSession, deactivateSession } from '@/context/Auth/authCookie';
 import { getCompletedCourses, type Course } from './getCompletedCourses';
 import { getCurrentCourses } from './getCurrentCourses';
@@ -88,18 +87,30 @@ export function AfterLogin() {
               : '科目がありません';
             
             return (
-              <Tooltip key={key} content={tooltipContent}>
-                <p style={{ 
-                  cursor: 'pointer',
-                  textDecoration: 'underline',
-                  textDecorationStyle: 'dotted'
-                }}>
-                  {key}: {value[0]}
-                  <span style={{ color: '#999', fontSize: '0.8em' }}>
-                    {value[1]}
-                  </span>
-                </p>
-              </Tooltip>
+              <Popover.Root key={key}>
+                <Popover.Trigger asChild>
+                  <Button variant="ghost" p={0} onClick={(e) => e.preventDefault()}>
+                    <Text style={{ 
+                      cursor: 'pointer',
+                      textDecoration: 'underline',
+                      textDecorationStyle: 'dotted'
+                    }}>
+                      {key}: {value[0]}
+                      <span style={{ color: '#999', fontSize: '0.8em' }}>
+                        {value[1]}
+                      </span>
+                    </Text>
+                  </Button>
+                </Popover.Trigger>
+                <Portal>
+                  <Popover.Positioner>
+                    <Popover.Content>
+                      <Popover.Arrow />
+                      {tooltipContent}
+                    </Popover.Content>
+                  </Popover.Positioner>
+                </Portal>
+              </Popover.Root>
             )
           } else {
             return (
@@ -143,18 +154,30 @@ export function AfterLogin() {
               : '科目がありません';
             
             return (
-              <Tooltip key={key} content={tooltipContent}>
-                <p style={{ 
-                  cursor: 'pointer',
-                  textDecoration: 'underline',
-                  textDecorationStyle: 'dotted'
-                }}>
-                  {key}: {value[0]}
-                  <span style={{ color: '#999', fontSize: '0.8em' }}>
-                    {value[1]}
-                  </span>
-                </p>
-              </Tooltip>
+              <Popover.Root key={key}>
+                <Popover.Trigger asChild>
+                  <Button variant="ghost" p={0} onClick={(e) => e.preventDefault()}>
+                    <Text style={{ 
+                      cursor: 'pointer',
+                      textDecoration: 'underline',
+                      textDecorationStyle: 'dotted'
+                    }}>
+                      {key}: {value[0]}
+                      <span style={{ color: '#999', fontSize: '0.8em' }}>
+                        {value[1]}
+                      </span>
+                    </Text>
+                  </Button>
+                </Popover.Trigger>
+                <Portal>
+                  <Popover.Positioner>
+                    <Popover.Content>
+                      <Popover.Arrow />
+                      {tooltipContent}
+                    </Popover.Content>
+                  </Popover.Positioner>
+                </Portal>
+              </Popover.Root>
             )
           } else {
             return (
