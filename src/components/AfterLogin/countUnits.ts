@@ -1,50 +1,5 @@
 import {type Course} from './getCompletedCourses'
 
-/**
- * 科目を直接必要単位数に割り当てる
- */
-function allocateCoursesToRequiredUnits(
-  courses: Course[],
-  requiredUnits: Record<string, number>,
-  result: Record<string, number>,
-  otherCourses: Course[]
-): void {
-  for (const course of courses) {
-    const category = course.category;
-    let allocated = false;
-    let matchedCategoryKey: string | undefined = undefined;
-
-    if (category) {
-      // カテゴリーがある場合、対応する必要単位に割り当てを試す
-      for (const categoryKey in requiredUnits) {
-        if (categoryKey.split(',').includes(category)) {
-          matchedCategoryKey = categoryKey;
-          if (result[categoryKey] < requiredUnits[categoryKey]) {
-            const courseUnits = course.units || 1; // undefinedの場合は1単位として扱う
-            const allocatableUnits = Math.min(requiredUnits[categoryKey] - result[categoryKey], courseUnits);
-            result[categoryKey] += allocatableUnits;
-            allocated = true;
-            break;
-          }
-        }
-      }
-
-      // 対応するカテゴリーがあったが満たされていた場合、そのカテゴリーに超過算入
-      if (!allocated && matchedCategoryKey) {
-        const courseUnits = course.units || 1; // undefinedの場合は1単位として扱う
-        result[matchedCategoryKey] += courseUnits;
-        allocated = true;
-      }
-    }
-
-    // 割り当てできなかった場合は「その他」に追加
-    if (!allocated) {
-      const courseUnits = course.units || 1; // undefinedの場合は1単位として扱う
-      result['その他'] += courseUnits;
-      otherCourses.push(course);
-    }
-  }
-}
 
 /**
  * カテゴリーごとの単位数をカウントする
@@ -54,20 +9,67 @@ export async function countUnits(completedCourses: Course[], currentCourses: Cou
   const requiredUnits: Record<string, number> = await sotsugyoResponse.json();
   
   const result: Record<string, number> = {};
+  const categoryCompletedCourses: Record<string, Course[]> = {};
+  const categoryCurrentCourses: Record<string, Course[]> = {};
+  
   for (const key in requiredUnits) {
     result[key] = 0;
+    categoryCompletedCourses[key] = [];
+    categoryCurrentCourses[key] = [];
   }
   result['その他'] = 0;
-  
-  // 取得済み科目の「その他」科目を収集
   const completedOtherCourses: Course[] = [];
-  allocateCoursesToRequiredUnits(completedCourses, requiredUnits, result, completedOtherCourses);
+  
+  // 取得済み科目を各カテゴリに分類
+  for (const course of completedCourses) {
+    const category = course.category;
+    let allocated = false;
+    
+    if (category) {
+      for (const categoryKey in requiredUnits) {
+        if (categoryKey.split(',').includes(category)) {
+          categoryCompletedCourses[categoryKey].push(course);
+          const courseUnits = course.units || 1;
+          result[categoryKey] += courseUnits;
+          allocated = true;
+          break;
+        }
+      }
+    }
+    
+    if (!allocated) {
+      const courseUnits = course.units || 1;
+      result['その他'] += courseUnits;
+      completedOtherCourses.push(course);
+    }
+  }
 
   const futureResult: Record<string, number> = structuredClone(result);
-  
-  // 履修中科目の「その他」科目を収集
   const currentOtherCourses: Course[] = [];
-  allocateCoursesToRequiredUnits(currentCourses, requiredUnits, futureResult, currentOtherCourses);
+  
+  // 履修中科目を各カテゴリに分類
+  for (const course of currentCourses) {
+    const category = course.category;
+    let allocated = false;
+    
+    if (category) {
+      for (const categoryKey in requiredUnits) {
+        if (categoryKey.split(',').includes(category)) {
+          categoryCurrentCourses[categoryKey].push(course);
+          const courseUnits = course.units || 1;
+          futureResult[categoryKey] += courseUnits;
+          allocated = true;
+          break;
+        }
+      }
+    }
+    
+    if (!allocated) {
+      const courseUnits = course.units || 1;
+      futureResult['その他'] += courseUnits;
+      currentOtherCourses.push(course);
+    }
+  }
 
   const formattedResult: Record<string, string[] | Course[]> = {};
   
@@ -80,6 +82,8 @@ export async function countUnits(completedCourses: Course[], currentCourses: Cou
         formattedResult['other_current_courses'] = currentOtherCourses
       } else {
         formattedResult[displayName] = [`${result[categoryKey]}`, `(${futureResult[categoryKey]})`, " / ", `${requiredUnits[categoryKey]}`]
+        formattedResult[`${displayName}_completed_courses`] = categoryCompletedCourses[categoryKey]
+        formattedResult[`${displayName}_current_courses`] = categoryCurrentCourses[categoryKey]
       }
     }
   }
