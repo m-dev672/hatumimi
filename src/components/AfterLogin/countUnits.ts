@@ -4,7 +4,11 @@ import {type Course} from './getCompletedCourses'
 /**
  * カテゴリーごとの単位数をカウントする
  */
-export async function countUnits(completedCourses: Course[], currentCourses: Course[]): Promise<Record<string, string[] | Course[]>> {
+export async function countUnits(completedCourses: Course[], currentCourses: Course[]): Promise<{
+  units: Record<string, string[]>;
+  categoryCourses: Record<string, {completed: Course[], current: Course[]}>;
+  otherCourses: {completed: Course[], current: Course[]};
+}> {
   const sotsugyoResponse = await fetch('human_science_2024_sotsugyo.json');
   const requiredUnits: Record<string, number> = await sotsugyoResponse.json();
   
@@ -24,19 +28,34 @@ export async function countUnits(completedCourses: Course[], currentCourses: Cou
   for (const course of completedCourses) {
     const category = course.category;
     let allocated = false;
-    
+    let matchedCategoryKey: string | undefined = undefined;
+
     if (category) {
+      // カテゴリーがある場合、対応する必要単位に割り当てを試す
       for (const categoryKey in requiredUnits) {
         if (categoryKey.split(',').includes(category)) {
-          categoryCompletedCourses[categoryKey].push(course);
-          const courseUnits = course.units || 1;
-          result[categoryKey] += courseUnits;
-          allocated = true;
-          break;
+          matchedCategoryKey = categoryKey;
+          if (result[categoryKey] < requiredUnits[categoryKey]) {
+            const courseUnits = course.units || 1;
+            const allocatableUnits = Math.min(requiredUnits[categoryKey] - result[categoryKey], courseUnits);
+            result[categoryKey] += allocatableUnits;
+            categoryCompletedCourses[categoryKey].push(course);
+            allocated = true;
+            break;
+          }
         }
       }
+
+      // 対応するカテゴリーがあったが満たされていた場合、そのカテゴリーに超過算入
+      if (!allocated && matchedCategoryKey) {
+        const courseUnits = course.units || 1;
+        result[matchedCategoryKey] += courseUnits;
+        categoryCompletedCourses[matchedCategoryKey].push(course);
+        allocated = true;
+      }
     }
-    
+
+    // 割り当てできなかった場合は「その他」に追加
     if (!allocated) {
       const courseUnits = course.units || 1;
       result['その他'] += courseUnits;
@@ -51,19 +70,34 @@ export async function countUnits(completedCourses: Course[], currentCourses: Cou
   for (const course of currentCourses) {
     const category = course.category;
     let allocated = false;
-    
+    let matchedCategoryKey: string | undefined = undefined;
+
     if (category) {
+      // カテゴリーがある場合、対応する必要単位に割り当てを試す
       for (const categoryKey in requiredUnits) {
         if (categoryKey.split(',').includes(category)) {
-          categoryCurrentCourses[categoryKey].push(course);
-          const courseUnits = course.units || 1;
-          futureResult[categoryKey] += courseUnits;
-          allocated = true;
-          break;
+          matchedCategoryKey = categoryKey;
+          if (futureResult[categoryKey] < requiredUnits[categoryKey]) {
+            const courseUnits = course.units || 1;
+            const allocatableUnits = Math.min(requiredUnits[categoryKey] - futureResult[categoryKey], courseUnits);
+            futureResult[categoryKey] += allocatableUnits;
+            categoryCurrentCourses[categoryKey].push(course);
+            allocated = true;
+            break;
+          }
         }
       }
+
+      // 対応するカテゴリーがあったが満たされていた場合、そのカテゴリーに超過算入
+      if (!allocated && matchedCategoryKey) {
+        const courseUnits = course.units || 1;
+        futureResult[matchedCategoryKey] += courseUnits;
+        categoryCurrentCourses[matchedCategoryKey].push(course);
+        allocated = true;
+      }
     }
-    
+
+    // 割り当てできなかった場合は「その他」に追加
     if (!allocated) {
       const courseUnits = course.units || 1;
       futureResult['その他'] += courseUnits;
@@ -71,22 +105,30 @@ export async function countUnits(completedCourses: Course[], currentCourses: Cou
     }
   }
 
-  const formattedResult: Record<string, string[] | Course[]> = {};
+  const units: Record<string, string[]> = {};
+  const categoryCourses: Record<string, {completed: Course[], current: Course[]}> = {};
   
   for (const categoryKey in result) {
     const displayName = categoryKey.split(',').at(-1)
     if (displayName) {
       if (displayName === 'その他') {
-        formattedResult[displayName] = [`${result[categoryKey]}`, `(${futureResult[categoryKey]})`]
-        formattedResult['other_completed_courses'] = completedOtherCourses
-        formattedResult['other_current_courses'] = currentOtherCourses
+        units[displayName] = [`${result[categoryKey]}`, `(${futureResult[categoryKey]})`]
       } else {
-        formattedResult[displayName] = [`${result[categoryKey]}`, `(${futureResult[categoryKey]})`, " / ", `${requiredUnits[categoryKey]}`]
-        formattedResult[`${displayName}_completed_courses`] = categoryCompletedCourses[categoryKey]
-        formattedResult[`${displayName}_current_courses`] = categoryCurrentCourses[categoryKey]
+        units[displayName] = [`${result[categoryKey]}`, `(${futureResult[categoryKey]})`, " / ", `${requiredUnits[categoryKey]}`]
+        categoryCourses[displayName] = {
+          completed: categoryCompletedCourses[categoryKey],
+          current: categoryCurrentCourses[categoryKey]
+        }
       }
     }
   }
   
-  return formattedResult;
+  return {
+    units,
+    categoryCourses,
+    otherCourses: {
+      completed: completedOtherCourses,
+      current: currentOtherCourses
+    }
+  };
 }

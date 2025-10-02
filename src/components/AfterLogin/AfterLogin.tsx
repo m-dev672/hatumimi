@@ -24,34 +24,10 @@ export function AfterLogin() {
 
       if (sessionActivated) {
         const result = await countUnits(await getCompletedCourses(), await getCurrentCourses());
-        const { other_completed_courses, other_current_courses, ...resultData } = result;
         
-        // 単位データとカテゴリ科目データを分離
-        const unitsData: Record<string, string[]> = {};
-        const categoryData: Record<string, {completed: Course[], current: Course[]}> = {};
-        
-        Object.entries(resultData).forEach(([key, value]) => {
-          if (key.endsWith('_completed_courses') || key.endsWith('_current_courses')) {
-            const categoryName = key.replace('_completed_courses', '').replace('_current_courses', '');
-            if (!categoryData[categoryName]) {
-              categoryData[categoryName] = { completed: [], current: [] };
-            }
-            if (key.endsWith('_completed_courses')) {
-              categoryData[categoryName].completed = value as Course[];
-            } else {
-              categoryData[categoryName].current = value as Course[];
-            }
-          } else {
-            unitsData[key] = value as string[];
-          }
-        });
-        
-        setUnits(unitsData);
-        setCategoryCourses(categoryData);
-        setOtherCourses({
-          completed: other_completed_courses as Course[],
-          current: other_current_courses as Course[]
-        });
+        setUnits(result.units);
+        setCategoryCourses(result.categoryCourses);
+        setOtherCourses(result.otherCourses);
         setLoading(false);
       }
     })();
