@@ -106,7 +106,9 @@ export function AfterLogin() {
                   <Popover.Positioner>
                     <Popover.Content>
                       <Popover.Arrow />
-                      {tooltipContent}
+                      <Popover.Body>
+                        {tooltipContent}
+                      </Popover.Body>
                     </Popover.Content>
                   </Popover.Positioner>
                 </Portal>

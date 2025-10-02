@@ -72,9 +72,11 @@ export const BeforeLogin = () => {
               <Popover.Positioner>
                 <Popover.Content>
                   <Popover.Arrow />
-                  <Text textStyle="sm" color="fg.muted">
-                    アップデートにより、Googleアカウントを用いて認証情報を暗号化し、保護できるようになりました。XSS攻撃を防ぐため、こちらの機能の利用を推奨します。
-                  </Text>
+                  <Popover.Body>
+                    <Text textStyle="sm" color="fg.muted">
+                      アップデートにより、Googleアカウントを用いて認証情報を暗号化し、保護できるようになりました。XSS攻撃を防ぐため、こちらの機能の利用を推奨します。
+                    </Text>
+                  </Popover.Body>
                 </Popover.Content>
               </Popover.Positioner>
             </Portal>
