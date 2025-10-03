@@ -25,9 +25,6 @@ export async function getCurriculumPath() {
 
   const joinYear = Number(joinDateStr.split('年')[0]);
 
-  console.log(affiliation)
-  console.log(joinYear)
-
   const curriculumMappingJsonResponse = await fetch('/curriculum/curriculum_mapping.json');
   const curriculumMappingJsonContent = await curriculumMappingJsonResponse.json()
 

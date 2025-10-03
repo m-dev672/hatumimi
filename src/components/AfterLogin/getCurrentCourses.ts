@@ -16,12 +16,11 @@ export async function getCurrentCourses(curriculumPath: string): Promise<Course[
 
   const attendancesTable = Array.from(document.querySelectorAll('tbody')).at(-2);
 
-  const kyoyoJsonResponse = await fetch(`${curriculumPath}/kyoyo.json`);
-  const gaikokugoJsonResponse = await fetch(`${curriculumPath}/gaikokugo.json`);
-  const senkoJsonResponse = await fetch(`${curriculumPath}/senko.json`);
-  const kyoyoJsonContent = await kyoyoJsonResponse.json()
-  const gaikokugoJsonContent = await gaikokugoJsonResponse.json()
-  const senkoJsonContent = await senkoJsonResponse.json()
+  const [kyoyoJsonContent, gaikokugoJsonContent, senkoJsonContent] = await Promise.all([
+    fetch(`${curriculumPath}/kyoyo.json`).then(res => res.json()),
+    fetch(`${curriculumPath}/gaikokugo.json`).then(res => res.json()),
+    fetch(`${curriculumPath}/senko.json`).then(res => res.json())
+  ])
 
   const courses: Course[] = [...kyoyoJsonContent, ...gaikokugoJsonContent, ...senkoJsonContent]
   const currentCourses: Course[] = []
