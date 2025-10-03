@@ -26,7 +26,7 @@ const CategoryDisplay = ({ data }: { data: CategoryData }) => (
         <Text 
           style={{ cursor: 'pointer', color: data.completed ? '#5FB89B' : 'inherit' }}
           textDecoration={{ base: 'underline', md: 'none' }}
-          textDecorationColor={{ base: 'rgba(0,0,0,0.2)', md: 'transparent' }}
+          textDecorationColor={{ base: 'gray.300', md: 'transparent' }}
           textUnderlineOffset={{ base: '3px', md: '0' }}
         >
             {data.category}
