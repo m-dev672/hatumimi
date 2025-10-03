@@ -86,15 +86,17 @@ export function AfterLogin() {
               : '科目がありません';
             
             return (
-              <Popover.Root key={key}>
+              <Popover.Root key={key} positioning={{ placement: "bottom", flip: false }}>
                 <Popover.Trigger asChild>
                   <Link cursor="pointer">
-                    <Text style={{ 
-                      cursor: 'pointer',
-                      textDecoration: 'underline',
-                      textDecorationStyle: 'dotted'
-                    }}>
-                      {key}: {(value as string[])[0]}
+                    <Text style={{ cursor: 'pointer' }}>
+                      <span style={{ 
+                        textDecoration: 'underline',
+                        textDecorationStyle: 'dotted'
+                      }}>
+                        {key}
+                      </span>
+                      : {(value as string[])[0]}
                       <span style={{ color: '#999', fontSize: '0.8em' }}>
                         {(value as string[])[1]}
                       </span>
@@ -146,15 +148,17 @@ export function AfterLogin() {
               : '科目がありません';
             
             return (
-              <Popover.Root key={key}>
+              <Popover.Root key={key} positioning={{ placement: "bottom", flip: false }}>
                 <Popover.Trigger asChild>
                   <Link cursor="pointer">
-                    <Text style={{ 
-                      cursor: 'pointer',
-                      textDecoration: 'underline',
-                      textDecorationStyle: 'dotted'
-                    }}>
-                      {key}: {(value as string[])[0]}
+                    <Text style={{ cursor: 'pointer' }}>
+                      <span style={{ 
+                        textDecoration: 'underline',
+                        textDecorationStyle: 'dotted'
+                      }}>
+                        {key}
+                      </span>
+                      : {(value as string[])[0]}
                       <span style={{ color: '#999', fontSize: '0.8em' }}>
                         {(value as string[])[1]}
                       </span>
