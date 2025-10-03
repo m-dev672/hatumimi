@@ -82,9 +82,9 @@ export async function getCompletedCourses(curriculumPath: string): Promise<Cours
     const courseName = columns[4];
     let category = columns[2];
     let units = parseInt(columns[6]) || 0;
-    const evaluation = columns[9];
+    const passed = columns[10] === '合';
 
-    if (courseName && evaluation !== '不可') {
+    if (courseName && passed) {
       // パッチデータで修正があるかチェック
       const patch = patchData.find(p => p.courseName === courseName);
       if (patch) {
