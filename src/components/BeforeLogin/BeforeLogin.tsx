@@ -1,7 +1,7 @@
 import { useAuth } from '@/hook/useAuth';
 import { type User } from '@/context/Auth/AuthContext';
 import { useRef } from 'react';
-import { Button, Card, Center, Checkbox, Field, HoverCard, Input, Link, Portal, Stack, Text } from '@chakra-ui/react';
+import { Button, Card, Center, Checkbox, Field, Input, Link, Popover, Portal, Stack, Text } from '@chakra-ui/react';
 import { PasswordInput } from '@/components/ui/password-input';
 
 import { signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
@@ -60,25 +60,27 @@ export const BeforeLogin = () => {
           </Card.Footer>
         </Card.Root>
         <Center>
-          <HoverCard.Root size="sm">
-            <HoverCard.Trigger asChild>
-              <Link href="#" textAlign="center" >
+          <Popover.Root>
+            <Popover.Trigger asChild>
+              <Link textAlign="center" cursor="pointer">
                 <Text color='gray.500'>
                   Continue with Google について
                 </Text>
               </Link>
-            </HoverCard.Trigger>
+            </Popover.Trigger>
             <Portal>
-              <HoverCard.Positioner>
-                <HoverCard.Content>
-                  <HoverCard.Arrow />
-                  <Text textStyle="sm" color="fg.muted">
-                    アップデートにより、Googleアカウントを用いて認証情報を暗号化し、保護できるようになりました。XSS攻撃を防ぐため、こちらの機能の利用を推奨します。
-                  </Text>
-                </HoverCard.Content>
-              </HoverCard.Positioner>
+              <Popover.Positioner>
+                <Popover.Content>
+                  <Popover.Arrow />
+                  <Popover.Body>
+                    <Text textStyle="sm" color="fg.muted">
+                      アップデートにより、Googleアカウントを用いて認証情報を暗号化し、保護できるようになりました。XSS攻撃を防ぐため、こちらの機能の利用を推奨します。
+                    </Text>
+                  </Popover.Body>
+                </Popover.Content>
+              </Popover.Positioner>
             </Portal>
-          </HoverCard.Root>
+          </Popover.Root>
         </Center>
       </Stack>
     </Center>
