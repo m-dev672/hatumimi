@@ -1,9 +1,18 @@
 import {type Course} from './getCompletedCourses'
 
-export async function countUnits(completedCourses: Course[], currentCourses: Course[], curriculumPath: string): Promise<{
-  units: Record<string, string[]>
-  categoryCourses: Record<string, {completed: Course[], current: Course[]}>
-}> {
+export interface CategoryData {
+  category: string
+  currentUnits: number
+  futureUnits: number
+  requiredUnits?: number
+  completed: boolean
+  courses: {
+    completed: Course[]
+    current: Course[]
+  }
+}
+
+export async function countUnits(completedCourses: Course[], currentCourses: Course[], curriculumPath: string): Promise<CategoryData[]> {
   const requiredUnits = await fetch(`${curriculumPath}/sotsugyo.json`).then(r => r.json())
   
   const keys = [...Object.keys(requiredUnits), 'その他']
@@ -48,22 +57,26 @@ export async function countUnits(completedCourses: Course[], currentCourses: Cou
   const futureResult = structuredClone(result)
   allocate(currentCourses, futureResult, current)
 
-  return {
-    units: Object.fromEntries(
-      Object.keys(result).flatMap(key => {
-        const name = key.split(',').at(-1)
-        return name ? [[name, name === 'その他' 
-          ? [`${result[key]}`, `(${futureResult[key]})`]
-          : [`${result[key]}`, `(${futureResult[key]})`, ' / ', `${requiredUnits[key]}`]
-        ]] : []
-      })
-    ),
-    categoryCourses: Object.fromEntries(
-      Object.keys(result).flatMap(key => {
-        const name = key.split(',').at(-1)
-        return name ? [[name, { completed: completed[key], current: current[key] }]] : []
-      })
-    )
-  }
+  return Object.keys(result).flatMap(key => {
+    const name = key.split(',').at(-1)
+    if (!name) return []
+    
+    const currentUnits = result[key]
+    const futureUnits = futureResult[key]
+    const required = name === 'その他' ? undefined : requiredUnits[key]
+    const isCompleted = required !== undefined && currentUnits >= required
+    
+    return [{
+      category: name,
+      currentUnits,
+      futureUnits,
+      requiredUnits: required,
+      completed: isCompleted,
+      courses: {
+        completed: completed[key],
+        current: current[key]
+      }
+    }]
+  })
   
 }
