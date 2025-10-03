@@ -14,8 +14,8 @@ export interface CategoryData {
 
 export async function countUnits(completedCourses: Course[], currentCourses: Course[], curriculumPath: string): Promise<CategoryData[]> {
   const requiredUnits = await fetch(`${curriculumPath}/sotsugyo.json`).then(r => r.json())
-  
   const keys = [...Object.keys(requiredUnits), 'その他']
+  
   const result = Object.fromEntries(keys.map(k => [k, 0]))
   const completed = Object.fromEntries(keys.map(k => [k, []]))
   const current = Object.fromEntries(keys.map(k => [k, []]))
@@ -57,26 +57,25 @@ export async function countUnits(completedCourses: Course[], currentCourses: Cou
   const futureResult = structuredClone(result)
   allocate(currentCourses, futureResult, current)
 
-  return Object.keys(result).flatMap(key => {
-    const name = key.split(',').at(-1)
-    if (!name) return []
-    
+  return keys.map(key => {
+    const name = key.split(',').at(-1)!
     const currentUnits = result[key]
     const futureUnits = futureResult[key]
     const required = name === 'その他' ? undefined : requiredUnits[key]
     const isCompleted = required !== undefined && currentUnits >= required
+    const completedCourses = completed[key]
+    const currentCourses = current[key]
     
-    return [{
+    return {
       category: name,
       currentUnits,
       futureUnits,
       requiredUnits: required,
       completed: isCompleted,
       courses: {
-        completed: completed[key],
-        current: current[key]
+        completed: completedCourses,
+        current: currentCourses
       }
-    }]
+    }
   })
-  
 }
