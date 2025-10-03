@@ -14,14 +14,14 @@ export async function getCurriculumPath() {
   const registrationInfoTable = tables.at(5)
 
   const affiliationStr = studentInfoTable?.children[2].children[1].textContent
-  if (affiliationStr === undefined) return "";
+  if (affiliationStr === undefined || affiliationStr === null) return "";
 
   let match = affiliationStr.match(/^(.+?学部)\s*(.+?学科)\s*(.*)$/u)
   if (match  === null || match.length < 4) return "";
   const affiliation = match.slice(1);
 
   const joinDateStr = registrationInfoTable?.children[1].children[3].textContent
-  if (joinDateStr === undefined) return "";
+  if (joinDateStr === undefined || joinDateStr === null) return "";
 
   const joinYear = Number(joinDateStr.split('年')[0]);
 
