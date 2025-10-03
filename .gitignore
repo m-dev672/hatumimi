@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 /src/context/FirebaseUser/firebase.ts
-/public/*.pdf
+public/curriculum/**/*.pdf
