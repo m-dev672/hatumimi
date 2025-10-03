@@ -5,84 +5,82 @@ export async function countUnits(completedCourses: Course[], currentCourses: Cou
   categoryCourses: Record<string, {completed: Course[], current: Course[]}>
   otherCourses: {completed: Course[], current: Course[]}
 }> {
-  const sotsugyoResponse = await fetch('human_science_2024_sotsugyo.json')
-  const requiredUnits: Record<string, number> = await sotsugyoResponse.json()
-  
-  const ignoreResponse = await fetch('ignore.txt')
-  const ignoreText = await ignoreResponse.text()
-  const ignorePatterns = ignoreText.split('\n').filter(line => line.trim())
+  const [requiredUnits, ignorePatterns] = await Promise.all([
+    fetch('human_science_2024_sotsugyo.json').then(r => r.json()),
+    fetch('ignore.txt').then(r => r.text()).then(t => t.split('\n').filter(line => line.trim()))
+  ])
   
   const cleanCategory = (category: string): string => 
     ignorePatterns.reduce((cleaned, pattern) => 
       pattern.trim() ? cleaned.replace(pattern.trim(), '') : cleaned, category
     ).trim()
   
-  const result: Record<string, number> = { ...Object.fromEntries(Object.keys(requiredUnits).map(key => [key, 0])), 'その他': 0 }
-  const categoryCompletedCourses: Record<string, Course[]> = Object.fromEntries(Object.keys(requiredUnits).map(key => [key, []]))
-  const categoryCurrentCourses: Record<string, Course[]> = Object.fromEntries(Object.keys(requiredUnits).map(key => [key, []]))
+  const categoryKeys = Object.keys(requiredUnits)
+  const result: Record<string, number> = { ...Object.fromEntries(categoryKeys.map(key => [key, 0])), 'その他': 0 }
+  const categoryCompletedCourses: Record<string, Course[]> = Object.fromEntries(categoryKeys.map(key => [key, []]))
+  const categoryCurrentCourses: Record<string, Course[]> = Object.fromEntries(categoryKeys.map(key => [key, []]))
   const completedOtherCourses: Course[] = []
   
-  const allocateCourse = (course: Course, isCompleted: boolean) => {
-    if (!course.category) {
-      const units = course.units || 1
-      result['その他'] += units
-      if (isCompleted) completedOtherCourses.push(course)
-      else currentOtherCourses.push(course)
-      return
-    }
+  const allocateCourses = (courses: Course[], targetResult: Record<string, number>, targetCourses: Record<string, Course[]>, otherCourses: Course[]) => {
+    for (const course of courses) {
+      const courseUnits = course.units || 1
+      let allocated = false
+      let matchedCategoryKey: string | undefined
 
-    const cleaned = cleanCategory(course.category)
-    const matchedKey = Object.keys(requiredUnits).find(key => key.split(',').includes(cleaned))
-    
-    if (matchedKey) {
-      const units = course.units || 1
-      const target = isCompleted ? result : futureResult
-      const courses = isCompleted ? categoryCompletedCourses : categoryCurrentCourses
-      
-      if (target[matchedKey] < requiredUnits[matchedKey]) {
-        target[matchedKey] += Math.min(requiredUnits[matchedKey] - target[matchedKey], units)
-      } else {
-        target[matchedKey] += units
+      if (course.category) {
+        const cleaned = cleanCategory(course.category)
+        
+        for (const categoryKey in requiredUnits) {
+          if (categoryKey.split(',').includes(cleaned)) {
+            matchedCategoryKey = categoryKey
+            if (targetResult[categoryKey] < requiredUnits[categoryKey]) {
+              targetResult[categoryKey] += Math.min(requiredUnits[categoryKey] - targetResult[categoryKey], courseUnits)
+              targetCourses[categoryKey].push(course)
+              allocated = true
+              break
+            }
+          }
+        }
+
+        if (!allocated && matchedCategoryKey) {
+          targetResult[matchedCategoryKey] += courseUnits
+          targetCourses[matchedCategoryKey].push(course)
+          allocated = true
+        }
       }
-      courses[matchedKey].push(course)
-    } else {
-      const units = course.units || 1
-      const target = isCompleted ? result : futureResult
-      target['その他'] += units
-      if (isCompleted) completedOtherCourses.push(course)
-      else currentOtherCourses.push(course)
+
+      if (!allocated) {
+        targetResult['その他'] += courseUnits
+        otherCourses.push(course)
+      }
     }
   }
 
-  completedCourses.forEach(course => allocateCourse(course, true))
-
+  allocateCourses(completedCourses, result, categoryCompletedCourses, completedOtherCourses)
+  
   const futureResult = structuredClone(result)
   const currentOtherCourses: Course[] = []
-  
-  currentCourses.forEach(course => allocateCourse(course, false))
+  allocateCourses(currentCourses, futureResult, categoryCurrentCourses, currentOtherCourses)
 
   const units: Record<string, string[]> = {}
   const categoryCourses: Record<string, {completed: Course[], current: Course[]}> = {}
   
-  Object.keys(result).forEach(categoryKey => {
+  for (const categoryKey of Object.keys(result)) {
     const displayName = categoryKey.split(',').at(-1)
-    if (!displayName) return
+    if (!displayName) continue
     
-    units[displayName] = displayName === 'その他' 
+    const isOther = displayName === 'その他'
+    units[displayName] = isOther 
       ? [`${result[categoryKey]}`, `(${futureResult[categoryKey]})`]
       : [`${result[categoryKey]}`, `(${futureResult[categoryKey]})`, " / ", `${requiredUnits[categoryKey]}`]
     
-    if (displayName !== 'その他') {
+    if (!isOther) {
       categoryCourses[displayName] = {
         completed: categoryCompletedCourses[categoryKey],
         current: categoryCurrentCourses[categoryKey]
       }
     }
-  })
-  
-  return {
-    units,
-    categoryCourses,
-    otherCourses: { completed: completedOtherCourses, current: currentOtherCourses }
   }
+  
+  return { units, categoryCourses, otherCourses: { completed: completedOtherCourses, current: currentOtherCourses } }
 }
