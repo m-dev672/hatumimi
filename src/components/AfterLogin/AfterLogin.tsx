@@ -5,6 +5,7 @@ import { activateSession, deactivateSession } from '@/context/Auth/authCookie'
 import { getCompletedCourses, type Course } from './getCompletedCourses'
 import { getCurrentCourses } from './getCurrentCourses'
 import { countUnits } from './countUnits'
+import { getCurriculumPath } from './getCurriculumPath'
 
 export function AfterLogin() {
   const auth = useAuth()
@@ -20,7 +21,10 @@ export function AfterLogin() {
     ;(async () => {
       sessionActivated = await activateSession(auth.user)
       if (sessionActivated) {
-        setData(await countUnits(await getCompletedCourses(), await getCurrentCourses()))
+        const curriculumPath = await getCurriculumPath()
+        const completedCourses = await getCompletedCourses()
+        const currentCourses = await getCurrentCourses(curriculumPath)
+        setData(await countUnits(completedCourses, currentCourses, curriculumPath))
         setLoading(false)
       }
     })()

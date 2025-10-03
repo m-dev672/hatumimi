@@ -3,7 +3,7 @@ import {type Course} from './getCompletedCourses'
 /**
  * 現在履修中の授業を学内ポータルの出欠状況参照ページから取得する
  */
-export async function getCurrentCourses(): Promise<Course[]> {
+export async function getCurrentCourses(curriculumPath: string): Promise<Course[]> {
   const attendancesPage = await fetch('/campusweb/campussquare.do?_flowId=AAW0001000-flow&link=menu-link-mf-135117')
 
   const attendancesPageHtml = await attendancesPage.text()
@@ -16,9 +16,9 @@ export async function getCurrentCourses(): Promise<Course[]> {
 
   const attendancesTable = Array.from(document.querySelectorAll('tbody')).at(-2);
 
-  const kyoyoJsonResponse = await fetch('/human_science/2024/kyoyo.json');
-  const gaikokugoJsonResponse = await fetch('/human_science/2024/kyoyo.json');
-  const senkoJsonResponse = await fetch('/human_science/2024/senko.json');
+  const kyoyoJsonResponse = await fetch(`${curriculumPath}/kyoyo.json`);
+  const gaikokugoJsonResponse = await fetch(`${curriculumPath}/gaikokugo.json`);
+  const senkoJsonResponse = await fetch(`${curriculumPath}/senko.json`);
   const kyoyoJsonContent = await kyoyoJsonResponse.json()
   const gaikokugoJsonContent = await gaikokugoJsonResponse.json()
   const senkoJsonContent = await senkoJsonResponse.json()

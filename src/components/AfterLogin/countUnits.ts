@@ -1,12 +1,12 @@
 import {type Course} from './getCompletedCourses'
 
-export async function countUnits(completedCourses: Course[], currentCourses: Course[]): Promise<{
+export async function countUnits(completedCourses: Course[], currentCourses: Course[], curriculumPath: string): Promise<{
   units: Record<string, string[]>
   categoryCourses: Record<string, {completed: Course[], current: Course[]}>
 }> {
   const [requiredUnits, ignorePatterns] = await Promise.all([
-    fetch('/human_science/2024/sotsugyo.json').then(r => r.json()),
-    fetch('/human_science/2024/ignore.txt').then(r => r.text()).then(t => t.split('\n').filter(line => line.trim()))
+    fetch(`${curriculumPath}/sotsugyo.json`).then(r => r.json()),
+    fetch(`${curriculumPath}/ignore.txt`).then(r => r.text()).then(t => t.split('\n').filter(line => line.trim()))
   ])
   
   const cleanCategory = (category: string) => 
