@@ -12,6 +12,22 @@ export async function countUnits(completedCourses: Course[], currentCourses: Cou
   const sotsugyoResponse = await fetch('human_science_2024_sotsugyo.json');
   const requiredUnits: Record<string, number> = await sotsugyoResponse.json();
   
+  // ignore.txtをfetchして除外パターンを取得
+  const ignoreResponse = await fetch('ignore.txt');
+  const ignoreText = await ignoreResponse.text();
+  const ignorePatterns = ignoreText.split('\n').filter(line => line.trim() !== '');
+  
+  // カテゴリ名をクリーンアップする関数
+  const cleanCategory = (category: string): string => {
+    let cleaned = category;
+    for (const pattern of ignorePatterns) {
+      if (pattern.trim() !== '') {
+        cleaned = cleaned.replace(pattern.trim(), '');
+      }
+    }
+    return cleaned.trim();
+  };
+  
   const result: Record<string, number> = {};
   const categoryCompletedCourses: Record<string, Course[]> = {};
   const categoryCurrentCourses: Record<string, Course[]> = {};
@@ -31,9 +47,12 @@ export async function countUnits(completedCourses: Course[], currentCourses: Cou
     let matchedCategoryKey: string | undefined = undefined;
 
     if (category) {
+      // カテゴリ名をクリーンアップしてからマッチング
+      const cleaned = cleanCategory(category);
+      
       // カテゴリーがある場合、対応する必要単位に割り当てを試す
       for (const categoryKey in requiredUnits) {
-        if (categoryKey.split(',').includes(category)) {
+        if (categoryKey.split(',').includes(cleaned)) {
           matchedCategoryKey = categoryKey;
           if (result[categoryKey] < requiredUnits[categoryKey]) {
             const courseUnits = course.units || 1;
@@ -73,9 +92,12 @@ export async function countUnits(completedCourses: Course[], currentCourses: Cou
     let matchedCategoryKey: string | undefined = undefined;
 
     if (category) {
+      // カテゴリ名をクリーンアップしてからマッチング
+      const cleaned = cleanCategory(category);
+      
       // カテゴリーがある場合、対応する必要単位に割り当てを試す
       for (const categoryKey in requiredUnits) {
-        if (categoryKey.split(',').includes(category)) {
+        if (categoryKey.split(',').includes(cleaned)) {
           matchedCategoryKey = categoryKey;
           if (futureResult[categoryKey] < requiredUnits[categoryKey]) {
             const courseUnits = course.units || 1;
