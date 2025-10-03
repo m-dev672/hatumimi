@@ -63,6 +63,7 @@ export function AfterLogin() {
   const auth = useAuth()
   const [data, setData] = useState<CategoryData[]>()
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string>()
 
   useEffect(() => {
     if (!auth.user.id) return
@@ -73,6 +74,11 @@ export function AfterLogin() {
       sessionActivated = await activateSession(auth.user)
       if (sessionActivated) {
         const curriculumPath = await getCurriculumPath()
+        if (!curriculumPath) {
+          setError("未対応の学部又は学科、コースです。m.koutarou2004@gmail.comまで連絡してください。")
+          setLoading(false)
+          return
+        }
         const [completedCourses, currentCourses] = await Promise.all([
           getCompletedCourses(curriculumPath),
           getCurrentCourses(curriculumPath)
@@ -95,6 +101,15 @@ export function AfterLogin() {
           <Text mt={4}>単位数を計算中</Text>
         </VStack>
         <Button variant='solid' mt={4} onClick={auth.logout}>ログアウト</Button>
+      </Center>
+    )
+  }
+
+  if (error) {
+    return (
+      <Center h='100vh' flexDirection="column" alignItems="center" mx={4}>
+        <Text color="red.500" mb={4} textAlign="center">{error}</Text>
+        <Button variant='solid' onClick={auth.logout}>ログアウト</Button>
       </Center>
     )
   }
