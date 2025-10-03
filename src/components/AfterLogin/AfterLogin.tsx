@@ -23,7 +23,12 @@ const CategoryDisplay = ({ data }: { data: CategoryData }) => (
   <Popover.Root key={data.category} positioning={{ placement: "bottom", flip: false }}>
     <Popover.Trigger asChild>
       <Link cursor="pointer">
-        <Text style={{ cursor: 'pointer', color: data.completed ? '#5FB89B' : 'inherit' }}>
+        <Text 
+          style={{ cursor: 'pointer', color: data.completed ? '#5FB89B' : 'inherit' }}
+          textDecoration={{ base: 'underline', md: 'none' }}
+          textDecorationColor={{ base: 'rgba(0,0,0,0.2)', md: 'transparent' }}
+          textUnderlineOffset={{ base: '3px', md: '0' }}
+        >
             {data.category}
             : {data.currentUnits}
             <span style={{ color: 'color-mix(in srgb, currentColor 70%, transparent)', fontSize: '0.8em' }}>({data.futureUnits})</span>
