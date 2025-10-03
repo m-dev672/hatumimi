@@ -66,8 +66,9 @@ export async function getCompletedCourses(curriculumPath: string): Promise<Cours
   let isDataSection = false;
 
   // パッチデータを読み込み
-  const patchResponse = await fetch(`${curriculumPath}/patch.json`);
-  const patchData: Course[] = await patchResponse.json();
+  const patchResponse = await fetch(`${curriculumPath}/patches.json`);
+  const patchFile = await patchResponse.json();
+  const patchData: Course[] = patchFile.patches.flatMap((p: any) => p.patch);
 
   for (const line of lines) {
     if (line.includes('"No."')) {
