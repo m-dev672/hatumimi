@@ -4,13 +4,7 @@ export async function countUnits(completedCourses: Course[], currentCourses: Cou
   units: Record<string, string[]>
   categoryCourses: Record<string, {completed: Course[], current: Course[]}>
 }> {
-  const [requiredUnits, ignorePatterns] = await Promise.all([
-    fetch(`${curriculumPath}/sotsugyo.json`).then(r => r.json()),
-    fetch(`${curriculumPath}/ignore.txt`).then(r => r.text()).then(t => t.split('\n').filter(line => line.trim()))
-  ])
-  
-  const cleanCategory = (category: string) => 
-    ignorePatterns.reduce((c, p) => p.trim() ? c.replace(p.trim(), '') : c, category).trim()
+  const requiredUnits = await fetch(`${curriculumPath}/sotsugyo.json`).then(r => r.json())
   
   const keys = [...Object.keys(requiredUnits), 'その他']
   const result = Object.fromEntries(keys.map(k => [k, 0]))
@@ -24,10 +18,8 @@ export async function countUnits(completedCourses: Course[], currentCourses: Cou
       let matched: string | undefined
 
       if (course.category) {
-        const cleaned = cleanCategory(course.category)
-        
         for (const key in requiredUnits) {
-          if (key.split(',').includes(cleaned)) {
+          if (key.split(',').includes(course.category)) {
             matched = key
             if (targetResult[key] < requiredUnits[key]) {
               targetResult[key] += Math.min(requiredUnits[key] - targetResult[key], units)

@@ -47,6 +47,19 @@ export async function getCurrentCourses(curriculumPath: string): Promise<Course[
         }
       }
       
+      // 全体でマッチを試す
+      if (result === undefined) {
+        result = courses.find(c => c.courseName === fullCourseName)
+      }
+      
+      // 全体でもマッチしなかった場合、全角括弧より前の部分でマッチを試す
+      if (result === undefined && fullCourseName.includes('（')) {
+        const beforeBracket = fullCourseName.split('（')[0]?.trim()
+        if (beforeBracket) {
+          result = courses.find(c => c.courseName === beforeBracket)
+        }
+      }
+      
       if (result === undefined) {
         currentCourses.push({courseName: firstPart || fullCourseName, category: undefined, units: undefined} as Course)
       } else {
