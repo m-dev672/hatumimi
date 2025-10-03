@@ -23,14 +23,14 @@ const CategoryDisplay = ({ data }: { data: CategoryData }) => (
   <Popover.Root key={data.category} positioning={{ placement: "bottom", flip: false }}>
     <Popover.Trigger asChild>
       <Link cursor="pointer">
-        <Text style={{ cursor: 'pointer', color: data.completed ? '#98D8C8' : 'inherit' }}>
-          <span style={{ textDecoration: 'underline', textDecorationStyle: 'dotted' }}>{data.category}</span>
-          : {data.currentUnits}
-          <span style={{ color: '#999', fontSize: '0.8em' }}>({data.futureUnits})</span>
-          {data.category !== 'その他' && ` / ${data.requiredUnits}`}
-        </Text>
-      </Link>
-    </Popover.Trigger>
+        <Text style={{ cursor: 'pointer', color: data.completed ? '#5FB89B' : 'inherit' }}>
+            <span style={{ textDecoration: 'underline', textDecorationStyle: 'dotted' }}>{data.category}</span>
+            : {data.currentUnits}
+            <span style={{ color: 'color-mix(in srgb, currentColor 70%, transparent)', fontSize: '0.8em' }}>({data.futureUnits})</span>
+            {data.category !== 'その他' && ` / ${data.requiredUnits}`}
+          </Text>
+        </Link>
+      </Popover.Trigger>
     <Portal>
       <Popover.Positioner>
         <Popover.Content>
