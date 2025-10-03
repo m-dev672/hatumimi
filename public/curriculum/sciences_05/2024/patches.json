@@ -1,34 +1,32 @@
-{
-  "patches": [
-    {
-      "description": "必修科目というカテゴリがおそらく存在しないため",
-      "patch": [
-        {
-          "courseName": "理学ゼミナール",
-          "category": "必修科目",
-          "units": 2
-        },
-        {
-          "courseName": "卒業研究I",
-          "category": "必修科目",
-          "units": 4
-        },
-        {
-          "courseName": "卒業研究II",
-          "category": "必修科目",
-          "units": 4
-        },
-        {
-          "courseName": "輪講I",
-          "category": "必修科目",
-          "units": 1
-        },
-        {
-          "courseName": "輪講II",
-          "category": "必修科目",
-          "units": 1
-        }
-      ]
-    }
-  ]
-}
+[
+  {
+    "description": "必修科目というカテゴリがおそらく存在しないため",
+    "patch": [
+      {
+        "courseName": "理学ゼミナール",
+        "category": "必修科目",
+        "units": 2
+      },
+      {
+        "courseName": "卒業研究I",
+        "category": "必修科目",
+        "units": 4
+      },
+      {
+        "courseName": "卒業研究II",
+        "category": "必修科目",
+        "units": 4
+      },
+      {
+        "courseName": "輪講I",
+        "category": "必修科目",
+        "units": 1
+      },
+      {
+        "courseName": "輪講II",
+        "category": "必修科目",
+        "units": 1
+      }
+    ]
+  }
+]

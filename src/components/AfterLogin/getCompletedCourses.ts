@@ -1,3 +1,5 @@
+import { applyPatches } from './applyPatches';
+
 // 科目情報の型定義
 export interface Course {
   courseName: string;
@@ -65,16 +67,6 @@ export async function getCompletedCourses(curriculumPath: string): Promise<Cours
   const completedCourses: Course[] = [];
   let isDataSection = false;
 
-  // パッチデータを読み込み
-  let patchData: Course[] = [];
-  try {
-    const patchResponse = await fetch(`${curriculumPath}/patches.json`);
-    const patchFile = await patchResponse.json();
-    patchData = patchFile.patches.flatMap((p: any) => p.patch);
-  } catch (error) {
-    console.warn('patches.json not found, proceeding without patches');
-  }
-
   for (const line of lines) {
     if (line.includes('"No."')) {
       isDataSection = true;
@@ -86,18 +78,11 @@ export async function getCompletedCourses(curriculumPath: string): Promise<Cours
     const columns = line.split(',').map((column) => column.trim().slice(1, -1))
 
     const courseName = columns[4];
-    let category = columns[2];
-    let units = parseInt(columns[6]) || 0;
+    const category = columns[2];
+    const units = parseInt(columns[6]) || 0;
     const passed = columns[10] === '合';
 
     if (courseName && passed) {
-      // パッチデータで修正があるかチェック
-      const patch = patchData.find(p => p.courseName === courseName);
-      if (patch) {
-        category = patch.category || category;
-        units = patch.units || units;
-      }
-
       completedCourses.push({
         courseName: courseName,
         category: category,
@@ -106,5 +91,6 @@ export async function getCompletedCourses(curriculumPath: string): Promise<Cours
     }
   }
 
-  return completedCourses
+  // パッチを適用
+  return await applyPatches(completedCourses, curriculumPath);
 }

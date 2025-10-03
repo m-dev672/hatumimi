@@ -1,4 +1,5 @@
 import {type Course} from './getCompletedCourses'
+import { applyPatches } from './applyPatches';
 
 /**
  * 現在履修中の授業を学内ポータルの出欠状況参照ページから取得する
@@ -68,5 +69,6 @@ export async function getCurrentCourses(curriculumPath: string): Promise<Course[
     }
   })
 
-  return currentCourses;
+  // パッチを適用
+  return await applyPatches(currentCourses, curriculumPath);
 }
