@@ -9,9 +9,7 @@ import { countUnits } from './countUnits'
 export function AfterLogin() {
   const auth = useAuth()
 
-  const [units, setUnits] = useState<Record<string, string[]>>()
-  const [otherCourses, setOtherCourses] = useState<{completed: Course[], current: Course[]}>()
-  const [categoryCourses, setCategoryCourses] = useState<Record<string, {completed: Course[], current: Course[]}>>()
+  const [data, setData] = useState<{units: Record<string, string[]>, categoryCourses: Record<string, {completed: Course[], current: Course[]}>}>()
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -22,10 +20,7 @@ export function AfterLogin() {
     ;(async () => {
       sessionActivated = await activateSession(auth.user)
       if (sessionActivated) {
-        const result = await countUnits(await getCompletedCourses(), await getCurrentCourses())
-        setUnits(result.units)
-        setCategoryCourses(result.categoryCourses)
-        setOtherCourses(result.otherCourses)
+        setData(await countUnits(await getCompletedCourses(), await getCurrentCourses()))
         setLoading(false)
       }
     })()
@@ -49,42 +44,30 @@ export function AfterLogin() {
 
   return (
     <Center h='100vh' flexDirection="column" alignItems="center" mx={4}>
-      {units && Object.entries(units).map(([key, value]) => {
-        const isOther = key === 'その他'
-        const categoryData = categoryCourses?.[key]
-        const courses = isOther ? otherCourses : categoryData
+      {data?.units && Object.entries(data.units).map(([key, value]) => {
+        const courses = data.categoryCourses[key]
         const hasCourses = courses && (courses.completed.length > 0 || courses.current.length > 0)
         
-        const renderCourseSection = (title: string, courseList: Course[]) => 
-          courseList.length > 0 && (
-            <div style={{ marginTop: title === '履修中' && courses?.completed.length ? '8px' : '0' }}>
-              <div style={{ fontWeight: 'bold', marginBottom: '4px' }}>{title}:</div>
-              {courseList.map((course, index) => (
-                <div key={`${title}-${index}`} style={{ marginLeft: '8px' }}>
-                  {course.courseName}{course.units ? `（${course.units}単位）` : '（不明）'}
-                </div>
-              ))}
-            </div>
-          )
-
-        const popoverContent = hasCourses ? (
-          <div>
-            {renderCourseSection('取得済み', courses.completed)}
-            {renderCourseSection('履修中', courses.current)}
+        const renderSection = (title: string, list: Course[]) => list.length > 0 && (
+          <div style={{ marginTop: title === '履修中' && courses.completed.length ? '8px' : '0' }}>
+            <div style={{ fontWeight: 'bold', marginBottom: '4px' }}>{title}:</div>
+            {list.map((course, i) => (
+              <div key={i} style={{ marginLeft: '8px' }}>
+                {course.courseName}{course.units ? `（${course.units}単位）` : '（不明）'}
+              </div>
+            ))}
           </div>
-        ) : '科目がありません'
+        )
 
         return (
           <Popover.Root key={key} positioning={{ placement: "bottom", flip: false }}>
             <Popover.Trigger asChild>
               <Link cursor="pointer">
                 <Text style={{ cursor: 'pointer' }}>
-                  <span style={{ textDecoration: 'underline', textDecorationStyle: 'dotted' }}>
-                    {key}
-                  </span>
+                  <span style={{ textDecoration: 'underline', textDecorationStyle: 'dotted' }}>{key}</span>
                   : {value[0]}
                   <span style={{ color: '#999', fontSize: '0.8em' }}>{value[1]}</span>
-                  {!isOther && `${value[2]}${value[3]}`}
+                  {key !== 'その他' && `${value[2]}${value[3]}`}
                 </Text>
               </Link>
             </Popover.Trigger>
@@ -92,15 +75,23 @@ export function AfterLogin() {
               <Popover.Positioner>
                 <Popover.Content>
                   <Popover.Arrow />
-                  <Popover.Body>{popoverContent}</Popover.Body>
+                  <Popover.Body>
+                    {hasCourses ? (
+                      <div>
+                        {renderSection('取得済み', courses.completed)}
+                        {renderSection('履修中', courses.current)}
+                      </div>
+                    ) : '科目がありません'}
+                  </Popover.Body>
                 </Popover.Content>
               </Popover.Positioner>
             </Portal>
           </Popover.Root>
         )
       })}
-      <p style={{ color: '#666', fontSize: '0.9em', marginTop: '1rem' }}>※単位数が不明な科目については1単位で換算しています。</p>
-      <p style={{ color: '#666', fontSize: '0.9em' }}>※教職・社会教育士課程の方は資格取得のための単位がどの分野に算入されるかを改めてご確認ください。</p>
+      {['※単位数が不明な科目については1単位で換算しています。', '※教職・社会教育士課程の方は資格取得のための単位がどの分野に算入されるかを改めてご確認ください。'].map((text, i) => (
+        <p key={i} style={{ color: '#666', fontSize: '0.9em', marginTop: i === 0 ? '1rem' : '0' }}>{text}</p>
+      ))}
       <Button variant='solid' mt={4} onClick={auth.logout}>ログアウト</Button>
     </Center>
   )
