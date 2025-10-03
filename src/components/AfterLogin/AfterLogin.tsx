@@ -72,13 +72,10 @@ export function AfterLogin() {
     ;(async () => {
       sessionActivated = await activateSession(auth.user)
       if (sessionActivated) {
-        const [completedCourses, { curriculumPath, currentCourses }] = await Promise.all([
-          getCompletedCourses(),
-          (async () => {
-            const curriculumPath = await getCurriculumPath()
-            const currentCourses = await getCurrentCourses(curriculumPath)
-            return { curriculumPath, currentCourses }
-          })()
+        const curriculumPath = await getCurriculumPath()
+        const [completedCourses, currentCourses] = await Promise.all([
+          getCompletedCourses(curriculumPath),
+          getCurrentCourses(curriculumPath)
         ])
         setData(await countUnits(completedCourses, currentCourses, curriculumPath))
         setLoading(false)

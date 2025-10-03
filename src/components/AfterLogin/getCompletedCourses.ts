@@ -8,7 +8,7 @@ export interface Course {
 /**
  * 過去履修した授業を学内ポータルの成績情報ページから取得する
  */
-export async function getCompletedCourses(): Promise<Course[]> {
+export async function getCompletedCourses(curriculumPath: string): Promise<Course[]> {
   const initialResponse = await fetch('/campusweb/campussquare.do?_flowId=SIW0001300-flow&link=menu-link-mf-135122')
 
   const url = new URL(initialResponse.url);
@@ -65,6 +65,10 @@ export async function getCompletedCourses(): Promise<Course[]> {
   const completedCourses: Course[] = [];
   let isDataSection = false;
 
+  // パッチデータを読み込み
+  const patchResponse = await fetch(`${curriculumPath}/patch.json`);
+  const patchData: Course[] = await patchResponse.json();
+
   for (const line of lines) {
     if (line.includes('"No."')) {
       isDataSection = true;
@@ -76,15 +80,22 @@ export async function getCompletedCourses(): Promise<Course[]> {
     const columns = line.split(',').map((column) => column.trim().slice(1, -1))
 
     const courseName = columns[4];
-    const category = columns[2];
-    const units = columns[6];
+    let category = columns[2];
+    let units = parseInt(columns[6]) || 0;
     const evaluation = columns[9];
 
     if (courseName && evaluation !== '不可') {
+      // パッチデータで修正があるかチェック
+      const patch = patchData.find(p => p.courseName === courseName);
+      if (patch) {
+        category = patch.category || category;
+        units = patch.units || units;
+      }
+
       completedCourses.push({
         courseName: courseName,
         category: category,
-        units: parseInt(units) || 0
+        units: units
       });
     }
   }
