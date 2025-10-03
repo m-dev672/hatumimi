@@ -5,8 +5,8 @@ export async function countUnits(completedCourses: Course[], currentCourses: Cou
   categoryCourses: Record<string, {completed: Course[], current: Course[]}>
 }> {
   const [requiredUnits, ignorePatterns] = await Promise.all([
-    fetch('human_science_2024_sotsugyo.json').then(r => r.json()),
-    fetch('ignore.txt').then(r => r.text()).then(t => t.split('\n').filter(line => line.trim()))
+    fetch('/human_science/2024/sotsugyo.json').then(r => r.json()),
+    fetch('/human_science/2024/ignore.txt').then(r => r.text()).then(t => t.split('\n').filter(line => line.trim()))
   ])
   
   const cleanCategory = (category: string) => 

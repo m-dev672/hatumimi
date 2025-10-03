@@ -16,12 +16,14 @@ export async function getCurrentCourses(): Promise<Course[]> {
 
   const attendancesTable = Array.from(document.querySelectorAll('tbody')).at(-2);
 
-  const kyoyoJsonResponse = await fetch('human_science_2024_kyoyo.json');
-  const senkoJsonResponse = await fetch('human_science_2024_senko.json');
+  const kyoyoJsonResponse = await fetch('/human_science/2024/kyoyo.json');
+  const gaikokugoJsonResponse = await fetch('/human_science/2024/kyoyo.json');
+  const senkoJsonResponse = await fetch('/human_science/2024/senko.json');
   const kyoyoJsonContent = await kyoyoJsonResponse.json()
+  const gaikokugoJsonContent = await gaikokugoJsonResponse.json()
   const senkoJsonContent = await senkoJsonResponse.json()
 
-  const courses: Course[] = [...kyoyoJsonContent, ...senkoJsonContent]
+  const courses: Course[] = [...kyoyoJsonContent, ...gaikokugoJsonContent, ...senkoJsonContent]
   const currentCourses: Course[] = []
 
   Array.from(attendancesTable!.rows).forEach((row) => {

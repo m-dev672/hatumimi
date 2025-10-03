@@ -1,305 +1,5 @@
 [
   {
-    "courseName": "ＦＹＳ",
-    "category": "初年次ゼミナール",
-    "units": 2
-  },
-  {
-    "courseName": "文章表現基礎演習",
-    "category": "教養基礎演習",
-    "units": 2
-  },
-  {
-    "courseName": "教養データサイエンス",
-    "category": "教養基礎演習",
-    "units": 2
-  },
-  {
-    "courseName": "哲学",
-    "category": "人文の分野",
-    "units": 2
-  },
-  {
-    "courseName": "倫理学",
-    "category": "人文の分野",
-    "units": 2
-  },
-  {
-    "courseName": "宗教学",
-    "category": "人文の分野",
-    "units": 2
-  },
-  {
-    "courseName": "心理学",
-    "category": "人文の分野",
-    "units": 2
-  },
-  {
-    "courseName": "文学",
-    "category": "人文の分野",
-    "units": 2
-  },
-  {
-    "courseName": "日本語学",
-    "category": "人文の分野",
-    "units": 2
-  },
-  {
-    "courseName": "言語学",
-    "category": "人文の分野",
-    "units": 2
-  },
-  {
-    "courseName": "世界史",
-    "category": "人文の分野",
-    "units": 2
-  },
-  {
-    "courseName": "日本史",
-    "category": "人文の分野",
-    "units": 2
-  },
-  {
-    "courseName": "民俗学",
-    "category": "人文の分野",
-    "units": 2
-  },
-  {
-    "courseName": "考古学",
-    "category": "人文の分野",
-    "units": 2
-  },
-  {
-    "courseName": "文化人類学",
-    "category": "人文の分野",
-    "units": 2
-  },
-  {
-    "courseName": "社会学",
-    "category": "社会の分野",
-    "units": 2
-  },
-  {
-    "courseName": "人文地理学",
-    "category": "社会の分野",
-    "units": 2
-  },
-  {
-    "courseName": "国際関係概論",
-    "category": "社会の分野",
-    "units": 2
-  },
-  {
-    "courseName": "法学",
-    "category": "社会の分野",
-    "units": 2
-  },
-  {
-    "courseName": "日本国憲法",
-    "category": "社会の分野",
-    "units": 2
-  },
-  {
-    "courseName": "政治学",
-    "category": "社会の分野",
-    "units": 2
-  },
-  {
-    "courseName": "社会心理学",
-    "category": "社会の分野",
-    "units": 2
-  },
-  {
-    "courseName": "経済学",
-    "category": "社会の分野",
-    "units": 2
-  },
-  {
-    "courseName": "ジェンダー論",
-    "category": "社会の分野",
-    "units": 2
-  },
-  {
-    "courseName": "ボランティア論",
-    "category": "社会の分野",
-    "units": 2
-  },
-  {
-    "courseName": "経営学",
-    "category": "社会の分野",
-    "units": 2
-  },
-  {
-    "courseName": "生涯学習論",
-    "category": "社会の分野",
-    "units": 2
-  },
-  {
-    "courseName": "日本事情",
-    "category": "社会の分野",
-    "units": 2
-  },
-  {
-    "courseName": "基礎数学",
-    "category": "自然の分野",
-    "units": 2
-  },
-  {
-    "courseName": "数学",
-    "category": "自然の分野",
-    "units": 2
-  },
-  {
-    "courseName": "統計学",
-    "category": "自然の分野",
-    "units": 2
-  },
-  {
-    "courseName": "基礎物理学",
-    "category": "自然の分野",
-    "units": 2
-  },
-  {
-    "courseName": "物理学",
-    "category": "自然の分野",
-    "units": 2
-  },
-  {
-    "courseName": "基礎化学",
-    "category": "自然の分野",
-    "units": 2
-  },
-  {
-    "courseName": "化学",
-    "category": "自然の分野",
-    "units": 2
-  },
-  {
-    "courseName": "基礎生物学",
-    "category": "自然の分野",
-    "units": 2
-  },
-  {
-    "courseName": "生物学",
-    "category": "自然の分野",
-    "units": 2
-  },
-  {
-    "courseName": "教養デジタルテクノロジ",
-    "category": "自然の分野",
-    "units": 2
-  },
-  {
-    "courseName": "物理科学",
-    "category": "自然の分野",
-    "units": 2
-  },
-  {
-    "courseName": "生命科学",
-    "category": "自然の分野",
-    "units": 2
-  },
-  {
-    "courseName": "科学技術史",
-    "category": "自然の分野",
-    "units": 2
-  },
-  {
-    "courseName": "AIの実践と社会への展開",
-    "category": "自然の分野",
-    "units": 1
-  },
-  {
-    "courseName": "キャリアデザイン",
-    "category": "人間形成の分野",
-    "units": 2
-  },
-  {
-    "courseName": "国内インターンシップ",
-    "category": "人間形成の分野",
-    "units": 2
-  },
-  {
-    "courseName": "海外インターンシップ",
-    "category": "人間形成の分野",
-    "units": 2
-  },
-  {
-    "courseName": "体験型研修",
-    "category": "人間形成の分野",
-    "units": 2
-  },
-  {
-    "courseName": "手話入門",
-    "category": "人間形成の分野",
-    "units": 2
-  },
-  {
-    "courseName": "神奈川大学の歴史",
-    "category": "人間形成の分野",
-    "units": 2
-  },
-  {
-    "courseName": "健康科学とスポーツI",
-    "category": "人間形成の分野",
-    "units": 1
-  },
-  {
-    "courseName": "健康科学とスポーツII",
-    "category": "人間形成の分野",
-    "units": 1
-  },
-  {
-    "courseName": "教養スポーツ",
-    "category": "人間形成の分野",
-    "units": 1
-  },
-  {
-    "courseName": "公衆衛生",
-    "category": "人間形成の分野",
-    "units": 2
-  },
-  {
-    "courseName": "芸術",
-    "category": "人間形成の分野",
-    "units": 2
-  },
-  {
-    "courseName": "社会と人間",
-    "category": "現代社会と市民",
-    "units": 2
-  },
-  {
-    "courseName": "科学技術と社会",
-    "category": "現代社会と市民",
-    "units": 2
-  },
-  {
-    "courseName": "世界の中の日本",
-    "category": "現代社会と市民",
-    "units": 2
-  },
-  {
-    "courseName": "公共の新しいかたちをもとめて",
-    "category": "現代社会と市民",
-    "units": 2
-  },
-  {
-    "courseName": "社会生活とスポーツ",
-    "category": "現代社会と市民",
-    "units": 2
-  },
-  {
-    "courseName": "環境と社会",
-    "category": "現代社会と市民",
-    "units": 2
-  },
-  {
-    "courseName": "科学の世界",
-    "category": "現代社会と市民",
-    "units": 2
-  },
-  {
     "courseName": "英語I（基礎）",
     "category": "外国語科目",
     "units": 2
@@ -380,42 +80,42 @@
     "units": 2
   },
   {
-    "courseName": "英語I（Listening）",
+    "courseName": "英語I（Ｌｉｓｔｅｎｉｎｇ）",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "英語II（Listening）",
+    "courseName": "英語II（Ｌｉｓｔｅｎｉｎｇ）",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "英語I（Speaking）",
+    "courseName": "英語I（Ｓｐｅａｋｉｎｇ）",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "英語II（Speaking）",
+    "courseName": "英語II（Ｓｐｅａｋｉｎｇ）",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "英語I（Reading）",
+    "courseName": "英語I（Ｒｅａｄｉｎｇ）",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "英語II（Reading）",
+    "courseName": "英語II（Ｒｅａｄｉｎｇ）",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "英語I（Writing）",
+    "courseName": "英語I（Ｗｒｉｔｉｎｇ）",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "英語II（Writing）",
+    "courseName": "英語II（Ｗｒｉｔｉｎｇ）",
     "category": "外国語科目",
     "units": 1
   },
@@ -520,42 +220,42 @@
     "units": 1
   },
   {
-    "courseName": "TOEIC演習（初級I）",
+    "courseName": "ＴＯＥＩＣ演習（初級I）",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "TOEIC演習（初級II）",
+    "courseName": "ＴＯＥＩＣ演習（初級II）",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "TOEIC演習（中級I）",
+    "courseName": "ＴＯＥＩＣ演習（中級I）",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "TOEIC演習（中級II）",
+    "courseName": "ＴＯＥＩＣ演習（中級II）",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "TOEIC演習（上級I）",
+    "courseName": "ＴＯＥＩＣ演習（上級I）",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "TOEIC演習（上級II）",
+    "courseName": "ＴＯＥＩＣ演習（上級II）",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "TOEFL演習（初級I）",
+    "courseName": "ＴＯＥＦＬ演習（初級I）",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "TOEFL演習（初級II）",
+    "courseName": "ＴＯＥＦＬ演習（初級II）",
     "category": "外国語科目",
     "units": 1
   },
@@ -620,82 +320,82 @@
     "units": 2
   },
   {
-    "courseName": "初級韓国語Ia",
+    "courseName": "初級韓国語Iａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級韓国語Ib",
+    "courseName": "初級韓国語Iｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級韓国語IIa",
+    "courseName": "初級韓国語IIａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級韓国語IIb",
+    "courseName": "初級韓国語IIｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級韓国語IIIa",
+    "courseName": "初級韓国語IIIａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級韓国語IIIb",
+    "courseName": "初級韓国語IIIｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級韓国語IVa",
+    "courseName": "初級韓国語IVａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級韓国語IVb",
+    "courseName": "初級韓国語IVｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級韓国語Ia",
+    "courseName": "中級韓国語Iａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級韓国語Ib",
+    "courseName": "中級韓国語Iｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級韓国語IIa",
+    "courseName": "中級韓国語IIａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級韓国語IIb",
+    "courseName": "中級韓国語IIｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級韓国語IIIa",
+    "courseName": "中級韓国語IIIａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級韓国語IIIb",
+    "courseName": "中級韓国語IIIｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級韓国語IVa",
+    "courseName": "中級韓国語IVａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級韓国語IVb",
+    "courseName": "中級韓国語IVｂ",
     "category": "外国語科目",
     "units": 1
   },
@@ -730,82 +430,82 @@
     "units": 1
   },
   {
-    "courseName": "初級スペイン語Ia",
+    "courseName": "初級スペイン語Iａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級スペイン語Ib",
+    "courseName": "初級スペイン語Iｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級スペイン語IIa",
+    "courseName": "初級スペイン語IIａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級スペイン語IIb",
+    "courseName": "初級スペイン語IIｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級スペイン語IIIa",
+    "courseName": "初級スペイン語IIIａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級スペイン語IIIb",
+    "courseName": "初級スペイン語IIIｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級スペイン語IVa",
+    "courseName": "初級スペイン語IVａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級スペイン語IVb",
+    "courseName": "初級スペイン語IVｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級スペイン語Ia",
+    "courseName": "中級スペイン語Iａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級スペイン語Ib",
+    "courseName": "中級スペイン語Iｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級スペイン語IIa",
+    "courseName": "中級スペイン語IIａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級スペイン語IIb",
+    "courseName": "中級スペイン語IIｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級スペイン語IIIa",
+    "courseName": "中級スペイン語IIIａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級スペイン語IIIb",
+    "courseName": "中級スペイン語IIIｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級スペイン語IVa",
+    "courseName": "中級スペイン語IVａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級スペイン語IVb",
+    "courseName": "中級スペイン語IVｂ",
     "category": "外国語科目",
     "units": 1
   },
@@ -840,82 +540,82 @@
     "units": 1
   },
   {
-    "courseName": "初級中国語Ia",
+    "courseName": "初級中国語Iａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級中国語Ib",
+    "courseName": "初級中国語Iｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級中国語IIa",
+    "courseName": "初級中国語IIａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級中国語IIb",
+    "courseName": "初級中国語IIｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級中国語IIIa",
+    "courseName": "初級中国語IIIａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級中国語IIIb",
+    "courseName": "初級中国語IIIｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級中国語IVa",
+    "courseName": "初級中国語IVａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級中国語IVb",
+    "courseName": "初級中国語IVｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級中国語Ia",
+    "courseName": "中級中国語Iａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級中国語Ib",
+    "courseName": "中級中国語Iｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級中国語IIa",
+    "courseName": "中級中国語IIａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級中国語IIb",
+    "courseName": "中級中国語IIｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級中国語IIIa",
+    "courseName": "中級中国語IIIａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級中国語IIIb",
+    "courseName": "中級中国語IIIｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級中国語IVa",
+    "courseName": "中級中国語IVａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級中国語IVb",
+    "courseName": "中級中国語IVｂ",
     "category": "外国語科目",
     "units": 1
   },
@@ -950,82 +650,82 @@
     "units": 1
   },
   {
-    "courseName": "初級ドイツ語Ia",
+    "courseName": "初級ドイツ語Iａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級ドイツ語Ib",
+    "courseName": "初級ドイツ語Iｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級ドイツ語IIa",
+    "courseName": "初級ドイツ語IIａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級ドイツ語IIb",
+    "courseName": "初級ドイツ語IIｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級ドイツ語IIIa",
+    "courseName": "初級ドイツ語IIIａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級ドイツ語IIIb",
+    "courseName": "初級ドイツ語IIIｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級ドイツ語IVa",
+    "courseName": "初級ドイツ語IVａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級ドイツ語IVb",
+    "courseName": "初級ドイツ語IVｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級ドイツ語Ia",
+    "courseName": "中級ドイツ語Iａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級ドイツ語Ib",
+    "courseName": "中級ドイツ語Iｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級ドイツ語IIa",
+    "courseName": "中級ドイツ語IIａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級ドイツ語IIb",
+    "courseName": "中級ドイツ語IIｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級ドイツ語IIIa",
+    "courseName": "中級ドイツ語IIIａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級ドイツ語IIIb",
+    "courseName": "中級ドイツ語IIIｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級ドイツ語IVa",
+    "courseName": "中級ドイツ語IVａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級ドイツ語IVb",
+    "courseName": "中級ドイツ語IVｂ",
     "category": "外国語科目",
     "units": 1
   },
@@ -1060,82 +760,82 @@
     "units": 1
   },
   {
-    "courseName": "初級フランス語Ia",
+    "courseName": "初級フランス語Iａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級フランス語Ib",
+    "courseName": "初級フランス語Iｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級フランス語IIa",
+    "courseName": "初級フランス語IIａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級フランス語IIb",
+    "courseName": "初級フランス語IIｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級フランス語IIIa",
+    "courseName": "初級フランス語IIIａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級フランス語IIIb",
+    "courseName": "初級フランス語IIIｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級フランス語IVa",
+    "courseName": "初級フランス語IVａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級フランス語IVb",
+    "courseName": "初級フランス語IVｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級フランス語Ia",
+    "courseName": "中級フランス語Iａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級フランス語Ib",
+    "courseName": "中級フランス語Iｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級フランス語IIa",
+    "courseName": "中級フランス語IIａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級フランス語IIb",
+    "courseName": "中級フランス語IIｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級フランス語IIIa",
+    "courseName": "中級フランス語IIIａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級フランス語IIIb",
+    "courseName": "中級フランス語IIIｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級フランス語IVa",
+    "courseName": "中級フランス語IVａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級フランス語IVb",
+    "courseName": "中級フランス語IVｂ",
     "category": "外国語科目",
     "units": 1
   },
@@ -1170,82 +870,82 @@
     "units": 1
   },
   {
-    "courseName": "初級ロシア語Ia",
+    "courseName": "初級ロシア語Iａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級ロシア語Ib",
+    "courseName": "初級ロシア語Iｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級ロシア語IIa",
+    "courseName": "初級ロシア語IIａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級ロシア語IIb",
+    "courseName": "初級ロシア語IIｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級ロシア語IIIa",
+    "courseName": "初級ロシア語IIIａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級ロシア語IIIb",
+    "courseName": "初級ロシア語IIIｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級ロシア語IVa",
+    "courseName": "初級ロシア語IVａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "初級ロシア語IVb",
+    "courseName": "初級ロシア語IVｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級ロシア語Ia",
+    "courseName": "中級ロシア語Iａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級ロシア語Ib",
+    "courseName": "中級ロシア語Iｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級ロシア語IIa",
+    "courseName": "中級ロシア語IIａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級ロシア語IIb",
+    "courseName": "中級ロシア語IIｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級ロシア語IIIa",
+    "courseName": "中級ロシア語IIIａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級ロシア語IIIb",
+    "courseName": "中級ロシア語IIIｂ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級ロシア語IVa",
+    "courseName": "中級ロシア語IVａ",
     "category": "外国語科目",
     "units": 1
   },
   {
-    "courseName": "中級ロシア語IVb",
+    "courseName": "中級ロシア語IVｂ",
     "category": "外国語科目",
     "units": 1
   },
@@ -1276,6 +976,111 @@
   },
   {
     "courseName": "特修ロシア語II",
+    "category": "外国語科目",
+    "units": 1
+  },
+  {
+    "courseName": "日本語Iａ",
+    "category": "外国語科目",
+    "units": 1
+  },
+  {
+    "courseName": "日本語Iｂ",
+    "category": "外国語科目",
+    "units": 1
+  },
+  {
+    "courseName": "日本語IIａ",
+    "category": "外国語科目",
+    "units": 1
+  },
+  {
+    "courseName": "日本語IIｂ",
+    "category": "外国語科目",
+    "units": 1
+  },
+  {
+    "courseName": "日本語IIIａ",
+    "category": "外国語科目",
+    "units": 1
+  },
+  {
+    "courseName": "日本語IIIｂ",
+    "category": "外国語科目",
+    "units": 1
+  },
+  {
+    "courseName": "日本語IVａ",
+    "category": "外国語科目",
+    "units": 1
+  },
+  {
+    "courseName": "日本語IVｂ",
+    "category": "外国語科目",
+    "units": 1
+  },
+  {
+    "courseName": "日本語演習I",
+    "category": "外国語科目",
+    "units": 1
+  },
+  {
+    "courseName": "日本語演習II",
+    "category": "外国語科目",
+    "units": 1
+  },
+  {
+    "courseName": "日本語演習III",
+    "category": "外国語科目",
+    "units": 1
+  },
+  {
+    "courseName": "日本語特別演習（基礎）ＡI",
+    "category": "外国語科目",
+    "units": 1
+  },
+  {
+    "courseName": "日本語特別演習（基礎）ＡII",
+    "category": "外国語科目",
+    "units": 1
+  },
+  {
+    "courseName": "日本語特別演習（作文）ＡI",
+    "category": "外国語科目",
+    "units": 1
+  },
+  {
+    "courseName": "日本語特別演習（作文）ＡII",
+    "category": "外国語科目",
+    "units": 1
+  },
+  {
+    "courseName": "日本語特別演習（応用）ＡI",
+    "category": "外国語科目",
+    "units": 1
+  },
+  {
+    "courseName": "日本語特別演習（応用）ＡII",
+    "category": "外国語科目",
+    "units": 1
+  },
+  {
+    "courseName": "日本語特別演習（知識）ＡI",
+    "category": "外国語科目",
+    "units": 1
+  },
+  {
+    "courseName": "日本語特別演習（知識）ＡII",
+    "category": "外国語科目",
+    "units": 1
+  },
+  {
+    "courseName": "日本語特別演習（理解）ＡI",
+    "category": "外国語科目",
+    "units": 1
+  },
+  {
+    "courseName": "日本語特別演習（理解）ＡII",
     "category": "外国語科目",
     "units": 1
   }
