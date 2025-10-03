@@ -24,7 +24,7 @@ const CategoryDisplay = ({ data }: { data: CategoryData }) => (
     <Popover.Trigger asChild>
       <Link cursor="pointer">
         <Text style={{ cursor: 'pointer', color: data.completed ? '#5FB89B' : 'inherit' }}>
-            <span style={{ textDecoration: 'underline', textDecorationStyle: 'dotted' }}>{data.category}</span>
+            {data.category}
             : {data.currentUnits}
             <span style={{ color: 'color-mix(in srgb, currentColor 70%, transparent)', fontSize: '0.8em' }}>({data.futureUnits})</span>
             {data.category !== 'その他' && ` / ${data.requiredUnits}`}
