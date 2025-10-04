@@ -1,0 +1,982 @@
+[
+  {
+    "courseName": "憲法I",
+    "category": "Ａ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "民事法入門",
+    "category": "Ａ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "憲法II",
+    "category": "Ａ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "民法基礎Ａ",
+    "category": "Ａ群科目",
+    "units": 4
+  },
+  {
+    "courseName": "刑事法入門",
+    "category": "Ａ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "憲法III",
+    "category": "Ａ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "民法基礎Ｂ",
+    "category": "Ａ群科目",
+    "units": 4
+  },
+  {
+    "courseName": "民事訴訟法I",
+    "category": "Ａ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "刑法I",
+    "category": "Ａ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "憲法IV",
+    "category": "Ａ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "民法基礎Ｃ",
+    "category": "Ａ群科目",
+    "units": 4
+  },
+  {
+    "courseName": "民事訴訟法II",
+    "category": "Ａ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "刑法II",
+    "category": "Ａ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "行政法I",
+    "category": "Ａ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "民法応用Ａ",
+    "category": "Ａ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "民法応用Ｃ",
+    "category": "Ａ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "家族法I",
+    "category": "Ａ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "民事訴訟法論点研究",
+    "category": "Ａ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "刑法III",
+    "category": "Ａ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "刑事訴訟法",
+    "category": "Ａ群科目",
+    "units": 4
+  },
+  {
+    "courseName": "行政法II",
+    "category": "Ａ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "民法応用Ｂ",
+    "category": "Ａ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "家族法II",
+    "category": "Ａ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "刑法IV",
+    "category": "Ａ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "法学部入門演習",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "政治学入門",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "企業法特講",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "法学部基礎演習I",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "自治体法I",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "環境法I",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "基本行政学",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "日本政治",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "会社法I",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "国際法I",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "国際政治学I",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "法学部基礎演習II",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "自治体法II",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "環境法II",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "応用行政学",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "会社法II",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "国際法II",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "国際政治学II",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "憲法論点研究I",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "刑事政策I",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "社会保障法I",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "税法I",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "防災行政とまちづくり",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "商法I",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "労働法I",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "民事執行・保全法",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "国際協力論I",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "捜査法",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "少年法",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "刑事政策II",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "税法II",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "社会保障法II",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "防災法・危機管理法",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "商法II",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "労働法II",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "倒産処理法",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "国際協力論II",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "法学部ゼミナールI",
+    "category": "Ｂ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "法学部ゼミナールII",
+    "category": "Ｂ群科目",
+    "units": 4
+  },
+  {
+    "courseName": "法学部ゼミナールIII",
+    "category": "Ｂ群科目",
+    "units": 4
+  },
+  {
+    "courseName": "法情報学",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "法律学特講Ａ",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "政治学特講I",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "教育法I",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "消費者法I",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "比較政治学I",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "経済学入門I",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "法律学特講Ｂ",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "政治学特講II",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "教育法II",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "消費者法II",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "日本政治史",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "比較政治学II",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "社会調査論",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "経済学入門II",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "政治学特講III",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "ジェンダーと法",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "地方自治論I",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "自治体経営論",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "登記実務I",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "不動産法実務",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "登記実習",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "知的財産法I",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "保険法",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "経済法I",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "金融商品取引法",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "法哲学I",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "法社会学I",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "日本近現代法史I",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "比較法I",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "英米法I",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "アジア法I",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "国際法III",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "国際取引法I",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "国際私法I",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "日本政治思想史I",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "アジア政治史",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "ヨーロッパ政治",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "西洋政治思想史I",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "法律学特講Ｃ",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "政治学特講IV",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "行政学特講I",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "憲法論点研究II",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "行政法特講",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "地方自治論II",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "公共経営論",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "公務員制度論",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "不動産鑑定理論",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "登記実務II",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "知的財産法II",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "運送・海商法",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "経済法II",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "法哲学II",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "法社会学II",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "日本近現代法史II",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "比較法II",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "英米法II",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "アジア法II",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "国際法IV",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "国際取引法II",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "国際私法II",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "日本政治思想史II",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "西洋政治思想史II",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "アジア政治",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "ヨーロッパ政治史",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "法律学特講Ｄ",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "政治学特講V",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "行政学特講II",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "手形・小切手法",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "法学政治学英語特講I",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "法学政治学英語特講II",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "法学政治学英語特講III",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "法学政治学英語特講IV",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "法学政治学英語特講V",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "法学政治学英語特講VI",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "法律学特修I",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "自治体実務特修I",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "法律学特修II",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "Ｇｌｏｂａｌ Ｐｅｒｓｐｅｃｔｉｖｅ Ｐｒｏｇｒａｍ特修",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "警察官実務特修I",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "自治体実務特修II",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "法律学特修III",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "警察官実務特修II",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "自治体実務特修III",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "法律学特修IV",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "警察官実務特修III",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "自治体実務特修IV",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "企業法務実務特修I",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "法律学特修V",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "警察官実務特修IV",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "企業法務実務特修II",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "法律学特修VI",
+    "category": "Ｃ群科目",
+    "units": 2
+  },
+  {
+    "courseName": "情報処理I",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "経営学総論I",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "経済地理I",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "日本史概論I",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "外国史概論I",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "地理学(含地誌)",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "人文地理学概論I",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "自然地理学概論I",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "社会学概論I",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "哲学概論I",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "情報処理II",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "ミクロ経済学",
+    "category": "関連科目",
+    "units": 4
+  },
+  {
+    "courseName": "経営学総論II",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "経済地理II",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "日本史概論II",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "外国史概論II",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "マーケティングI",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "人文地理学概論II",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "自然地理学概論II",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "社会学概論II",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "哲学概論II",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "経済政策",
+    "category": "関連科目",
+    "units": 4
+  },
+  {
+    "courseName": "マクロ経済学",
+    "category": "関連科目",
+    "units": 4
+  },
+  {
+    "courseName": "西洋経済史I",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "財務会計論",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "マーケティングII",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "日本経済史I",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "世界経済論I",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "財政学I",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "社会経済学",
+    "category": "関連科目",
+    "units": 4
+  },
+  {
+    "courseName": "金融論",
+    "category": "関連科目",
+    "units": 4
+  },
+  {
+    "courseName": "西洋経済史II",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "連結会計論",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "日本経済史II",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "世界経済論II",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "財政学II",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "会計制度論",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "社会思想史I",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "税務会計論",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "社会思想史II",
+    "category": "関連科目",
+    "units": 2
+  }
+]

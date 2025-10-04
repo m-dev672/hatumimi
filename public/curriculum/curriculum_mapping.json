@@ -4,5 +4,10 @@
   },
   "理学部,理学科,生物コース": {
     "2024": "/curriculum/science_5/2024"
+  },
+  "法学部": {
+    "2023": "/curriculum/science_5/2023",
+    "2020": "/curriculum/science_5/2020",
+    "2019": ""
   }
 }
