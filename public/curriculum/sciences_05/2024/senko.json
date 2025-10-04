@@ -1,1 +1,1032 @@
-[]
+[
+  {
+    "courseName": "ＰＣリテラシー",
+    "category": "科学一般",
+    "units": 2
+  },
+  {
+    "courseName": "生物学実験I",
+    "category": "実験科目",
+    "units": 2
+  },
+  {
+    "courseName": "生物学実験II",
+    "category": "実験科目",
+    "units": 4
+  },
+  {
+    "courseName": "生物学概論I",
+    "category": "基礎科目",
+    "units": 2
+  },
+  {
+    "courseName": "生物学概論II",
+    "category": "基礎科目",
+    "units": 2
+  },
+  {
+    "courseName": "基礎遺伝学",
+    "category": "基礎科目",
+    "units": 2
+  },
+  {
+    "courseName": "基礎細胞生物学",
+    "category": "基礎科目",
+    "units": 2
+  },
+  {
+    "courseName": "基礎植物学",
+    "category": "基礎科目",
+    "units": 2
+  },
+  {
+    "courseName": "学外体験実習（生物）Ａ",
+    "category": "基礎科目",
+    "units": 1
+  },
+  {
+    "courseName": "学外体験実習（生物）Ｂ",
+    "category": "基礎科目",
+    "units": 1
+  },
+  {
+    "courseName": "基礎生物化学",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "基礎動物学",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "基礎生態学",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "生物物理化学",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "基礎進化生物学",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "動物生理学Ａ",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "バイオテクノロジー",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "生物情報学",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "生物科学特論I",
+    "category": "基幹科目",
+    "units": 1
+  },
+  {
+    "courseName": "生物科学特論II",
+    "category": "基幹科目",
+    "units": 1
+  },
+  {
+    "courseName": "生物科学特論III",
+    "category": "基幹科目",
+    "units": 1
+  },
+  {
+    "courseName": "生物科学特論IV",
+    "category": "基幹科目",
+    "units": 1
+  },
+  {
+    "courseName": "系統分類学",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "細胞生物学Ａ",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "分子生物学Ａ",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "生物科学演習Ａ",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "生物科学演習Ｂ",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "生物科学演習Ｃ",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "森林実習",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "特別実習Ａ（生態学実習）",
+    "category": "展開科目",
+    "units": 1
+  },
+  {
+    "courseName": "特別実習Ａ（昆虫実習）",
+    "category": "展開科目",
+    "units": 1
+  },
+  {
+    "courseName": "特別実習Ｂ（顕微鏡実習）",
+    "category": "展開科目",
+    "units": 1
+  },
+  {
+    "courseName": "特別実習Ｂ（臨海実習）",
+    "category": "展開科目",
+    "units": 1
+  },
+  {
+    "courseName": "特別実習Ｃ（解剖実習）",
+    "category": "展開科目",
+    "units": 1
+  },
+  {
+    "courseName": "化学基礎実験I",
+    "category": "実験科目",
+    "units": 1
+  },
+  {
+    "courseName": "化学基礎実験II",
+    "category": "実験科目",
+    "units": 1
+  },
+  {
+    "courseName": "地球科学基礎実験",
+    "category": "実験科目",
+    "units": 1
+  },
+  {
+    "courseName": "物理学基礎実験",
+    "category": "実験科目",
+    "units": 1
+  },
+  {
+    "courseName": "物理学実験I",
+    "category": "実験科目",
+    "units": 3
+  },
+  {
+    "courseName": "物理学実験II",
+    "category": "実験科目",
+    "units": 3
+  },
+  {
+    "courseName": "化学実験I",
+    "category": "実験科目",
+    "units": 3
+  },
+  {
+    "courseName": "化学実験II",
+    "category": "実験科目",
+    "units": 3
+  },
+  {
+    "courseName": "化学実験III",
+    "category": "実験科目",
+    "units": 3
+  },
+  {
+    "courseName": "先端化学実験",
+    "category": "実験科目",
+    "units": 2
+  },
+  {
+    "courseName": "地球科学実験",
+    "category": "実験科目",
+    "units": 2
+  },
+  {
+    "courseName": "生物学基礎実験",
+    "category": "実験科目",
+    "units": 1
+  },
+  {
+    "courseName": "情報処理入門I",
+    "category": "情報系科目",
+    "units": 2
+  },
+  {
+    "courseName": "情報処理入門II",
+    "category": "情報系科目",
+    "units": 2
+  },
+  {
+    "courseName": "情報科学概論",
+    "category": "情報系科目",
+    "units": 2
+  },
+  {
+    "courseName": "情報科学リテラシー",
+    "category": "情報系科目",
+    "units": 4
+  },
+  {
+    "courseName": "プログラミングＡ",
+    "category": "情報系科目",
+    "units": 2
+  },
+  {
+    "courseName": "プログラミングＡ演習",
+    "category": "情報系科目",
+    "units": 4
+  },
+  {
+    "courseName": "離散数学I",
+    "category": "情報系科目",
+    "units": 2
+  },
+  {
+    "courseName": "離散数学II",
+    "category": "情報系科目",
+    "units": 2
+  },
+  {
+    "courseName": "データベースシステム",
+    "category": "情報系科目",
+    "units": 2
+  },
+  {
+    "courseName": "情報検索",
+    "category": "情報系科目",
+    "units": 2
+  },
+  {
+    "courseName": "計算機システム基礎",
+    "category": "情報系科目",
+    "units": 2
+  },
+  {
+    "courseName": "解析I",
+    "category": "数学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "解析I演習",
+    "category": "数学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "線形代数I（行列）",
+    "category": "数学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "線形代数I演習",
+    "category": "数学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "数学演習I",
+    "category": "数学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "数学概論I",
+    "category": "数学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "数学概論II",
+    "category": "数学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "解析II",
+    "category": "数学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "解析II演習",
+    "category": "数学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "線形代数II（線形空間）",
+    "category": "数学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "線形代数II演習",
+    "category": "数学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "数学演習II",
+    "category": "数学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "集合と論理",
+    "category": "数学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "解析III",
+    "category": "数学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "解析III演習",
+    "category": "数学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "線形代数III（標準形）",
+    "category": "数学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "線形代数III演習",
+    "category": "数学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "代数学I",
+    "category": "数学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "代数学II",
+    "category": "数学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "代数学III",
+    "category": "数学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "確率論I",
+    "category": "数学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "確率論II",
+    "category": "数学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "幾何学I",
+    "category": "数学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "幾何学II",
+    "category": "数学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "微分方程式論I",
+    "category": "数学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "微分方程式論II",
+    "category": "数学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "複素関数論I",
+    "category": "数学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "複素関数論II",
+    "category": "数学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "数値解析",
+    "category": "数学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "代数学続論",
+    "category": "数学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "関数解析学",
+    "category": "数学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "確率過程論",
+    "category": "数学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "数理統計学",
+    "category": "数学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "数理統計学続論",
+    "category": "数学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "数理科学演習",
+    "category": "数学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "応用数理",
+    "category": "数学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "物理学概論I",
+    "category": "物理系科目",
+    "units": 2
+  },
+  {
+    "courseName": "物理学概論II",
+    "category": "物理系科目",
+    "units": 2
+  },
+  {
+    "courseName": "物理数学I",
+    "category": "物理系科目",
+    "units": 2
+  },
+  {
+    "courseName": "物理数学II",
+    "category": "物理系科目",
+    "units": 2
+  },
+  {
+    "courseName": "物理学演習I",
+    "category": "物理系科目",
+    "units": 2
+  },
+  {
+    "courseName": "物理学演習II",
+    "category": "物理系科目",
+    "units": 2
+  },
+  {
+    "courseName": "物理学演習III",
+    "category": "物理系科目",
+    "units": 2
+  },
+  {
+    "courseName": "物理学演習IV",
+    "category": "物理系科目",
+    "units": 2
+  },
+  {
+    "courseName": "基礎物理学実験法",
+    "category": "物理系科目",
+    "units": 2
+  },
+  {
+    "courseName": "天文実習I",
+    "category": "物理系科目",
+    "units": 1
+  },
+  {
+    "courseName": "天文実習II",
+    "category": "物理系科目",
+    "units": 1
+  },
+  {
+    "courseName": "力学I",
+    "category": "物理系科目",
+    "units": 2
+  },
+  {
+    "courseName": "力学II",
+    "category": "物理系科目",
+    "units": 2
+  },
+  {
+    "courseName": "力学III",
+    "category": "物理系科目",
+    "units": 2
+  },
+  {
+    "courseName": "電磁気学I",
+    "category": "物理系科目",
+    "units": 2
+  },
+  {
+    "courseName": "電磁気学II",
+    "category": "物理系科目",
+    "units": 2
+  },
+  {
+    "courseName": "電磁気学III",
+    "category": "物理系科目",
+    "units": 2
+  },
+  {
+    "courseName": "熱・統計力学I",
+    "category": "物理系科目",
+    "units": 2
+  },
+  {
+    "courseName": "熱・統計力学II",
+    "category": "物理系科目",
+    "units": 2
+  },
+  {
+    "courseName": "熱・統計力学III",
+    "category": "物理系科目",
+    "units": 2
+  },
+  {
+    "courseName": "量子力学I",
+    "category": "物理系科目",
+    "units": 2
+  },
+  {
+    "courseName": "量子力学II",
+    "category": "物理系科目",
+    "units": 2
+  },
+  {
+    "courseName": "量子力学III",
+    "category": "物理系科目",
+    "units": 2
+  },
+  {
+    "courseName": "天文学概論",
+    "category": "物理系科目",
+    "units": 2
+  },
+  {
+    "courseName": "計算物理学I",
+    "category": "物理系科目",
+    "units": 2
+  },
+  {
+    "courseName": "計算物理学II",
+    "category": "物理系科目",
+    "units": 2
+  },
+  {
+    "courseName": "相対性理論・宇宙論",
+    "category": "物理系科目",
+    "units": 2
+  },
+  {
+    "courseName": "原子核・素粒子物理学",
+    "category": "物理系科目",
+    "units": 2
+  },
+  {
+    "courseName": "物性物理学",
+    "category": "物理系科目",
+    "units": 2
+  },
+  {
+    "courseName": "数理物理学",
+    "category": "物理系科目",
+    "units": 2
+  },
+  {
+    "courseName": "流体力学",
+    "category": "物理系科目",
+    "units": 2
+  },
+  {
+    "courseName": "ナノサイエンス",
+    "category": "物理系科目",
+    "units": 2
+  },
+  {
+    "courseName": "化学概論I",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "化学概論II",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "化学基礎セミナー",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "安全工学",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "物理化学I",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "物理化学II",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "無機化学I",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "無機化学II",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "無機化学III",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "無機化学IV",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "分析化学I",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "分析化学II",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "有機化学I",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "有機化学II",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "有機化学III",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "有機化学IV",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "環境化学",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "量子化学",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "分子分光学",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "文化財基礎化学",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "分子構造決定法",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "計算化学",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "化学熱力学",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "無機化学IV",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "高分子合成法",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "高分子物性論",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "有機化学演習",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "環境分析化学",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "環境物質化学",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "物性化学",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "化学国際交流I",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "化学国際交流II",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "反応速度論",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "化学工業概論",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "生物有機化学",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "応用環境化学",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "物理化学演習",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "無機分析化学演習",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "知的所有権法",
+    "category": "化学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "専門化学演習I",
+    "category": "化学系科目",
+    "units": 3
+  },
+  {
+    "courseName": "専門化学演習II",
+    "category": "化学系科目",
+    "units": 3
+  },
+  {
+    "courseName": "地球科学概論I",
+    "category": "地球科学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "地球科学概論II",
+    "category": "地球科学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "地球惑星科学",
+    "category": "地球科学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "気象学",
+    "category": "地球科学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "古生物学",
+    "category": "地球科学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "固体地球科学",
+    "category": "地球科学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "地球環境学",
+    "category": "地球科学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "地史学",
+    "category": "地球科学系科目",
+    "units": 2
+  },
+  {
+    "courseName": "学外体験学習I",
+    "category": "関連科目",
+    "units": 1
+  },
+  {
+    "courseName": "学外体験学習II",
+    "category": "関連科目",
+    "units": 1
+  },
+  {
+    "courseName": "学外体験学習III",
+    "category": "関連科目",
+    "units": 1
+  },
+  {
+    "courseName": "学外体験学習IV",
+    "category": "関連科目",
+    "units": 1
+  },
+  {
+    "courseName": "科学技術英語I",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "科学技術英語II",
+    "category": "関連科目",
+    "units": 2
+  },
+  {
+    "courseName": "自然の歴史",
+    "category": "科学一般",
+    "units": 2
+  },
+  {
+    "courseName": "科学概論",
+    "category": "科学一般",
+    "units": 2
+  },
+  {
+    "courseName": "総合理学演習",
+    "category": "科学一般",
+    "units": 2
+  },
+  {
+    "courseName": "サイエンスコミュニケーション",
+    "category": "科学一般",
+    "units": 2
+  },
+  {
+    "courseName": "物理学の歴史",
+    "category": "科学一般",
+    "units": 2
+  },
+  {
+    "courseName": "生物学の歴史",
+    "category": "科学一般",
+    "units": 2
+  },
+  {
+    "courseName": "化学の歴史",
+    "category": "科学一般",
+    "units": 2
+  },
+  {
+    "courseName": "理学ゼミナール",
+    "category": "総合演習",
+    "units": 2
+  },
+  {
+    "courseName": "卒業研究I",
+    "category": "総合演習",
+    "units": 4
+  },
+  {
+    "courseName": "卒業研究II",
+    "category": "総合演習",
+    "units": 4
+  },
+  {
+    "courseName": "輪講I",
+    "category": "総合演習",
+    "units": 1
+  },
+  {
+    "courseName": "輪講II",
+    "category": "総合演習",
+    "units": 1
+  },
+  {
+    "courseName": "生物科学研究法",
+    "category": "基礎科目",
+    "units": 2
+  },
+  {
+    "courseName": "生物化学",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "分子生物学Ｂ",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "植物発生学",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "環境生物学",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "植物生理学",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "動物生態学",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "植物生態学",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "動物発生学",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "動物生理学Ｂ",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "生物科学方法論",
+    "category": "基幹科目",
+    "units": 2
+  },
+  {
+    "courseName": "生物統計学",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "細胞生物学Ｂ",
+    "category": "展開科目",
+    "units": 2
+  },
+  {
+    "courseName": "進化生物学",
+    "category": "展開科目",
+    "units": 2
+  }
+]
