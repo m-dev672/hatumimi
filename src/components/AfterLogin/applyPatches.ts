@@ -11,8 +11,6 @@ export async function applyPatches(courses: Course[], curriculumPath: string): P
     if (patchResponse.ok) {
       const patchFile = await patchResponse.json();
       patchData = patchFile.flatMap((p: any) => p.patch);
-    } else {
-      console.warn('patches.json not found, proceeding without patches');
     }
   } catch (error) {
     console.warn('patches.json not found, proceeding without patches');
