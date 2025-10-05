@@ -22,7 +22,6 @@ export function AfterLogin() {
   const [loading, setLoading] = useState(true)
   const [updating, setUpdating] = useState(false)
   const [error, setError] = useState<string>()
-  const [selectedItem, setSelectedItem] = useState<KeijiData | null>(null)
 
   const bgColor = 'gray.50'
   const cardBg = 'white'
@@ -104,7 +103,7 @@ export function AfterLogin() {
       <Container maxW="container.xl" py={6}>
         <HStack justify="space-between" mb={6}>
           <HStack>
-            <Heading size="lg">掲示板メールボックス</Heading>
+            <Heading size="lg">HatuMiMi</Heading>
             {updating && (
               <HStack gap={2} color="blue.500">
                 <Spinner size="sm" />
@@ -115,116 +114,58 @@ export function AfterLogin() {
           <Button variant='solid' onClick={auth.logout}>ログアウト</Button>
         </HStack>
 
-        <HStack gap={0} alignItems="stretch" h="calc(100vh - 160px)">
-          {/* メール一覧 */}
-          <Box 
-            w="400px" 
-            bg={cardBg} 
-            borderRadius="md" 
-            border="1px" 
-            borderColor={borderColor}
-            overflow="hidden"
-          >
-            <Box p={4} borderBottom="1px" borderColor={borderColor}>
-              <Text fontWeight="bold">掲示一覧 ({keijiData.length}件)</Text>
-            </Box>
-            <Box overflowY="auto" h="full">
-              {keijiData.length === 0 ? (
-                <Center p={8}>
-                  <Text color="gray.500">掲示がありません</Text>
-                </Center>
-              ) : (
-                <VStack gap={0}>
-                  {keijiData.map((item) => (
-                    <Box
-                      key={item.id}
-                      p={4}
-                      cursor="pointer"
-                      borderBottom="1px"
-                      borderColor={borderColor}
-                      bg={selectedItem?.id === item.id ? 'blue.50' : 'transparent'}
-                      _hover={{ bg: 'gray.50' }}
-                      onClick={() => setSelectedItem(item)}
-                    >
-                      <VStack alignItems="start" gap={2}>
-                        <HStack justify="space-between" w="full">
-                          <Badge colorScheme="blue" fontSize="xs">
-                            {item.genre_name}
-                          </Badge>
-                          <Text fontSize="xs" color="gray.500">
-                            {formatDate(item.created_at)}
-                          </Text>
-                        </HStack>
-                        <Text 
-                          fontWeight="semibold" 
-                          fontSize="sm" 
-                          lineHeight="short"
-                          overflow="hidden"
-                          textOverflow="ellipsis"
-                          display="-webkit-box"
-                          css={{
-                            WebkitLineClamp: 2,
-                            WebkitBoxOrient: 'vertical',
-                          }}
-                        >
-                          {item.title}
-                        </Text>
-                      </VStack>
-                    </Box>
-                  ))}
-                </VStack>
-              )}
-            </Box>
+        <Box 
+          bg={cardBg} 
+          borderRadius="md" 
+          border="1px" 
+          borderColor={borderColor}
+          overflow="hidden"
+          h="calc(100vh - 160px)"
+          display="flex"
+          flexDirection="column"
+        >
+          <Box p={4} borderBottom="1px" borderColor={borderColor} bg="gray.100">
+            <Text fontWeight="bold">掲示一覧 ({keijiData.length}件)</Text>
           </Box>
-
-          {/* 詳細表示 */}
-          <Box 
-            flex="1" 
-            bg={cardBg} 
-            borderRadius="md" 
-            border="1px" 
-            borderColor={borderColor}
-            ml={4}
-            overflow="hidden"
-          >
-            {selectedItem ? (
-              <Box h="full">
-                <Box p={6} borderBottom="1px" borderColor={borderColor}>
-                  <VStack alignItems="start" gap={3}>
-                    <HStack>
-                      <Badge colorScheme="blue" size="sm">
-                        {selectedItem.genre_name}
-                      </Badge>
-                      <Text fontSize="sm" color="gray.500">
-                        {formatDate(selectedItem.created_at)}
-                      </Text>
-                    </HStack>
-                    <Heading size="md">{selectedItem.title}</Heading>
-                    <HStack gap={4} fontSize="sm" color="gray.600">
-                      <Text>掲示種別: {selectedItem.keijitype}</Text>
-                      <Text>ジャンルコード: {selectedItem.genrecd}</Text>
-                      <Text>連番: {selectedItem.seqNo}</Text>
-                    </HStack>
-                  </VStack>
-                </Box>
-                <Box p={6}>
-                  <Text color="gray.600">
-                    この掲示の詳細内容を表示する機能は今後実装予定です。
-                  </Text>
-                </Box>
-              </Box>
-            ) : (
-              <Center h="full">
-                <VStack gap={4}>
-                  <Text color="gray.500" fontSize="lg">掲示を選択してください</Text>
-                  <Text color="gray.400" fontSize="sm" textAlign="center">
-                    左の一覧から掲示を選択すると<br />詳細が表示されます
-                  </Text>
-                </VStack>
+          <Box overflowY="auto" flex="1">
+            {keijiData.length === 0 ? (
+              <Center p={8}>
+                <Text color="gray.500">掲示がありません</Text>
               </Center>
+            ) : (
+              <VStack gap={0} w="full">
+                {keijiData.map((item) => (
+                  <Box
+                    key={item.id}
+                    p={4}
+                    borderBottom="1px"
+                    borderColor={borderColor}
+                    _hover={{ bg: 'gray.50' }}
+                    w="full"
+                  >
+                    <VStack alignItems="start" gap={2}>
+                      <HStack justify="space-between" w="full">
+                        <Badge colorScheme="blue" fontSize="xs">
+                          {item.genre_name}
+                        </Badge>
+                        <Text fontSize="xs" color="gray.500">
+                          {formatDate(item.created_at)}
+                        </Text>
+                      </HStack>
+                      <Text 
+                        fontWeight="semibold" 
+                        fontSize="sm" 
+                        lineHeight="short"
+                      >
+                        {item.title}
+                      </Text>
+                    </VStack>
+                  </Box>
+                ))}
+              </VStack>
             )}
           </Box>
-        </HStack>
+        </Box>
       </Container>
     </Box>
   )
