@@ -61,30 +61,32 @@ export interface KeijiData {
   seqNo: string;
   genre_name: string;
   title: string;
+  published_at: string;
   created_at: string;
 }
 
 export const getKeijiData = (): Promise<KeijiData[]> =>
-  executeSql('SELECT id, keijitype, genrecd, seqNo, genre_name, title, created_at FROM keiji_data ORDER BY created_at DESC', row => ({
+  executeSql('SELECT id, keijitype, genrecd, seqNo, genre_name, title, published_at, created_at FROM keiji_data ORDER BY published_at DESC', row => ({
     id: row[0] as number,
     keijitype: row[1] as number,
     genrecd: row[2] as number,
     seqNo: row[3] as string,
     genre_name: row[4] as string,
     title: row[5] as string,
-    created_at: row[6] as string
+    published_at: row[6] as string,
+    created_at: row[7] as string
   }));
 
-export const insertKeijiDataBatch = async (dataList: { keijitype: string; genrecd: string; seqNo: string; genre_name: string; title: string }[]) => {
+export const insertKeijiDataBatch = async (dataList: { keijitype: string; genrecd: string; seqNo: string; genre_name: string; title: string; published_at: string }[]) => {
   if (dataList.length === 0) return;
   
   const [dbData, SQL] = await Promise.all([loadSqlDatabase(), createSqlEngine()]);
   const db = new SQL.Database(dbData);
   
-  const stmt = db.prepare('INSERT OR REPLACE INTO keiji_data (keijitype, genrecd, seqNo, genre_name, title) VALUES (?, ?, ?, ?, ?)');
+  const stmt = db.prepare('INSERT OR REPLACE INTO keiji_data (keijitype, genrecd, seqNo, genre_name, title, published_at) VALUES (?, ?, ?, ?, ?, ?)');
   
   for (const data of dataList) {
-    stmt.run([parseInt(data.keijitype), parseInt(data.genrecd), data.seqNo, data.genre_name, data.title]);
+    stmt.run([parseInt(data.keijitype), parseInt(data.genrecd), data.seqNo, data.genre_name, data.title, data.published_at]);
   }
   
   stmt.free();

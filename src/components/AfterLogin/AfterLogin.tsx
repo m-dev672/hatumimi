@@ -88,14 +88,20 @@ export function AfterLogin() {
   }
 
   const formatDate = (dateStr: string) => {
-    const date = new Date(dateStr)
-    return date.toLocaleDateString('ja-JP', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    })
+    if (!dateStr) return '';
+    
+    try {
+      const date = new Date(dateStr);
+      return date.toLocaleDateString('ja-JP', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+    } catch (error) {
+      return dateStr; // パースできない場合は元の文字列を返す
+    }
   }
 
   return (
@@ -149,7 +155,7 @@ export function AfterLogin() {
                           {item.genre_name}
                         </Badge>
                         <Text fontSize="xs" color="gray.500">
-                          {formatDate(item.created_at)}
+                          {formatDate(item.published_at)}
                         </Text>
                       </HStack>
                       <Text 
