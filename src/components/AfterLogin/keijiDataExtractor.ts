@@ -1,7 +1,7 @@
 import type { KeijiGenre } from './sqlDatabase';
-import { insertKeijiData } from './sqlDatabase';
+import { insertKeijiDataBatch } from './sqlDatabase';
 
-export const extractKeijiData = (genre: KeijiGenre, row: Element) => {
+const extractKeijiData = (genre: KeijiGenre, row: Element) => {
   const anchor = row.children[1]?.children[0] as HTMLAnchorElement;
   if (!anchor?.href || !anchor.textContent) return null;
   
@@ -23,11 +23,12 @@ export const fetchGenreKeiji = async (genre: KeijiGenre, flowKey: string) => {
   const table = new DOMParser().parseFromString(html, 'text/html').querySelectorAll('tbody')[1];
   
   if (table) {
-    const insertPromises = Array.from(table.children)
+    const extractedData = Array.from(table.children)
       .map(row => extractKeijiData(genre, row))
-      .filter(Boolean)
-      .map(data => insertKeijiData(data!));
+      .filter(Boolean);
     
-    await Promise.all(insertPromises);
+    if (extractedData.length > 0) {
+      await insertKeijiDataBatch(extractedData as any[]);
+    }
   }
 };

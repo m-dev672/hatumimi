@@ -26,7 +26,7 @@ const initializeDatabase = async (): Promise<Uint8Array> => {
   return data;
 };
 
-export const loadSqlDatabase = async (): Promise<Uint8Array> => {
+const loadSqlDatabase = async (): Promise<Uint8Array> => {
   let dbData = await loadFromIndexedDatabase();
   
   if (!dbData) {
@@ -38,7 +38,7 @@ export const loadSqlDatabase = async (): Promise<Uint8Array> => {
   return new Uint8Array(dbData);
 };
 
-export const executeSql = async <T>(query: string, transform?: (row: any[]) => T): Promise<T[]> => {
+const executeSql = async <T>(query: string, transform?: (row: any[]) => T): Promise<T[]> => {
   const [dbData, SQL] = await Promise.all([loadSqlDatabase(), createSqlEngine()]);
   const db = new SQL.Database(dbData);
   const results = db.exec(query);
@@ -75,14 +75,19 @@ export const getKeijiData = (): Promise<KeijiData[]> =>
     created_at: row[6] as string
   }));
 
-export const insertKeijiData = async (data: { keijitype: string; genrecd: string; seqNo: string; genre_name: string; title: string }) => {
+export const insertKeijiDataBatch = async (dataList: { keijitype: string; genrecd: string; seqNo: string; genre_name: string; title: string }[]) => {
+  if (dataList.length === 0) return;
+  
   const [dbData, SQL] = await Promise.all([loadSqlDatabase(), createSqlEngine()]);
   const db = new SQL.Database(dbData);
   
   const stmt = db.prepare('INSERT OR REPLACE INTO keiji_data (keijitype, genrecd, seqNo, genre_name, title) VALUES (?, ?, ?, ?, ?)');
-  stmt.run([parseInt(data.keijitype), parseInt(data.genrecd), data.seqNo, data.genre_name, data.title]);
-  stmt.free();
   
+  for (const data of dataList) {
+    stmt.run([parseInt(data.keijitype), parseInt(data.genrecd), data.seqNo, data.genre_name, data.title]);
+  }
+  
+  stmt.free();
   const updatedData = db.export();
   db.close();
   await saveToIndexedDatabase(updatedData);
