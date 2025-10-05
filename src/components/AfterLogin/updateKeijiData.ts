@@ -1,4 +1,4 @@
-import { getKeijiGenres } from './sqlDatabase';
+import { getKeijiGenres, deleteExpiredKeiji } from './sqlDatabase';
 import { fetchGenreKeiji } from './keijiDataExtractor';
 
 export type { KeijiGenre } from './sqlDatabase';
@@ -6,6 +6,12 @@ export type { KeijiGenre } from './sqlDatabase';
 export const updateKeijiData = async (): Promise<void> => {
   try {
     console.log('Starting keiji data update...');
+    
+    // まず期限切れの掲示を削除
+    const deletedCount = await deleteExpiredKeiji();
+    if (deletedCount > 0) {
+      console.log(`期限切れの掲示 ${deletedCount} 件を削除しました`);
+    }
     
     const [genres, response] = await Promise.all([
       getKeijiGenres(),

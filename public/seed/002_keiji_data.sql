@@ -6,6 +6,8 @@ CREATE TABLE keiji_data (
     genre_name VARCHAR(100) NOT NULL,
     title TEXT NOT NULL,
     published_at DATETIME,
+    display_start DATETIME,
+    display_end DATETIME,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     UNIQUE(keijitype, genrecd, seqNo)
 );

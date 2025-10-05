@@ -62,11 +62,13 @@ export interface KeijiData {
   genre_name: string;
   title: string;
   published_at: string;
+  display_start: string;
+  display_end: string;
   created_at: string;
 }
 
 export const getKeijiData = (): Promise<KeijiData[]> =>
-  executeSql('SELECT id, keijitype, genrecd, seqNo, genre_name, title, published_at, created_at FROM keiji_data ORDER BY published_at DESC', row => ({
+  executeSql('SELECT id, keijitype, genrecd, seqNo, genre_name, title, published_at, display_start, display_end, created_at FROM keiji_data ORDER BY published_at DESC', row => ({
     id: row[0] as number,
     keijitype: row[1] as number,
     genrecd: row[2] as number,
@@ -74,23 +76,51 @@ export const getKeijiData = (): Promise<KeijiData[]> =>
     genre_name: row[4] as string,
     title: row[5] as string,
     published_at: row[6] as string,
-    created_at: row[7] as string
+    display_start: row[7] as string,
+    display_end: row[8] as string,
+    created_at: row[9] as string
   }));
 
-export const insertKeijiDataBatch = async (dataList: { keijitype: string; genrecd: string; seqNo: string; genre_name: string; title: string; published_at: string }[]) => {
+export const insertKeijiDataBatch = async (dataList: { keijitype: string; genrecd: string; seqNo: string; genre_name: string; title: string; published_at: string; display_start: string; display_end: string }[]) => {
   if (dataList.length === 0) return;
   
   const [dbData, SQL] = await Promise.all([loadSqlDatabase(), createSqlEngine()]);
   const db = new SQL.Database(dbData);
   
-  const stmt = db.prepare('INSERT OR REPLACE INTO keiji_data (keijitype, genrecd, seqNo, genre_name, title, published_at) VALUES (?, ?, ?, ?, ?, ?)');
+  const stmt = db.prepare('INSERT OR REPLACE INTO keiji_data (keijitype, genrecd, seqNo, genre_name, title, published_at, display_start, display_end) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
   
   for (const data of dataList) {
-    stmt.run([parseInt(data.keijitype), parseInt(data.genrecd), data.seqNo, data.genre_name, data.title, data.published_at]);
+    stmt.run([parseInt(data.keijitype), parseInt(data.genrecd), data.seqNo, data.genre_name, data.title, data.published_at, data.display_start, data.display_end]);
   }
   
   stmt.free();
   const updatedData = db.export();
   db.close();
   await saveToIndexedDatabase(updatedData);
+};
+
+export const deleteExpiredKeiji = async (): Promise<number> => {
+  const [dbData, SQL] = await Promise.all([loadSqlDatabase(), createSqlEngine()]);
+  const db = new SQL.Database(dbData);
+  
+  const now = new Date().toISOString();
+  const stmt = db.prepare('DELETE FROM keiji_data WHERE display_end < ?');
+  stmt.run([now]);
+  
+  // 削除された件数を取得
+  const countResult = db.exec('SELECT changes() as deleted_count');
+  const deletedCount = countResult[0]?.values[0]?.[0] as number || 0;
+  
+  stmt.free();
+  
+  if (deletedCount > 0) {
+    const updatedData = db.export();
+    db.close();
+    await saveToIndexedDatabase(updatedData);
+    console.log(`期限切れの掲示 ${deletedCount} 件を削除しました`);
+  } else {
+    db.close();
+  }
+  
+  return deletedCount;
 };
