@@ -8,7 +8,7 @@ export interface KeijiGenre {
 
 const createSqlEngine = () => initSqlJs({ locateFile: file => `https://sql.js.org/dist/${file}` });
 
-const openDatabase = () => new Promise<IDBDatabase>((resolve, reject) => {
+const openIndexedDatabase = () => new Promise<IDBDatabase>((resolve, reject) => {
   const request = indexedDB.open('keiji', 1);
   request.onupgradeneeded = () => {
     const db = request.result;
@@ -18,12 +18,22 @@ const openDatabase = () => new Promise<IDBDatabase>((resolve, reject) => {
   request.onerror = () => reject(request.error);
 });
 
-const dbOperation = async (mode: IDBTransactionMode, operation: (store: IDBObjectStore) => IDBRequest) => {
-  const db = await openDatabase();
-  const store = db.transaction(['keiji'], mode).objectStore('keiji');
+const saveToIndexedDatabase = async (data: Uint8Array) => {
+  const db = await openIndexedDatabase();
+  const store = db.transaction(['keiji'], 'readwrite').objectStore('keiji');
+  return new Promise<void>((resolve, reject) => {
+    const request = store.put(data, 'keiji.db');
+    request.onsuccess = () => resolve();
+    request.onerror = () => reject(request.error);
+  });
+};
+
+const loadFromIndexedDatabase = async (): Promise<Uint8Array | null> => {
+  const db = await openIndexedDatabase();
+  const store = db.transaction(['keiji'], 'readonly').objectStore('keiji');
   return new Promise((resolve, reject) => {
-    const request = operation(store);
-    request.onsuccess = () => resolve(request.result);
+    const request = store.get('keiji.db');
+    request.onsuccess = () => resolve(request.result || null);
     request.onerror = () => reject(request.error);
   });
 };
@@ -45,20 +55,20 @@ const initializeDatabase = async (): Promise<Uint8Array> => {
   return data;
 };
 
-const loadDatabase = async (): Promise<Uint8Array> => {
-  let dbData = await dbOperation('readonly', store => store.get('keiji.db')) as Uint8Array;
+const loadSqlDatabase = async (): Promise<Uint8Array> => {
+  let dbData = await loadFromIndexedDatabase();
   
   if (!dbData) {
     console.log('keiji.db not found, initializing from seed files...');
     dbData = await initializeDatabase();
-    await dbOperation('readwrite', store => store.put(dbData, 'keiji.db'));
+    await saveToIndexedDatabase(dbData);
   }
   
   return new Uint8Array(dbData);
 };
 
 const executeSql = async <T>(query: string, transform?: (row: any[]) => T): Promise<T[]> => {
-  const [dbData, SQL] = await Promise.all([loadDatabase(), createSqlEngine()]);
+  const [dbData, SQL] = await Promise.all([loadSqlDatabase(), createSqlEngine()]);
   const db = new SQL.Database(dbData);
   const results = db.exec(query);
   const data = results[0]?.values.map(transform || (row => row as T)) || [];
@@ -74,7 +84,7 @@ const getKeijiGenres = (): Promise<KeijiGenre[]> =>
   }));
 
 const insertKeijiData = async (data: { keijitype: string; genrecd: string; seqNo: string; genre_name: string; title: string }) => {
-  const [dbData, SQL] = await Promise.all([loadDatabase(), createSqlEngine()]);
+  const [dbData, SQL] = await Promise.all([loadSqlDatabase(), createSqlEngine()]);
   const db = new SQL.Database(dbData);
   
   const stmt = db.prepare('INSERT OR REPLACE INTO keiji_data (keijitype, genrecd, seqNo, genre_name, title) VALUES (?, ?, ?, ?, ?)');
@@ -83,7 +93,7 @@ const insertKeijiData = async (data: { keijitype: string; genrecd: string; seqNo
   
   const updatedData = db.export();
   db.close();
-  await dbOperation('readwrite', store => store.put(updatedData, 'keiji.db'));
+  await saveToIndexedDatabase(updatedData);
 };
 
 const extractKeijiData = (genre: KeijiGenre, row: Element) => {
