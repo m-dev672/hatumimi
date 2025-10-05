@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useAuth } from '@/hook/useAuth'
 import { Button, Center, Spinner, Text, VStack, Popover, Portal, Link } from '@chakra-ui/react'
 import { activateSession, deactivateSession } from '@/context/Auth/authCookie'
-import { fetchKeijiList } from './fetchKeijiList'
+import { updateKeijiData } from './updateKeijiData'
 
 export function AfterLogin() {
   const auth = useAuth()
@@ -18,7 +18,7 @@ export function AfterLogin() {
     ;(async () => {
       sessionActivated = await activateSession(auth.user)
       if (sessionActivated) {
-        await fetchKeijiList();
+        await updateKeijiData();
         setLoading(false)
       }
     })()
