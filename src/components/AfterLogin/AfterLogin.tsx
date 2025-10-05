@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from 'react'
+import { useEffect, useState } from 'react'
 import { useAuth } from '@/hook/useAuth'
 import { Box, Button, Center, Spinner, Text, VStack, HStack, Badge, Container, Heading, Input, createListCollection } from '@chakra-ui/react'
 import { SelectRoot, SelectTrigger, SelectContent, SelectItem, SelectValueText } from '@/components/ui/select'
@@ -50,11 +50,22 @@ export function AfterLogin() {
     return () => { if (sessionActivated) deactivateSession() }
   }, [auth.user])
 
-  const filteredData = useMemo(() => 
-    keijiData.filter(item => 
-      (!searchTitle || item.title.toLowerCase().includes(searchTitle.toLowerCase())) &&
-      (!selectedGenre || item.genre_name === selectedGenre)
-    ), [keijiData, searchTitle, selectedGenre])
+  useEffect(() => {
+    const loadFilteredData = async () => {
+      if (loading) return
+      try {
+        const filters = {
+          ...(searchTitle && { title: searchTitle }),
+          ...(selectedGenre && { genre: selectedGenre })
+        }
+        const data = await getKeijiData(Object.keys(filters).length > 0 ? filters : undefined)
+        setKeijiData(data)
+      } catch (error) {
+        console.warn('フィルタリングされたデータの取得に失敗しました:', error)
+      }
+    }
+    loadFilteredData()
+  }, [searchTitle, selectedGenre, loading])
 
   const formatDate = (dateStr: string) => 
     dateStr ? new Date(dateStr).toLocaleDateString('ja-JP', {
@@ -98,7 +109,7 @@ export function AfterLogin() {
              h="calc(100vh - 200px)" display="flex" flexDirection="column">
           <Box p={4} borderBottom="1px" borderColor="gray.200" bg="gray.100">
             <VStack gap={3} alignItems="stretch">
-              <Text fontWeight="bold">掲示一覧 ({filteredData.length}件)</Text>
+              <Text fontWeight="bold">掲示一覧 ({keijiData.length}件)</Text>
               <HStack gap={3}>
                 <Field flex="1">
                   <Input
@@ -131,15 +142,15 @@ export function AfterLogin() {
             </VStack>
           </Box>
           <Box overflowY="auto" flex="1">
-            {filteredData.length === 0 ? (
+            {keijiData.length === 0 ? (
               <Center p={8}>
                 <Text color="gray.500">
-                  {keijiData.length === 0 ? '掲示がありません' : '検索条件に一致する掲示がありません'}
+                  {!searchTitle && !selectedGenre ? '掲示がありません' : '検索条件に一致する掲示がありません'}
                 </Text>
               </Center>
             ) : (
               <VStack gap={0} w="full">
-                {filteredData.map((item) => (
+                {keijiData.map((item) => (
                   <Box key={item.id} p={4} borderBottom="1px" borderColor="gray.200" 
                        _hover={{ bg: 'gray.50' }} w="full">
                     <VStack alignItems="start" gap={2}>
