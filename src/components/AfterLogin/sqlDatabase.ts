@@ -54,6 +54,27 @@ export const getKeijiGenres = (): Promise<KeijiGenre[]> =>
     genre_name: row[2] as string
   }));
 
+export interface KeijiData {
+  id: number;
+  keijitype: number;
+  genrecd: number;
+  seqNo: string;
+  genre_name: string;
+  title: string;
+  created_at: string;
+}
+
+export const getKeijiData = (): Promise<KeijiData[]> =>
+  executeSql('SELECT id, keijitype, genrecd, seqNo, genre_name, title, created_at FROM keiji_data ORDER BY created_at DESC', row => ({
+    id: row[0] as number,
+    keijitype: row[1] as number,
+    genrecd: row[2] as number,
+    seqNo: row[3] as string,
+    genre_name: row[4] as string,
+    title: row[5] as string,
+    created_at: row[6] as string
+  }));
+
 export const insertKeijiData = async (data: { keijitype: string; genrecd: string; seqNo: string; genre_name: string; title: string }) => {
   const [dbData, SQL] = await Promise.all([loadSqlDatabase(), createSqlEngine()]);
   const db = new SQL.Database(dbData);
