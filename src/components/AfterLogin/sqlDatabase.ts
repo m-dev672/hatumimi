@@ -38,30 +38,33 @@ const loadSqlDatabase = async (): Promise<Uint8Array> => {
   return new Uint8Array(dbData)
 }
 
-const executeSql = async <T>(query: string, params: (string | number)[] = [], transform?: (row: unknown[]) => T): Promise<T[]> => {
+const executeSql = async <T>(query: string, transform?: (row: unknown[]) => T): Promise<T[]> => {
   const [dbData, SQL] = await Promise.all([loadSqlDatabase(), createSqlEngine()])
   const db = new SQL.Database(dbData)
-  
-  let results
-  if (params.length > 0) {
-    const stmt = db.prepare(query)
-    stmt.bind(params as any)
-    results = [{ values: [] as unknown[][] }]
-    while (stmt.step()) {
-      results[0].values.push(stmt.get())
-    }
-    stmt.free()
-  } else {
-    results = db.exec(query)
-  }
-  
+  const results = db.exec(query)
   const data = results[0]?.values.map(transform || (row => row as T)) || []
   db.close()
   return data
 }
 
+const executeStmt = async <T>(query: string, params: (string | number)[], transform: (row: unknown[]) => T): Promise<T[]> => {
+  const [dbData, SQL] = await Promise.all([loadSqlDatabase(), createSqlEngine()])
+  const db = new SQL.Database(dbData)
+  const stmt = db.prepare(query)
+  
+  const results: T[] = []
+  stmt.bind(params)
+  while (stmt.step()) {
+    results.push(transform(stmt.get()))
+  }
+  
+  stmt.free()
+  db.close()
+  return results
+}
+
 export const getKeijiGenres = (): Promise<KeijiGenre[]> =>
-  executeSql('SELECT keijitype, genrecd, genre_name FROM keiji_genres', [], row => ({
+  executeSql('SELECT keijitype, genrecd, genre_name FROM keiji_genres', row => ({
     keijitype: row[0] as number,
     genrecd: row[1] as number,
     genre_name: row[2] as string
@@ -81,26 +84,37 @@ export interface KeijiData {
 }
 
 export const getKeijiData = (filters?: { title?: string; genre?: string }): Promise<KeijiData[]> => {
+  if (!filters || (!filters.title && !filters.genre)) {
+    return executeSql('SELECT id, keijitype, genrecd, seqNo, genre_name, title, published_at, display_start, display_end, created_at FROM keiji_data ORDER BY published_at DESC', row => ({
+      id: row[0] as number,
+      keijitype: row[1] as number,
+      genrecd: row[2] as number,
+      seqNo: row[3] as string,
+      genre_name: row[4] as string,
+      title: row[5] as string,
+      published_at: row[6] as string,
+      display_start: row[7] as string,
+      display_end: row[8] as string,
+      created_at: row[9] as string
+    }))
+  }
+
   let query = 'SELECT id, keijitype, genrecd, seqNo, genre_name, title, published_at, display_start, display_end, created_at FROM keiji_data'
   const conditions: string[] = []
   const params: string[] = []
   
-  if (filters?.title) {
+  if (filters.title) {
     conditions.push("title LIKE '%' || ? || '%'")
     params.push(filters.title)
   }
-  if (filters?.genre) {
+  if (filters.genre) {
     conditions.push("genre_name = ?")
     params.push(filters.genre)
   }
   
-  if (conditions.length > 0) {
-    query += ' WHERE ' + conditions.join(' AND ')
-  }
+  query += ' WHERE ' + conditions.join(' AND ') + ' ORDER BY published_at DESC'
   
-  query += ' ORDER BY published_at DESC'
-  
-  return executeSql(query, params, row => ({
+  return executeStmt(query, params, row => ({
     id: row[0] as number,
     keijitype: row[1] as number,
     genrecd: row[2] as number,
