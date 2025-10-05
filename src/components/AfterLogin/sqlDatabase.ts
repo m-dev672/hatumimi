@@ -1,70 +1,70 @@
-import initSqlJs from 'sql.js';
-import { saveToIndexedDatabase, loadFromIndexedDatabase } from './indexedDatabase';
+import initSqlJs from 'sql.js'
+import { saveToIndexedDatabase, loadFromIndexedDatabase } from './indexedDatabase'
 
 export interface KeijiGenre {
-  keijitype: number;
-  genrecd: number;
-  genre_name: string;
+  keijitype: number
+  genrecd: number
+  genre_name: string
 }
 
-const createSqlEngine = () => initSqlJs({ locateFile: file => `https://sql.js.org/dist/${file}` });
+const createSqlEngine = () => initSqlJs({ locateFile: file => `https://sql.js.org/dist/${file}` })
 
 const initializeDatabase = async (): Promise<Uint8Array> => {
   const [SQL, ...responses] = await Promise.all([
     createSqlEngine(),
     fetch('/seed/001_keiji_genres.sql'),
     fetch('/seed/002_keiji_data.sql')
-  ]);
+  ])
   
-  const db = new SQL.Database();
+  const db = new SQL.Database()
   for (const response of responses) {
-    db.exec(await response.text());
+    db.exec(await response.text())
   }
   
-  const data = db.export();
-  db.close();
-  return data;
-};
+  const data = db.export()
+  db.close()
+  return data
+}
 
 const loadSqlDatabase = async (): Promise<Uint8Array> => {
-  let dbData = await loadFromIndexedDatabase();
+  let dbData = await loadFromIndexedDatabase()
   
   if (!dbData) {
-    console.log('keiji.db not found, initializing from seed files...');
-    dbData = await initializeDatabase();
-    await saveToIndexedDatabase(dbData);
+    console.log('keiji.db not found, initializing from seed files...')
+    dbData = await initializeDatabase()
+    await saveToIndexedDatabase(dbData)
   }
   
-  return new Uint8Array(dbData);
-};
+  return new Uint8Array(dbData)
+}
 
-const executeSql = async <T>(query: string, transform?: (row: any[]) => T): Promise<T[]> => {
-  const [dbData, SQL] = await Promise.all([loadSqlDatabase(), createSqlEngine()]);
-  const db = new SQL.Database(dbData);
-  const results = db.exec(query);
-  const data = results[0]?.values.map(transform || (row => row as T)) || [];
-  db.close();
-  return data;
-};
+const executeSql = async <T>(query: string, transform?: (row: unknown[]) => T): Promise<T[]> => {
+  const [dbData, SQL] = await Promise.all([loadSqlDatabase(), createSqlEngine()])
+  const db = new SQL.Database(dbData)
+  const results = db.exec(query)
+  const data = results[0]?.values.map(transform || (row => row as T)) || []
+  db.close()
+  return data
+}
 
 export const getKeijiGenres = (): Promise<KeijiGenre[]> =>
   executeSql('SELECT keijitype, genrecd, genre_name FROM keiji_genres', row => ({
     keijitype: row[0] as number,
     genrecd: row[1] as number,
     genre_name: row[2] as string
-  }));
+  }))
 
 export interface KeijiData {
-  id: number;
-  keijitype: number;
-  genrecd: number;
-  seqNo: string;
-  genre_name: string;
-  title: string;
-  published_at: string;
-  display_start: string;
-  display_end: string;
-  created_at: string;
+  id: number
+  keijitype: number
+  genrecd: number
+  seqNo: string
+  genre_name: string
+  title: string
+  published_at: string
+  display_start: string
+  display_end: string
+  created_at: string
 }
 
 export const getKeijiData = (): Promise<KeijiData[]> =>
@@ -79,48 +79,47 @@ export const getKeijiData = (): Promise<KeijiData[]> =>
     display_start: row[7] as string,
     display_end: row[8] as string,
     created_at: row[9] as string
-  }));
+  }))
 
 export const insertKeijiDataBatch = async (dataList: { keijitype: string; genrecd: string; seqNo: string; genre_name: string; title: string; published_at: string; display_start: string; display_end: string }[]) => {
-  if (dataList.length === 0) return;
+  if (dataList.length === 0) return
   
-  const [dbData, SQL] = await Promise.all([loadSqlDatabase(), createSqlEngine()]);
-  const db = new SQL.Database(dbData);
+  const [dbData, SQL] = await Promise.all([loadSqlDatabase(), createSqlEngine()])
+  const db = new SQL.Database(dbData)
   
-  const stmt = db.prepare('INSERT OR REPLACE INTO keiji_data (keijitype, genrecd, seqNo, genre_name, title, published_at, display_start, display_end) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
+  const stmt = db.prepare('INSERT OR REPLACE INTO keiji_data (keijitype, genrecd, seqNo, genre_name, title, published_at, display_start, display_end) VALUES (?, ?, ?, ?, ?, ?, ?, ?)')
   
   for (const data of dataList) {
-    stmt.run([parseInt(data.keijitype), parseInt(data.genrecd), data.seqNo, data.genre_name, data.title, data.published_at, data.display_start, data.display_end]);
+    stmt.run([parseInt(data.keijitype), parseInt(data.genrecd), data.seqNo, data.genre_name, data.title, data.published_at, data.display_start, data.display_end])
   }
   
-  stmt.free();
-  const updatedData = db.export();
-  db.close();
-  await saveToIndexedDatabase(updatedData);
-};
+  stmt.free()
+  const updatedData = db.export()
+  db.close()
+  await saveToIndexedDatabase(updatedData)
+}
 
 export const deleteExpiredKeiji = async (): Promise<number> => {
-  const [dbData, SQL] = await Promise.all([loadSqlDatabase(), createSqlEngine()]);
-  const db = new SQL.Database(dbData);
+  const [dbData, SQL] = await Promise.all([loadSqlDatabase(), createSqlEngine()])
+  const db = new SQL.Database(dbData)
   
-  const now = new Date().toISOString();
-  const stmt = db.prepare('DELETE FROM keiji_data WHERE display_end < ?');
-  stmt.run([now]);
+  const now = new Date().toISOString()
+  const stmt = db.prepare('DELETE FROM keiji_data WHERE display_end != "" AND display_end < ?')
+  stmt.run([now])
   
-  // 削除された件数を取得
-  const countResult = db.exec('SELECT changes() as deleted_count');
-  const deletedCount = countResult[0]?.values[0]?.[0] as number || 0;
+  const countResult = db.exec('SELECT changes() as deleted_count')
+  const deletedCount = countResult[0]?.values[0]?.[0] as number || 0
   
-  stmt.free();
+  stmt.free()
   
   if (deletedCount > 0) {
-    const updatedData = db.export();
-    db.close();
-    await saveToIndexedDatabase(updatedData);
-    console.log(`期限切れの掲示 ${deletedCount} 件を削除しました`);
+    const updatedData = db.export()
+    db.close()
+    await saveToIndexedDatabase(updatedData)
+    console.log(`期限切れの掲示 ${deletedCount} 件を削除しました`)
   } else {
-    db.close();
+    db.close()
   }
   
-  return deletedCount;
-};
+  return deletedCount
+}
