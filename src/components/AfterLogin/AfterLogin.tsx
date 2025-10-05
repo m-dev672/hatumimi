@@ -73,17 +73,8 @@ export function AfterLogin() {
     ;(async () => {
       sessionActivated = await activateSession(auth.user)
       if (sessionActivated) {
-        const curriculumPath = await getCurriculumPath()
-        if (!curriculumPath) {
-          setError("未対応の学部又は学科、コースです。m.koutarou2004@gmail.comまで連絡してください。")
-          setLoading(false)
-          return
-        }
-        const [completedCourses, currentCourses] = await Promise.all([
-          getCompletedCourses(curriculumPath),
-          getCurrentCourses(curriculumPath)
-        ])
-        setData(await countUnits(completedCourses, currentCourses, curriculumPath))
+        getCompletedCourses(),
+ 
         setLoading(false)
       }
     })()
