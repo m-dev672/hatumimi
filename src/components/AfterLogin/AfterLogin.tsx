@@ -51,6 +51,24 @@ export function AfterLogin() {
     setSelectedGenre(details.value[0] || '')
   }, [])
 
+  const handleManualRefresh = useCallback(async () => {
+    if (!auth.user.id || updating) return
+    
+    setUpdating(true)
+    try {
+      const sessionActivated = await activateSession(auth.user)
+      if (sessionActivated) {
+        await updateKeijiData()
+        await loadFilteredData(filtersRef.current)
+        await deactivateSession()
+      }
+    } catch (error) {
+      console.warn('手動更新に失敗しました:', error)
+    } finally {
+      setUpdating(false)
+    }
+  }, [auth.user, updating, loadFilteredData])
+
   const formatDate = useCallback((dateStr: string) => {
     if (!dateStr) return ''
     try {
@@ -64,35 +82,48 @@ export function AfterLogin() {
 
   useEffect(() => {
     if (!auth.user.id) return
+    
+    const abortController = new AbortController()
     let sessionActivated = false
 
     const initializeData = async () => {
       try {
         const [initialData, genreData] = await Promise.all([getKeijiData(), getKeijiGenres()])
+        if (abortController.signal.aborted) return
+        
         setData(initialData)
         setGenres(genreData)
         setLoading(false)
 
         sessionActivated = await activateSession(auth.user)
-        if (sessionActivated) {
+        if (sessionActivated && !abortController.signal.aborted) {
           setUpdating(true)
           try {
             await updateKeijiData()
-            await loadFilteredData(filtersRef.current)
+            if (!abortController.signal.aborted) {
+              await loadFilteredData(filtersRef.current)
+            }
           } catch (error) {
             console.warn('掲示データの更新に失敗しました:', error)
           } finally {
-            setUpdating(false)
+            if (!abortController.signal.aborted) {
+              setUpdating(false)
+            }
           }
         }
       } catch {
-        setError('掲示データの取得に失敗しました')
-        setLoading(false)
+        if (!abortController.signal.aborted) {
+          setError('掲示データの取得に失敗しました')
+          setLoading(false)
+        }
       }
     }
 
     initializeData()
-    return () => { if (sessionActivated) deactivateSession() }
+    return () => { 
+      abortController.abort()
+      if (sessionActivated) deactivateSession() 
+    }
   }, [auth.user, loadFilteredData])
 
   useEffect(() => {
@@ -121,16 +152,22 @@ export function AfterLogin() {
     <Box bg="gray.50" minH="100vh" p={4}>
       <VStack h="100%" maxH="calc(100vh - 2rem)" gap={4}>
         <HStack justify="space-between" w="full" flex="0 0 auto">
+          <Heading size="lg">HatuMiMi</Heading>
           <HStack>
-            <Heading size="lg">HatuMiMi</Heading>
-            {updating && (
-              <HStack gap={2} color="blue.500">
-                <Spinner size="sm" />
-                <Text fontSize="sm">更新中...</Text>
+            <Button 
+              onClick={handleManualRefresh} 
+              disabled={updating}
+              size="sm"
+              variant="outline"
+              colorScheme={updating ? "blue" : "gray"}
+            >
+              <HStack gap={2}>
+                {updating && <Spinner size="sm" />}
+                <Text>{updating ? "更新中..." : "更新"}</Text>
               </HStack>
-            )}
+            </Button>
+            <Button onClick={auth.logout}>ログアウト</Button>
           </HStack>
-          <Button onClick={auth.logout}>ログアウト</Button>
         </HStack>
 
         <Box bg="white" borderRadius="lg" border="1px" borderColor="gray.200" overflow="hidden" 
