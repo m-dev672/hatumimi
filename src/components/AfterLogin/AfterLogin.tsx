@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import {
   Badge, Box, Button, Center, createListCollection, Heading, HStack, Input, Spinner, Text, VStack,
 } from '@chakra-ui/react'
@@ -30,6 +30,9 @@ export function AfterLogin() {
       ? { ...(searchTitle && { title: searchTitle }), ...(selectedGenre && { genre: selectedGenre }) }
       : undefined
   }, [searchTitle, selectedGenre])
+
+  const filtersRef = useRef(filters)
+  filtersRef.current = filters
 
   const loadFilteredData = useCallback(async (filters?: Filters) => {
     try {
@@ -75,7 +78,7 @@ export function AfterLogin() {
           setUpdating(true)
           try {
             await updateKeijiData()
-            await loadFilteredData(filters)
+            await loadFilteredData(filtersRef.current)
           } catch (error) {
             console.warn('掲示データの更新に失敗しました:', error)
           } finally {
@@ -90,7 +93,7 @@ export function AfterLogin() {
 
     initializeData()
     return () => { if (sessionActivated) deactivateSession() }
-  }, [auth.user, loadFilteredData, filters])
+  }, [auth.user, loadFilteredData])
 
   useEffect(() => {
     if (loading) return
