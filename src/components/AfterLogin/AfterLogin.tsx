@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useAuth } from '@/hook/useAuth'
-import { Box, Button, Center, Spinner, Text, VStack, HStack, Badge, Container, Heading, Input, createListCollection } from '@chakra-ui/react'
+import { Box, Button, Center, Spinner, Text, VStack, HStack, Badge, Heading, Input, createListCollection } from '@chakra-ui/react'
 import { SelectRoot, SelectTrigger, SelectContent, SelectItem, SelectValueText } from '@/components/ui/select'
 import { Field } from '@/components/ui/field'
 import { activateSession, deactivateSession } from '@/context/Auth/authCookie'
@@ -96,9 +96,9 @@ export function AfterLogin() {
   )
 
   return (
-    <Box bg="gray.50" minH="100vh">
-      <Container maxW="container.xl" py={6}>
-        <HStack justify="space-between" mb={6}>
+    <Box bg="gray.50" minH="100vh" p={4}>
+      <VStack h="100%" maxH="calc(100vh - 2rem)" gap={4}>
+        <HStack justify="space-between" w="full" flex="0 0 auto">
           <HStack>
             <Heading size="lg">HatuMiMi</Heading>
             {updating && (
@@ -112,12 +112,12 @@ export function AfterLogin() {
         </HStack>
 
         <Box bg="white" borderRadius="lg" border="1px" borderColor="gray.200" overflow="hidden" 
-             h="calc(100vh - 200px)" display="flex" flexDirection="column">
+             w="full" flex="1" display="flex" flexDirection="column" minH="0">
           <Box p={4} borderBottom="1px" borderColor="gray.200" bg="gray.100">
             <VStack gap={3} alignItems="stretch">
               <Text fontWeight="bold">掲示一覧 ({keijiData.length}件)</Text>
-              <HStack gap={3}>
-                <Field flex="1">
+              <Box display="flex" flexDirection={{ base: "column", md: "row" }} gap={3} alignItems="stretch">
+                <Field flex={{ base: "none", md: "1" }}>
                   <Input
                     placeholder="タイトルで検索..."
                     value={searchTitle}
@@ -131,7 +131,7 @@ export function AfterLogin() {
                   value={selectedGenre ? [selectedGenre] : []}
                   onValueChange={(details) => setSelectedGenre(details.value[0] || '')}
                   size="sm"
-                  width="200px"
+                  width={{ base: "100%", md: "18rem" }}
                 >
                   <SelectTrigger bg="white">
                     <SelectValueText placeholder="全てのカテゴリ" />
@@ -144,7 +144,7 @@ export function AfterLogin() {
                     ))}
                   </SelectContent>
                 </SelectRoot>
-              </HStack>
+              </Box>
             </VStack>
           </Box>
           <Box overflowY="auto" flex="1">
@@ -172,7 +172,7 @@ export function AfterLogin() {
             )}
           </Box>
         </Box>
-      </Container>
+      </VStack>
     </Box>
   )
 }
