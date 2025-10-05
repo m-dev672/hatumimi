@@ -9,14 +9,18 @@ export interface KeijiGenre {
 
 // public/seed/配下のSQLファイルを読み込んでDBを初期化
 async function initializeDatabase(): Promise<Uint8Array> {
-  const [SQL, response] = await Promise.all([
+  const [SQL, genresResponse, keijiDataResponse] = await Promise.all([
     createSqlEngine(),
-    fetch('/seed/001_keiji_genres.sql')
+    fetch('/seed/001_keiji_genres.sql'),
+    fetch('/seed/002_keiji_data.sql')
   ]);
   
   const db = new SQL.Database();
-  const sqlContent = await response.text();
-  db.exec(sqlContent);
+  const genresSql = await genresResponse.text();
+  const keijiDataSql = await keijiDataResponse.text();
+  
+  db.exec(genresSql);
+  db.exec(keijiDataSql);
   
   const data = db.export();
   db.close();
@@ -87,16 +91,54 @@ const getKeijiGenres = async (): Promise<KeijiGenre[]> => {
   return genres;
 };
 
+// 掲示データをデータベースに挿入
+const insertKeijiData = async (keijiData: {
+  keijitype: string;
+  genrecd: string;
+  seqNo: string;
+  genre_name: string;
+  title: string;
+}) => {
+  const [dbData, SQL] = await Promise.all([loadKeijiDatabase(), createSqlEngine()]);
+  const sqlDb = new SQL.Database(dbData);
+  
+  const stmt = sqlDb.prepare(`
+    INSERT OR REPLACE INTO keiji_data (keijitype, genrecd, seqNo, genre_name, title)
+    VALUES (?, ?, ?, ?, ?)
+  `);
+  
+  stmt.run([
+    parseInt(keijiData.keijitype),
+    parseInt(keijiData.genrecd),
+    keijiData.seqNo,
+    keijiData.genre_name,
+    keijiData.title
+  ]);
+  
+  stmt.free();
+  
+  // データベースを保存
+  const updatedData = sqlDb.export();
+  sqlDb.close();
+  await saveKeijiDatabase(updatedData);
+};
+
 // 掲示情報を抽出
 const extractKeijiData = (genre: KeijiGenre, keijiRow: Element) => {
   const anchor = keijiRow.children[1]?.children[0] as HTMLAnchorElement;
-  if (!anchor?.href) return null;
+  if (!anchor?.href || !anchor.textContent) return null;
   
   const urlParams = new URLSearchParams(anchor.href.split('?')[1]);
+  const keijitype = urlParams.get('keijitype');
+  const genrecd = urlParams.get('genrecd');
+  const seqNo = urlParams.get('seqNo');
+  
+  if (!keijitype || !genrecd || !seqNo) return null;
+  
   return {
-    keijitype: urlParams.get('keijitype'),
-    genrecd: urlParams.get('genrecd'),
-    seqNo: urlParams.get('seqNo'),
+    keijitype,
+    genrecd,
+    seqNo,
     genre_name: genre.genre_name,
     title: anchor.textContent
   };
@@ -117,10 +159,12 @@ const fetchGenreKeiji = async (genre: KeijiGenre, flowKey: string) => {
   
   if (!table) return;
   
-  Array.from(table.children).forEach(row => {
-    const data = extractKeijiData(genre, row);
-    if (data) console.log(data);
-  });
+  const insertPromises = Array.from(table.children)
+    .map(row => extractKeijiData(genre, row))
+    .filter(data => data !== null)
+    .map(data => insertKeijiData(data));
+  
+  await Promise.all(insertPromises);
 };
 
 export const fetchKeijiList = async (): Promise<void> => {
