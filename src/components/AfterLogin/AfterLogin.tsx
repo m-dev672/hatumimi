@@ -17,6 +17,15 @@ export function AfterLogin() {
   const [searchTitle, setSearchTitle] = useState('')
   const [selectedGenre, setSelectedGenre] = useState('')
 
+  const loadFilteredData = async (filters?: { title?: string; genre?: string }) => {
+    try {
+      const data = await getKeijiData(filters)
+      setKeijiData(data)
+    } catch (error) {
+      console.warn('データの取得に失敗しました:', error)
+    }
+  }
+
   useEffect(() => {
     if (!auth.user.id) return
     let sessionActivated = false
@@ -33,7 +42,12 @@ export function AfterLogin() {
           setUpdating(true)
           try {
             await updateKeijiData()
-            setKeijiData(await getKeijiData())
+            // 更新後は現在の検索条件を適用
+            const currentFilters = {
+              ...(searchTitle && { title: searchTitle }),
+              ...(selectedGenre && { genre: selectedGenre })
+            }
+            await loadFilteredData(Object.keys(currentFilters).length > 0 ? currentFilters : undefined)
           } catch (error) {
             console.warn('掲示データの更新に失敗しました:', error)
           } finally {
@@ -51,20 +65,12 @@ export function AfterLogin() {
   }, [auth.user])
 
   useEffect(() => {
-    const loadFilteredData = async () => {
-      if (loading) return
-      try {
-        const filters = {
-          ...(searchTitle && { title: searchTitle }),
-          ...(selectedGenre && { genre: selectedGenre })
-        }
-        const data = await getKeijiData(Object.keys(filters).length > 0 ? filters : undefined)
-        setKeijiData(data)
-      } catch (error) {
-        console.warn('フィルタリングされたデータの取得に失敗しました:', error)
-      }
+    if (loading) return
+    const filters = {
+      ...(searchTitle && { title: searchTitle }),
+      ...(selectedGenre && { genre: selectedGenre })
     }
-    loadFilteredData()
+    loadFilteredData(Object.keys(filters).length > 0 ? filters : undefined)
   }, [searchTitle, selectedGenre, loading])
 
   const formatDate = (dateStr: string) => 
