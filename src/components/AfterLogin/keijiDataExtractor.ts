@@ -92,15 +92,25 @@ export interface KeijiAttachment {
   downloadUrl: string
 }
 
+export interface KeijiTableRow {
+  cells: string[]
+}
+
+export interface KeijiTable {
+  title?: string
+  rows: KeijiTableRow[]
+}
+
 export interface KeijiDetailResult {
   content: string | null
   attachments: KeijiAttachment[]
+  tables: KeijiTable[]
 }
 
 export const fetchKeijiDetail = async (keijitype: number, genrecd: number, seqNo: string): Promise<KeijiDetailResult> => {
   let response = await fetch('/campusweb/campussquare.do?_flowId=KJW0001100-flow&link=menu-link-mf-135062')
   let flowKey = new URL(response.url).searchParams.get('_flowExecutionKey')
-  if (!flowKey) return { content: null, attachments: [] };
+  if (!flowKey) return { content: null, attachments: [], tables: [] };
 
   let params = new URLSearchParams({
     _flowExecutionKey: flowKey,
@@ -112,7 +122,7 @@ export const fetchKeijiDetail = async (keijitype: number, genrecd: number, seqNo
   response = await fetch(`/campusweb/campussquare.do?${params}`)
 
   flowKey = new URL(response.url).searchParams.get('_flowExecutionKey')
-  if (!flowKey) return { content: null, attachments: [] };
+  if (!flowKey) return { content: null, attachments: [], tables: [] };
 
   params = new URLSearchParams({
     _flowExecutionKey: flowKey,
@@ -141,9 +151,9 @@ export const fetchKeijiDetail = async (keijitype: number, genrecd: number, seqNo
       .trim()
   }
 
-  // テーブルから追加情報と添付ファイルを抽出
+  // テーブルから添付ファイルとテーブル情報を抽出
   const attachments: KeijiAttachment[] = []
-  const additionalInfo: string[] = []
+  const tables: KeijiTable[] = []
   const tbodies = Array.from(doc.querySelectorAll('table.keiji-normal tbody'))
   
   tbodies.forEach(tbody => {
@@ -164,30 +174,38 @@ export const fetchKeijiDetail = async (keijitype: number, genrecd: number, seqNo
         }
       })
     } else {
-      // その他の情報を追加情報として抽出（thとtdの両方）
-      const cells = Array.from(tbody.querySelectorAll('th, td'))
-      cells.forEach(cell => {
-        // HTMLを整形してからテキストを抽出
-        let text = cell.innerHTML
-          .replace(/<BR\s*\/?>/gi, '\n')
-          .replace(/<[^>]*>/g, '')
-          .replace(/&nbsp;/g, ' ')
-          .replace(/\s+/g, ' ')
-          .trim()
+      // その他の情報を個別のテーブルとして抽出
+      const tableRows: KeijiTableRow[] = []
+      const rows = Array.from(tbody.querySelectorAll('tr'))
+      
+      rows.forEach(row => {
+        const cells = Array.from(row.querySelectorAll('th, td'))
+        const rowData: string[] = []
         
-        if (text && text.length > 0 && !text.match(/^[\s\n,]*$/)) {
-          additionalInfo.push(text)
+        cells.forEach(cell => {
+          // HTMLを整形してからテキストを抽出
+          let text = cell.innerHTML
+            .replace(/<BR\s*\/?>/gi, '\n')
+            .replace(/<[^>]*>/g, '')
+            .replace(/&nbsp;/g, ' ')
+            .replace(/\s+/g, ' ')
+            .trim()
+          
+          if (text && text.length > 0 && !text.match(/^[\s\n,]*$/)) {
+            rowData.push(text)
+          }
+        })
+        
+        if (rowData.length > 0) {
+          tableRows.push({ cells: rowData })
         }
       })
+      
+      if (tableRows.length > 0) {
+        tables.push({ rows: tableRows })
+      }
     }
   })
 
-  // 追加情報を本文に追加
-  if (additionalInfo.length > 0 && content) {
-    content += '\n\n--- 追加情報 ---\n' + additionalInfo.join('\n')
-  } else if (additionalInfo.length > 0 && !content) {
-    content = '--- 追加情報 ---\n' + additionalInfo.join('\n')
-  }
-
-  return { content, attachments }
+  return { content, attachments, tables }
 }
