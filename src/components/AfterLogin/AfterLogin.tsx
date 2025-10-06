@@ -187,9 +187,12 @@ export function AfterLogin() {
                 </Field>
                 <SelectRoot 
                   collection={createListCollection({ 
-                    items: genres.map(g => ({ label: g.genre_name, value: g.genre_name })) 
+                    items: [
+                      { label: "全てのカテゴリ", value: "" },
+                      ...genres.map(g => ({ label: g.genre_name, value: g.genre_name }))
+                    ]
                   })}
-                  value={selectedGenre ? [selectedGenre] : []}
+                  value={selectedGenre ? [selectedGenre] : [""]}
                   onValueChange={handleGenreChange}
                   size="sm"
                   width={{ base: "100%", md: "18rem" }}
@@ -198,6 +201,9 @@ export function AfterLogin() {
                     <SelectValueText placeholder="全てのカテゴリ" />
                   </SelectTrigger>
                   <SelectContent>
+                    <SelectItem item={{ label: "全てのカテゴリ", value: "" }}>
+                      全てのカテゴリ
+                    </SelectItem>
                     {genres.map((genre) => (
                       <SelectItem key={`${genre.keijitype}-${genre.genrecd}`} 
                                   item={{ label: genre.genre_name, value: genre.genre_name }}>
