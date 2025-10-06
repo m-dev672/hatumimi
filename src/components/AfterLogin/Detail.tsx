@@ -199,23 +199,26 @@ export function Detail({ keiji, isOpen, onClose }: DetailProps) {
                               px={4}
                               borderColor="gray.200"
                             >
-                              <Link
-                                href={url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                color="blue.600"
-                                textDecoration="underline"
-                                _hover={{ color: 'blue.800' }}
-                                fontSize="sm"
-                                fontWeight="medium"
-                                overflow="hidden"
-                                textOverflow="ellipsis"
-                                whiteSpace="nowrap"
-                                display="block"
-                                title={url}
-                              >
-                                {url}
-                              </Link>
+                              <HStack gap={2}>
+                                <Text fontSize="sm" color="blue.500">🔗</Text>
+                                <Link
+                                  href={url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  color="blue.600"
+                                  textDecoration="underline"
+                                  _hover={{ color: 'blue.800' }}
+                                  fontSize="sm"
+                                  fontWeight="medium"
+                                  overflow="hidden"
+                                  textOverflow="ellipsis"
+                                  whiteSpace="nowrap"
+                                  flex="1"
+                                  title={url}
+                                >
+                                  {url}
+                                </Link>
+                              </HStack>
                             </Table.Cell>
                           </Table.Row>
                         ))}
@@ -253,14 +256,17 @@ export function Detail({ keiji, isOpen, onClose }: DetailProps) {
                       boxShadow="sm"
                       onClick={() => handleAttachmentClick(attachment)}
                     >
-                      <VStack alignItems="start" gap={1} w="full">
-                        <Text fontSize="sm" fontWeight="medium" color="gray.700">
-                          {attachment.name}
-                        </Text>
-                        <Text fontSize="xs" color="gray.500">
-                          クリックしてダウンロード
-                        </Text>
-                      </VStack>
+                      <HStack gap={3} w="full">
+                        <Text fontSize="lg" color="blue.500">📎</Text>
+                        <VStack alignItems="start" gap={1} flex="1">
+                          <Text fontSize="sm" fontWeight="medium" color="gray.700">
+                            {attachment.name}
+                          </Text>
+                          <Text fontSize="xs" color="gray.500">
+                            クリックしてダウンロード
+                          </Text>
+                        </VStack>
+                      </HStack>
                     </Box>
                   ))}
                 </VStack>
