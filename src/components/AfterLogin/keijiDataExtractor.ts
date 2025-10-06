@@ -87,10 +87,20 @@ export const fetchGenreKeiji = async (genre: KeijiGenre, flowKey: string) => {
   }
 }
 
-export const fetchKeijiDetail = async (keijitype: number, genrecd: number, seqNo: string): Promise<string | null> => {
+export interface KeijiAttachment {
+  name: string
+  downloadUrl: string
+}
+
+export interface KeijiDetailResult {
+  content: string | null
+  attachments: KeijiAttachment[]
+}
+
+export const fetchKeijiDetail = async (keijitype: number, genrecd: number, seqNo: string): Promise<KeijiDetailResult> => {
   let response = await fetch('/campusweb/campussquare.do?_flowId=KJW0001100-flow&link=menu-link-mf-135062')
   let flowKey = new URL(response.url).searchParams.get('_flowExecutionKey')
-  if (!flowKey) return null;
+  if (!flowKey) return { content: null, attachments: [] };
 
   let params = new URLSearchParams({
     _flowExecutionKey: flowKey,
@@ -102,7 +112,7 @@ export const fetchKeijiDetail = async (keijitype: number, genrecd: number, seqNo
   response = await fetch(`/campusweb/campussquare.do?${params}`)
 
   flowKey = new URL(response.url).searchParams.get('_flowExecutionKey')
-  if (!flowKey) return null;
+  if (!flowKey) return { content: null, attachments: [] };
 
   params = new URLSearchParams({
     _flowExecutionKey: flowKey,
@@ -113,22 +123,41 @@ export const fetchKeijiDetail = async (keijitype: number, genrecd: number, seqNo
   })
 
   const html = await fetch(`/campusweb/campussquare.do?${params}`).then(r => r.text())
-  console.log(html)
-  
-  // HTMLから掲示本文を抽出
+
+  // HTMLから掲示本文と添付ファイルを抽出
   const parser = new DOMParser()
   const doc = parser.parseFromString(html, 'text/html')
+
+  // 掲示本文を抽出
+  let content: string | null = null
   const keijiNaiyoElement = doc.querySelector('.keiji-naiyo')
-  
   if (keijiNaiyoElement) {
     // <BR>タグを改行に変換し、HTMLタグを除去
-    let content = keijiNaiyoElement.innerHTML
+    content = keijiNaiyoElement.innerHTML
       .replace(/<BR\s*\/?>/gi, '\n')
       .replace(/<[^>]*>/g, '')
       .trim()
-    
-    return content
   }
 
-  return null
+  // 添付ファイルを抽出
+  const attachments: KeijiAttachment[] = []
+  const attachmentTbody = Array.from(doc.querySelectorAll('table.keiji-normal tbody'))
+    .find(tbody => tbody.querySelector('th')?.textContent === '添付ファイル')
+
+  if (attachmentTbody) {
+    const attachmentLinks = Array.from(attachmentTbody.querySelectorAll('td a'))
+    attachmentLinks.forEach(link => {
+      const href = link.getAttribute('href')
+      const fileName = link.textContent?.trim()
+
+      if (href && fileName) {
+        attachments.push({
+          name: fileName,
+          downloadUrl: href
+        })
+      }
+    })
+  }
+
+  return { content, attachments }
 }

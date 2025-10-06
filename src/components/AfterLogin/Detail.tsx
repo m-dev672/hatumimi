@@ -4,7 +4,7 @@ import {
 } from '@chakra-ui/react'
 import { formatDate } from './utils'
 import type { KeijiData } from './sqlDatabase'
-import { fetchKeijiDetail } from './keijiDataExtractor'
+import { fetchKeijiDetail, type KeijiAttachment } from './keijiDataExtractor'
 import { activateSession } from '@/context/Auth/authCookie'
 import { useAuth } from '@/hook/useAuth'
 
@@ -17,6 +17,7 @@ interface DetailProps {
 export function Detail({ keiji, isOpen, onClose }: DetailProps) {
   const auth = useAuth()
   const [detailContent, setDetailContent] = useState<string | null>(null)
+  const [attachments, setAttachments] = useState<KeijiAttachment[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const isLoadingRef = useRef(false)
 
@@ -29,8 +30,9 @@ export function Detail({ keiji, isOpen, onClose }: DetailProps) {
       // Detail専用のセッション管理（分離）
       const activated = await activateSession(auth.user)
       if (activated) {
-        const content = await fetchKeijiDetail(keiji?.keijitype || 0, keiji?.genrecd || 0, keiji?.seqNo || '')
-        setDetailContent(content)
+        const result = await fetchKeijiDetail(keiji?.keijitype || 0, keiji?.genrecd || 0, keiji?.seqNo || '')
+        setDetailContent(result.content)
+        setAttachments(result.attachments)
       } else {
         console.error('セッションの有効化に失敗しました')
       }
@@ -42,16 +44,32 @@ export function Detail({ keiji, isOpen, onClose }: DetailProps) {
     }
   }, [auth.user, keiji?.keijitype, keiji?.genrecd, keiji?.seqNo])
 
-  const handleAttachmentClick = useCallback((attachment: { name: string; size: string }) => {
-    // 添付ファイルダウンロード処理（仮置き）
-    console.log('Downloading attachment:', attachment.name)
-    alert(`添付ファイル「${attachment.name}」のダウンロードを開始します。`)
+  const handleAttachmentClick = useCallback(async (attachment: KeijiAttachment) => {
+    try {
+      const response = await fetch(`/campusweb/${attachment.downloadUrl}`)
+      if (!response.ok) {
+        throw new Error(`ダウンロードに失敗しました: ${response.status}`)
+      }
+      
+      const blob = await response.blob()
+      const url = window.URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = attachment.name
+      document.body.appendChild(a)
+      a.click()
+      document.body.removeChild(a)
+      window.URL.revokeObjectURL(url)
+    } catch (error) {
+      console.error('ファイルのダウンロードに失敗しました:', error)
+    }
   }, [])
 
   useEffect(() => {
     if (isOpen && keiji) {
       // 掲示が変わった時はコンテンツをリセット
       setDetailContent(null)
+      setAttachments([])
       fetchDetail()
     }
   }, [isOpen, keiji, fetchDetail])
@@ -60,39 +78,12 @@ export function Detail({ keiji, isOpen, onClose }: DetailProps) {
   useEffect(() => {
     if (!isOpen) {
       setDetailContent(null)
+      setAttachments([])
     }
   }, [isOpen])
 
   if (!isOpen || !keiji) return null
 
-  // 仮置きの詳細コンテンツ
-  const mockContent = `システムメンテナンスを下記の通り実施いたします。
-
-【メンテナンス日時】
-2024年1月20日（土） 2:00 ～ 6:00（予定）
-
-【メンテナンス内容】
-・システムの安定性向上のためのアップデート
-・セキュリティパッチの適用
-・データベースの最適化
-
-【影響範囲】
-メンテナンス時間中は、以下のサービスがご利用いただけません。
-・学務システム全般
-・履修登録機能
-・成績照会機能
-
-ご迷惑をおかけいたしますが、ご理解とご協力をお願いいたします。
-
-【お問い合わせ】
-システムに関するお問い合わせは、学務課までご連絡ください。
-TEL: 03-1234-5678
-Email: gakumu@university.ac.jp`
-
-  const mockAttachments = [
-    { name: 'メンテナンス詳細.pdf', size: '256KB' },
-    { name: '影響範囲一覧.xlsx', size: '128KB' }
-  ]
 
   return (
     <Box
@@ -157,18 +148,18 @@ Email: gakumu@university.ac.jp`
                 whiteSpace="pre-wrap"
                 color="gray.700"
               >
-                {isLoading ? '詳細情報を取得中...' : (detailContent || mockContent)}
+                {isLoading ? '詳細情報を取得中...' : (detailContent || '詳細情報を取得できませんでした。')}
               </Text>
             </Box>
 
             {/* 添付ファイル */}
-            {mockAttachments.length > 0 && (
+            {attachments.length > 0 && (
               <VStack alignItems="start" gap={3} w="full">
                 <Heading size="md" color="gray.700">
                   添付ファイル
                 </Heading>
                 <VStack gap={2} w="full" alignItems="start">
-                  {mockAttachments.map((attachment, index) => (
+                  {attachments.map((attachment, index) => (
                     <Box
                       key={index}
                       p={3}
@@ -187,9 +178,6 @@ Email: gakumu@university.ac.jp`
                             📎 {attachment.name}
                           </Text>
                         </HStack>
-                        <Text fontSize="xs" color="gray.500">
-                          {attachment.size}
-                        </Text>
                       </HStack>
                     </Box>
                   ))}
