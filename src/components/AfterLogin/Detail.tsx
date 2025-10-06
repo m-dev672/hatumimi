@@ -321,9 +321,12 @@ export function Detail({ keiji, isOpen, onClose }: DetailProps) {
                               >
                                 <Box
                                   overflow="hidden"
-                                  textOverflow="ellipsis"
-                                  whiteSpace={{ base: "normal", md: "nowrap" }}
                                   title={cell}
+                                  style={{
+                                    display: '-webkit-box',
+                                    WebkitLineClamp: 2,
+                                    WebkitBoxOrient: 'vertical'
+                                  }}
                                   lineHeight={1.4}
                                 >
                                   {cell}
