@@ -255,39 +255,11 @@ export function AfterLogin() {
         </Box>
       </VStack>
 
-      {/* モーダル */}
-      {isDetailOpen && selectedKeiji && (
-        <Box
-          position="fixed"
-          top={0}
-          left={0}
-          w="100vw"
-          h="100vh"
-          bg="rgba(0, 0, 0, 0.5)"
-          zIndex={1000}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          p={4}
-          onClick={handleCloseDetail}
-        >
-          <Box
-            bg="white"
-            borderRadius="lg"
-            boxShadow="xl"
-            w="full"
-            maxW="4xl"
-            maxH="90vh"
-            overflow="hidden"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <Detail
-              keijiId={selectedKeiji.id.toString()}
-              onBack={handleCloseDetail}
-            />
-          </Box>
-        </Box>
-      )}
+      <Detail
+        keiji={selectedKeiji}
+        isOpen={isDetailOpen}
+        onClose={handleCloseDetail}
+      />
     </Box>
   )
 }

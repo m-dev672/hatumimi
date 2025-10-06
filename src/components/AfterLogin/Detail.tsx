@@ -3,21 +3,19 @@ import {
   Badge, Box, Button, Heading, HStack, Text, VStack,
 } from '@chakra-ui/react'
 import { formatDate } from './utils'
+import type { KeijiData } from './sqlDatabase'
 
 interface DetailProps {
-  keijiId?: string
-  onBack: () => void
+  keiji: KeijiData | null
+  isOpen: boolean
+  onClose: () => void
 }
 
-export function Detail({ keijiId, onBack }: DetailProps) {
+export function Detail({ keiji, isOpen, onClose }: DetailProps) {
+  if (!isOpen || !keiji) return null
 
-  // 仮置きデータ
-  const mockData = {
-    id: keijiId || '1',
-    title: '【重要】システムメンテナンスのお知らせ',
-    genre_name: '重要',
-    published_at: '2024-01-15T10:00:00Z',
-    content: `システムメンテナンスを下記の通り実施いたします。
+  // 仮置きの詳細コンテンツ
+  const mockContent = `システムメンテナンスを下記の通り実施いたします。
 
 【メンテナンス日時】
 2024年1月20日（土） 2:00 ～ 6:00（予定）
@@ -38,13 +36,12 @@ export function Detail({ keijiId, onBack }: DetailProps) {
 【お問い合わせ】
 システムに関するお問い合わせは、学務課までご連絡ください。
 TEL: 03-1234-5678
-Email: gakumu@university.ac.jp`,
-    attachments: [
-      { name: 'メンテナンス詳細.pdf', size: '256KB' },
-      { name: '影響範囲一覧.xlsx', size: '128KB' }
-    ]
-  }
+Email: gakumu@university.ac.jp`
 
+  const mockAttachments = [
+    { name: 'メンテナンス詳細.pdf', size: '256KB' },
+    { name: '影響範囲一覧.xlsx', size: '128KB' }
+  ]
 
   const handleAttachmentClick = useCallback((attachment: { name: string; size: string }) => {
     // 添付ファイルダウンロード処理（仮置き）
@@ -53,38 +50,57 @@ Email: gakumu@university.ac.jp`,
   }, [])
 
   return (
-    <Box bg="gray.50" minH="100vh" p={4}>
-      <VStack h="100%" maxH="calc(100vh - 2rem)" gap={4}>
-        <HStack w="full" flex="0 0 auto" gap={3}>
-          <Button onClick={onBack} variant="outline" size="sm">
-            ← 戻る
-          </Button>
-          <Heading size="lg">掲示詳細</Heading>
-        </HStack>
+    <Box
+      position="fixed"
+      top={0}
+      left={0}
+      w="100vw"
+      h="100vh"
+      bg="rgba(0, 0, 0, 0.5)"
+      zIndex={1000}
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      p={4}
+      onClick={onClose}
+    >
+      <Box
+        bg="white"
+        borderRadius="lg"
+        boxShadow="xl"
+        w="full"
+        maxW="4xl"
+        maxH="90vh"
+        overflow="hidden"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <Box bg="gray.50" p={4}>
+          <HStack w="full" gap={3}>
+            <Button onClick={onClose} variant="outline" size="sm">
+              ← 戻る
+            </Button>
+            <Heading size="lg">掲示詳細</Heading>
+          </HStack>
+        </Box>
 
         <Box 
-          bg="white" 
-          borderRadius="lg" 
-          border="1px" 
-          borderColor="gray.200" 
-          w="full" 
-          flex="1" 
           p={6}
           overflowY="auto"
+          maxH="calc(90vh - 80px)"
         >
           <VStack alignItems="start" gap={6} w="full">
             {/* ヘッダー情報 */}
             <VStack alignItems="start" gap={3} w="full">
               <HStack justify="space-between" w="full">
                 <Badge colorScheme="red" fontSize="sm" px={3} py={1}>
-                  {mockData.genre_name}
+                  {keiji.genre_name}
                 </Badge>
                 <Text fontSize="sm" color="gray.500">
-                  {formatDate(mockData.published_at)}
+                  {formatDate(keiji.published_at)}
                 </Text>
               </HStack>
               <Heading size="lg" lineHeight="tall">
-                {mockData.title}
+                {keiji.title}
               </Heading>
             </VStack>
 
@@ -96,18 +112,18 @@ Email: gakumu@university.ac.jp`,
                 whiteSpace="pre-wrap"
                 color="gray.700"
               >
-                {mockData.content}
+                {mockContent}
               </Text>
             </Box>
 
             {/* 添付ファイル */}
-            {mockData.attachments.length > 0 && (
+            {mockAttachments.length > 0 && (
               <VStack alignItems="start" gap={3} w="full">
                 <Heading size="md" color="gray.700">
                   添付ファイル
                 </Heading>
                 <VStack gap={2} w="full" alignItems="start">
-                  {mockData.attachments.map((attachment, index) => (
+                  {mockAttachments.map((attachment, index) => (
                     <Box
                       key={index}
                       p={3}
@@ -137,7 +153,7 @@ Email: gakumu@university.ac.jp`,
             )}
           </VStack>
         </Box>
-      </VStack>
+      </Box>
     </Box>
   )
 }
