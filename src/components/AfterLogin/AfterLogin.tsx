@@ -9,6 +9,8 @@ import { useAuth } from '@/hook/useAuth'
 import type { KeijiData, KeijiGenre } from './sqlDatabase'
 import { getKeijiData, getKeijiGenres } from './sqlDatabase'
 import { updateKeijiData } from './updateKeijiData'
+import { Detail } from './Detail'
+import { formatDate } from './utils'
 
 interface Filters {
   title?: string
@@ -24,6 +26,8 @@ export function AfterLogin() {
   const [error, setError] = useState<string>()
   const [searchTitle, setSearchTitle] = useState('')
   const [selectedGenre, setSelectedGenre] = useState('')
+  const [selectedKeiji, setSelectedKeiji] = useState<KeijiData | null>(null)
+  const [isDetailOpen, setIsDetailOpen] = useState(false)
 
   const filters = useMemo<Filters | undefined>(() => {
     return searchTitle || selectedGenre 
@@ -51,6 +55,16 @@ export function AfterLogin() {
     setSelectedGenre(details.value[0] || '')
   }, [])
 
+  const handleKeijiClick = useCallback((item: KeijiData) => {
+    setSelectedKeiji(item)
+    setIsDetailOpen(true)
+  }, [])
+
+  const handleCloseDetail = useCallback(() => {
+    setIsDetailOpen(false)
+    setSelectedKeiji(null)
+  }, [])
+
   const handleManualRefresh = useCallback(async () => {
     if (!auth.user.id || updating) return
     
@@ -69,16 +83,6 @@ export function AfterLogin() {
     }
   }, [auth.user, updating, loadFilteredData])
 
-  const formatDate = useCallback((dateStr: string) => {
-    if (!dateStr) return ''
-    try {
-      return new Date(dateStr).toLocaleDateString('ja-JP', {
-        year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
-      })
-    } catch {
-      return dateStr
-    }
-  }, [])
 
   useEffect(() => {
     if (!auth.user.id) return
@@ -226,8 +230,16 @@ export function AfterLogin() {
             ) : (
               <VStack gap={0} w="full">
                 {data.map((item) => (
-                  <Box key={item.id} p={4} borderBottom="1px" borderColor="gray.200" 
-                       _hover={{ bg: 'gray.50' }} w="full">
+                  <Box 
+                    key={item.id} 
+                    p={4} 
+                    borderBottom="1px" 
+                    borderColor="gray.200" 
+                    _hover={{ bg: 'gray.50' }} 
+                    w="full"
+                    cursor="pointer"
+                    onClick={() => handleKeijiClick(item)}
+                  >
                     <VStack alignItems="start" gap={2}>
                       <HStack justify="space-between" w="full">
                         <Badge colorScheme="blue" fontSize="xs">{item.genre_name}</Badge>
@@ -242,6 +254,40 @@ export function AfterLogin() {
           </Box>
         </Box>
       </VStack>
+
+      {/* モーダル */}
+      {isDetailOpen && selectedKeiji && (
+        <Box
+          position="fixed"
+          top={0}
+          left={0}
+          w="100vw"
+          h="100vh"
+          bg="rgba(0, 0, 0, 0.5)"
+          zIndex={1000}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          p={4}
+          onClick={handleCloseDetail}
+        >
+          <Box
+            bg="white"
+            borderRadius="lg"
+            boxShadow="xl"
+            w="full"
+            maxW="4xl"
+            maxH="90vh"
+            overflow="hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Detail
+              keijiId={selectedKeiji.id.toString()}
+              onBack={handleCloseDetail}
+            />
+          </Box>
+        </Box>
+      )}
     </Box>
   )
 }
