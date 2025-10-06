@@ -8,6 +8,7 @@ import { activateSession, deactivateSession } from '@/context/Auth/authCookie'
 import { useAuth } from '@/hook/useAuth'
 import type { KeijiData, KeijiGenre } from './sqlDatabase'
 import { getKeijiData, getKeijiGenres } from './sqlDatabase'
+import { shouldSkipAutoUpdate, recordLastUpdate } from './indexedDatabase'
 import { updateKeijiData } from './updateKeijiData'
 import { Detail } from './Detail'
 import { formatDate } from './utils'
@@ -75,6 +76,8 @@ export function AfterLogin() {
       if (activated) {
         await updateKeijiData()
         await loadFilteredData(filtersRef.current)
+        // 手動更新完了後に最終更新時刻を記録
+        await recordLastUpdate()
         await deactivateSession()
       }
     } catch (error) {
@@ -100,21 +103,30 @@ export function AfterLogin() {
         setGenres(genreData)
         setLoading(false)
 
-        sessionActivated = await activateSession(auth.user)
-        if (sessionActivated && !abortController.signal.aborted) {
-          setUpdating(true)
-          try {
-            await updateKeijiData()
-            if (!abortController.signal.aborted) {
-              await loadFilteredData(filtersRef.current)
-            }
-          } catch (error) {
-            console.warn('掲示データの更新に失敗しました:', error)
-          } finally {
-            if (!abortController.signal.aborted) {
-              setUpdating(false)
+        // 1時間以内の更新をスキップするかチェック
+        const skipUpdate = await shouldSkipAutoUpdate()
+        
+        if (!skipUpdate) {
+          sessionActivated = await activateSession(auth.user)
+          if (sessionActivated && !abortController.signal.aborted) {
+            setUpdating(true)
+            try {
+              await updateKeijiData()
+              if (!abortController.signal.aborted) {
+                await loadFilteredData(filtersRef.current)
+                // 更新完了後に最終更新時刻を記録
+                await recordLastUpdate()
+              }
+            } catch (error) {
+              console.warn('掲示データの更新に失敗しました:', error)
+            } finally {
+              if (!abortController.signal.aborted) {
+                setUpdating(false)
+              }
             }
           }
+        } else {
+          console.log('1時間以内に更新済みのため、自動更新をスキップします')
         }
       } catch {
         if (!abortController.signal.aborted) {
