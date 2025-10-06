@@ -297,7 +297,7 @@ export function Detail({ keiji, isOpen, onClose }: DetailProps) {
                         </Text>
                       </Box>
                     )}
-                    <Table.Root size="sm" variant="line">
+                    <Table.Root size="sm" variant="line" style={{ tableLayout: "fixed" }}>
                       <Table.Body>
                         {table.rows.map((row, rowIndex) => (
                           <Table.Row 
@@ -311,17 +311,20 @@ export function Detail({ keiji, isOpen, onClose }: DetailProps) {
                                 key={cellIndex} 
                                 fontSize="sm" 
                                 py={3}
-                                px={4}
+                                px={{ base: 2, md: 4 }}
                                 borderColor="gray.200"
                                 color={cellIndex === 0 ? 'gray.700' : 'gray.600'}
                                 fontWeight={cellIndex === 0 ? 'medium' : 'normal'}
-                                maxW="300px"
+                                width={cellIndex === 0 ? { base: "120px", md: "200px" } : "auto"}
+                                minW={cellIndex === 0 ? { base: "120px", md: "200px" } : { base: "200px", md: "300px" }}
+                                maxW={cellIndex === 0 ? { base: "120px", md: "200px" } : { base: "300px", md: "500px" }}
                               >
                                 <Box
                                   overflow="hidden"
                                   textOverflow="ellipsis"
-                                  whiteSpace="nowrap"
+                                  whiteSpace={{ base: "normal", md: "nowrap" }}
                                   title={cell}
+                                  lineHeight={1.4}
                                 >
                                   {cell}
                                 </Box>
