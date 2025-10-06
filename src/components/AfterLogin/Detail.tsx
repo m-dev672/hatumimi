@@ -162,64 +162,66 @@ export function Detail({ keiji, isOpen, onClose }: DetailProps) {
 
             {/* URLテーブル */}
             {urlTables.length > 0 && (
-              <VStack alignItems="start" gap={4} w="full">
+              <VStack alignItems="start" gap={6} w="full">
                 <Heading size="md" color="gray.700">
-                  🔗 関連リンク
+                  関連リンク
                 </Heading>
                 {urlTables.map((urlTable, tableIndex) => (
-                  <VStack key={tableIndex} gap={3} w="full" alignItems="start">
+                  <Box 
+                    key={tableIndex} 
+                    w="full" 
+                    border="1px" 
+                    borderColor="gray.300" 
+                    borderRadius="lg" 
+                    overflow="hidden"
+                    boxShadow="sm"
+                    bg="white"
+                  >
                     {urlTable.title && (
-                      <Text fontSize="sm" fontWeight="semibold" color="blue.700">
-                        {urlTable.title}
-                      </Text>
-                    )}
-                    {urlTable.urls.map((url, urlIndex) => (
-                      <Box
-                        key={urlIndex}
-                        p={3}
-                        border="1px"
-                        borderColor="blue.300"
-                        borderRadius="lg"
-                        bg="blue.25"
-                        w="full"
-                        _hover={{ 
-                          bg: 'blue.50', 
-                          borderColor: 'blue.400',
-                          transform: 'translateY(-1px)',
-                          boxShadow: 'md'
-                        }}
-                        transition="all 0.2s"
-                        boxShadow="sm"
-                      >
-                        <HStack gap={3}>
-                          <Box
-                            bg="blue.100"
-                            borderRadius="md"
-                            p={2}
-                          >
-                            <Text fontSize="lg">🌐</Text>
-                          </Box>
-                          <Link
-                            href={url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            color="blue.600"
-                            textDecoration="underline"
-                            _hover={{ color: 'blue.800' }}
-                            fontSize="sm"
-                            fontWeight="medium"
-                            overflow="hidden"
-                            textOverflow="ellipsis"
-                            whiteSpace="nowrap"
-                            flex="1"
-                            title={url}
-                          >
-                            {url}
-                          </Link>
-                        </HStack>
+                      <Box bg="blue.50" px={4} py={3} borderBottom="1px" borderColor="gray.200">
+                        <Text fontSize="sm" fontWeight="semibold" color="blue.700">
+                          {urlTable.title}
+                        </Text>
                       </Box>
-                    ))}
-                  </VStack>
+                    )}
+                    <Table.Root size="sm" variant="line">
+                      <Table.Body>
+                        {urlTable.urls.map((url, urlIndex) => (
+                          <Table.Row 
+                            key={urlIndex} 
+                            bg={urlIndex % 2 === 0 ? 'gray.25' : 'white'}
+                            _hover={{ bg: 'blue.25' }}
+                            transition="background-color 0.2s"
+                          >
+                            <Table.Cell 
+                              fontSize="sm" 
+                              py={3}
+                              px={4}
+                              borderColor="gray.200"
+                            >
+                              <Link
+                                href={url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                color="blue.600"
+                                textDecoration="underline"
+                                _hover={{ color: 'blue.800' }}
+                                fontSize="sm"
+                                fontWeight="medium"
+                                overflow="hidden"
+                                textOverflow="ellipsis"
+                                whiteSpace="nowrap"
+                                display="block"
+                                title={url}
+                              >
+                                {url}
+                              </Link>
+                            </Table.Cell>
+                          </Table.Row>
+                        ))}
+                      </Table.Body>
+                    </Table.Root>
+                  </Box>
                 ))}
               </VStack>
             )}
@@ -228,7 +230,7 @@ export function Detail({ keiji, isOpen, onClose }: DetailProps) {
             {attachments.length > 0 && (
               <VStack alignItems="start" gap={4} w="full">
                 <Heading size="md" color="gray.700">
-                  📎 添付ファイル
+                  添付ファイル
                 </Heading>
                 <VStack gap={3} w="full" alignItems="start">
                   {attachments.map((attachment, index) => (
@@ -251,28 +253,14 @@ export function Detail({ keiji, isOpen, onClose }: DetailProps) {
                       boxShadow="sm"
                       onClick={() => handleAttachmentClick(attachment)}
                     >
-                      <HStack justify="space-between" w="full">
-                        <HStack gap={3}>
-                          <Box
-                            bg="blue.100"
-                            borderRadius="md"
-                            p={2}
-                          >
-                            <Text fontSize="lg">📄</Text>
-                          </Box>
-                          <VStack alignItems="start" gap={1}>
-                            <Text fontSize="sm" fontWeight="medium" color="gray.700">
-                              {attachment.name}
-                            </Text>
-                            <Text fontSize="xs" color="gray.500">
-                              クリックしてダウンロード
-                            </Text>
-                          </VStack>
-                        </HStack>
-                        <Text fontSize="sm" color="blue.600" fontWeight="medium">
-                          ⬇️
+                      <VStack alignItems="start" gap={1} w="full">
+                        <Text fontSize="sm" fontWeight="medium" color="gray.700">
+                          {attachment.name}
                         </Text>
-                      </HStack>
+                        <Text fontSize="xs" color="gray.500">
+                          クリックしてダウンロード
+                        </Text>
+                      </VStack>
                     </Box>
                   ))}
                 </VStack>
@@ -283,7 +271,7 @@ export function Detail({ keiji, isOpen, onClose }: DetailProps) {
             {tables.length > 0 && (
               <VStack alignItems="start" gap={6} w="full">
                 <Heading size="md" color="gray.700">
-                  📋 追加情報
+                  追加情報
                 </Heading>
                 {tables.map((table, tableIndex) => (
                   <Box 
