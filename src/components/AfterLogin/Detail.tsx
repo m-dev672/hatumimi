@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import {
-  Badge, Box, Button, Heading, HStack, Table, Text, VStack,
+  Badge, Box, Button, Heading, HStack, Link, Table, Text, VStack,
 } from '@chakra-ui/react'
 import { formatDate } from './utils'
 import type { KeijiData } from './sqlDatabase'
-import { fetchKeijiDetail, type KeijiAttachment, type KeijiTable } from './keijiDataExtractor'
+import { fetchKeijiDetail, type KeijiAttachment, type KeijiTable, type KeijiUrlTable } from './keijiDataExtractor'
 import { activateSession } from '@/context/Auth/authCookie'
 import { useAuth } from '@/hook/useAuth'
 
@@ -19,6 +19,7 @@ export function Detail({ keiji, isOpen, onClose }: DetailProps) {
   const [detailContent, setDetailContent] = useState<string | null>(null)
   const [attachments, setAttachments] = useState<KeijiAttachment[]>([])
   const [tables, setTables] = useState<KeijiTable[]>([])
+  const [urlTables, setUrlTables] = useState<KeijiUrlTable[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const isLoadingRef = useRef(false)
 
@@ -35,6 +36,7 @@ export function Detail({ keiji, isOpen, onClose }: DetailProps) {
         setDetailContent(result.content)
         setAttachments(result.attachments)
         setTables(result.tables)
+        setUrlTables(result.urlTables)
       } else {
         console.error('セッションの有効化に失敗しました')
       }
@@ -73,6 +75,7 @@ export function Detail({ keiji, isOpen, onClose }: DetailProps) {
       setDetailContent(null)
       setAttachments([])
       setTables([])
+      setUrlTables([])
       fetchDetail()
     }
   }, [isOpen, keiji, fetchDetail])
@@ -83,6 +86,7 @@ export function Detail({ keiji, isOpen, onClose }: DetailProps) {
       setDetailContent(null)
       setAttachments([])
       setTables([])
+      setUrlTables([])
     }
   }, [isOpen])
 
@@ -155,6 +159,70 @@ export function Detail({ keiji, isOpen, onClose }: DetailProps) {
                 {isLoading ? '詳細情報を取得中...' : (detailContent || '詳細情報を取得できませんでした。')}
               </Text>
             </Box>
+
+            {/* URLテーブル */}
+            {urlTables.length > 0 && (
+              <VStack alignItems="start" gap={4} w="full">
+                <Heading size="md" color="gray.700">
+                  🔗 関連リンク
+                </Heading>
+                {urlTables.map((urlTable, tableIndex) => (
+                  <VStack key={tableIndex} gap={3} w="full" alignItems="start">
+                    {urlTable.title && (
+                      <Text fontSize="sm" fontWeight="semibold" color="blue.700">
+                        {urlTable.title}
+                      </Text>
+                    )}
+                    {urlTable.urls.map((url, urlIndex) => (
+                      <Box
+                        key={urlIndex}
+                        p={3}
+                        border="1px"
+                        borderColor="blue.300"
+                        borderRadius="lg"
+                        bg="blue.25"
+                        w="full"
+                        _hover={{ 
+                          bg: 'blue.50', 
+                          borderColor: 'blue.400',
+                          transform: 'translateY(-1px)',
+                          boxShadow: 'md'
+                        }}
+                        transition="all 0.2s"
+                        boxShadow="sm"
+                      >
+                        <HStack gap={3}>
+                          <Box
+                            bg="blue.100"
+                            borderRadius="md"
+                            p={2}
+                          >
+                            <Text fontSize="lg">🌐</Text>
+                          </Box>
+                          <Link
+                            href={url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            color="blue.600"
+                            textDecoration="underline"
+                            _hover={{ color: 'blue.800' }}
+                            fontSize="sm"
+                            fontWeight="medium"
+                            overflow="hidden"
+                            textOverflow="ellipsis"
+                            whiteSpace="nowrap"
+                            flex="1"
+                            title={url}
+                          >
+                            {url}
+                          </Link>
+                        </HStack>
+                      </Box>
+                    ))}
+                  </VStack>
+                ))}
+              </VStack>
+            )}
 
             {/* 添付ファイル */}
             {attachments.length > 0 && (
@@ -255,14 +323,14 @@ export function Detail({ keiji, isOpen, onClose }: DetailProps) {
                                 fontWeight={cellIndex === 0 ? 'medium' : 'normal'}
                                 maxW="300px"
                               >
-                                <Text
+                                <Box
                                   overflow="hidden"
                                   textOverflow="ellipsis"
                                   whiteSpace="nowrap"
                                   title={cell}
                                 >
                                   {cell}
-                                </Text>
+                                </Box>
                               </Table.Cell>
                             ))}
                           </Table.Row>

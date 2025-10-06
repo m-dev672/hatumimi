@@ -101,16 +101,22 @@ export interface KeijiTable {
   rows: KeijiTableRow[]
 }
 
+export interface KeijiUrlTable {
+  title?: string
+  urls: string[]
+}
+
 export interface KeijiDetailResult {
   content: string | null
   attachments: KeijiAttachment[]
   tables: KeijiTable[]
+  urlTables: KeijiUrlTable[]
 }
 
 export const fetchKeijiDetail = async (keijitype: number, genrecd: number, seqNo: string): Promise<KeijiDetailResult> => {
   let response = await fetch('/campusweb/campussquare.do?_flowId=KJW0001100-flow&link=menu-link-mf-135062')
   let flowKey = new URL(response.url).searchParams.get('_flowExecutionKey')
-  if (!flowKey) return { content: null, attachments: [], tables: [] };
+  if (!flowKey) return { content: null, attachments: [], tables: [], urlTables: [] };
 
   let params = new URLSearchParams({
     _flowExecutionKey: flowKey,
@@ -122,7 +128,7 @@ export const fetchKeijiDetail = async (keijitype: number, genrecd: number, seqNo
   response = await fetch(`/campusweb/campussquare.do?${params}`)
 
   flowKey = new URL(response.url).searchParams.get('_flowExecutionKey')
-  if (!flowKey) return { content: null, attachments: [], tables: [] };
+  if (!flowKey) return { content: null, attachments: [], tables: [], urlTables: [] };
 
   params = new URLSearchParams({
     _flowExecutionKey: flowKey,
@@ -151,9 +157,10 @@ export const fetchKeijiDetail = async (keijitype: number, genrecd: number, seqNo
       .trim()
   }
 
-  // テーブルから添付ファイルとテーブル情報を抽出
+  // テーブルから添付ファイル、URL、その他のテーブル情報を抽出
   const attachments: KeijiAttachment[] = []
   const tables: KeijiTable[] = []
+  const urlTables: KeijiUrlTable[] = []
   const tbodies = Array.from(doc.querySelectorAll('table.keiji-normal tbody'))
   
   tbodies.forEach(tbody => {
@@ -173,6 +180,27 @@ export const fetchKeijiDetail = async (keijitype: number, genrecd: number, seqNo
           })
         }
       })
+    } else if (thElement?.textContent === 'URL') {
+      // URL専用の処理
+      const urlList: string[] = []
+      const tds = Array.from(tbody.querySelectorAll('td'))
+      
+      tds.forEach(td => {
+        let text = td.innerHTML
+          .replace(/<BR\s*\/?>/gi, '\n')
+          .replace(/<[^>]*>/g, '')
+          .replace(/&nbsp;/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim()
+        
+        if (text && text.length > 0 && !text.match(/^[\s\n,]*$/)) {
+          urlList.push(text)
+        }
+      })
+      
+      if (urlList.length > 0) {
+        urlTables.push({ urls: urlList })
+      }
     } else {
       // その他の情報を個別のテーブルとして抽出
       const tableRows: KeijiTableRow[] = []
@@ -207,5 +235,5 @@ export const fetchKeijiDetail = async (keijitype: number, genrecd: number, seqNo
     }
   })
 
-  return { content, attachments, tables }
+  return { content, attachments, tables, urlTables }
 }
