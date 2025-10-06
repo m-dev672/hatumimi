@@ -136,27 +136,57 @@ export const fetchKeijiDetail = async (keijitype: number, genrecd: number, seqNo
     content = keijiNaiyoElement.innerHTML
       .replace(/<BR\s*\/?>/gi, '\n')
       .replace(/<[^>]*>/g, '')
+      .replace(/&nbsp;/g, ' ')
+      .replace(/[ \t]+/g, ' ')
       .trim()
   }
 
-  // 添付ファイルを抽出
+  // テーブルから追加情報と添付ファイルを抽出
   const attachments: KeijiAttachment[] = []
-  const attachmentTbody = Array.from(doc.querySelectorAll('table.keiji-normal tbody'))
-    .find(tbody => tbody.querySelector('th')?.textContent === '添付ファイル')
+  const additionalInfo: string[] = []
+  const tbodies = Array.from(doc.querySelectorAll('table.keiji-normal tbody'))
+  
+  tbodies.forEach(tbody => {
+    const thElement = tbody.querySelector('th')
+    
+    if (thElement?.textContent === '添付ファイル') {
+      // 添付ファイルの処理
+      const attachmentLinks = Array.from(tbody.querySelectorAll('td a'))
+      attachmentLinks.forEach(link => {
+        const href = link.getAttribute('href')
+        const fileName = link.textContent?.trim()
 
-  if (attachmentTbody) {
-    const attachmentLinks = Array.from(attachmentTbody.querySelectorAll('td a'))
-    attachmentLinks.forEach(link => {
-      const href = link.getAttribute('href')
-      const fileName = link.textContent?.trim()
+        if (href && fileName) {
+          attachments.push({
+            name: fileName,
+            downloadUrl: href
+          })
+        }
+      })
+    } else {
+      // その他の情報を追加情報として抽出（thとtdの両方）
+      const cells = Array.from(tbody.querySelectorAll('th, td'))
+      cells.forEach(cell => {
+        // HTMLを整形してからテキストを抽出
+        let text = cell.innerHTML
+          .replace(/<BR\s*\/?>/gi, '\n')
+          .replace(/<[^>]*>/g, '')
+          .replace(/&nbsp;/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim()
+        
+        if (text && text.length > 0 && !text.match(/^[\s\n,]*$/)) {
+          additionalInfo.push(text)
+        }
+      })
+    }
+  })
 
-      if (href && fileName) {
-        attachments.push({
-          name: fileName,
-          downloadUrl: href
-        })
-      }
-    })
+  // 追加情報を本文に追加
+  if (additionalInfo.length > 0 && content) {
+    content += '\n\n--- 追加情報 ---\n' + additionalInfo.join('\n')
+  } else if (additionalInfo.length > 0 && !content) {
+    content = '--- 追加情報 ---\n' + additionalInfo.join('\n')
   }
 
   return { content, attachments }
