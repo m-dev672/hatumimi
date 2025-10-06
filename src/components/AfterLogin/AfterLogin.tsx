@@ -56,9 +56,10 @@ export function AfterLogin() {
   }, [])
 
   const handleKeijiClick = useCallback((item: KeijiData) => {
+    if (updating) return // 更新中はクリック無効
     setSelectedKeiji(item)
     setIsDetailOpen(true)
-  }, [])
+  }, [updating])
 
   const handleCloseDetail = useCallback(() => {
     setIsDetailOpen(false)
@@ -70,8 +71,8 @@ export function AfterLogin() {
     
     setUpdating(true)
     try {
-      const sessionActivated = await activateSession(auth.user)
-      if (sessionActivated) {
+      const activated = await activateSession(auth.user)
+      if (activated) {
         await updateKeijiData()
         await loadFilteredData(filtersRef.current)
         await deactivateSession()
@@ -235,9 +236,10 @@ export function AfterLogin() {
                     p={4} 
                     borderBottom="1px" 
                     borderColor="gray.200" 
-                    _hover={{ bg: 'gray.50' }} 
+                    _hover={updating ? {} : { bg: 'gray.50' }} 
                     w="full"
-                    cursor="pointer"
+                    cursor={updating ? "not-allowed" : "pointer"}
+                    opacity={updating ? 0.6 : 1}
                     onClick={() => handleKeijiClick(item)}
                   >
                     <VStack alignItems="start" gap={2}>

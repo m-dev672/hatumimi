@@ -1,9 +1,12 @@
-import { useCallback } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import {
   Badge, Box, Button, Heading, HStack, Text, VStack,
 } from '@chakra-ui/react'
 import { formatDate } from './utils'
 import type { KeijiData } from './sqlDatabase'
+import { fetchKeijiDetail } from './keijiDataExtractor'
+import { activateSession } from '@/context/Auth/authCookie'
+import { useAuth } from '@/hook/useAuth'
 
 interface DetailProps {
   keiji: KeijiData | null
@@ -12,6 +15,54 @@ interface DetailProps {
 }
 
 export function Detail({ keiji, isOpen, onClose }: DetailProps) {
+  const auth = useAuth()
+  const [detailContent, setDetailContent] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const isLoadingRef = useRef(false)
+
+  const fetchDetail = useCallback(async () => {
+    if (!auth.user.id || isLoadingRef.current) return
+
+    isLoadingRef.current = true
+    setIsLoading(true)
+    try {
+      // Detail専用のセッション管理（分離）
+      const activated = await activateSession(auth.user)
+      if (activated) {
+        const content = await fetchKeijiDetail(keiji?.keijitype || 0, keiji?.genrecd || 0, keiji?.seqNo || '')
+        setDetailContent(content)
+      } else {
+        console.error('セッションの有効化に失敗しました')
+      }
+    } catch (error) {
+      console.error('詳細情報の取得に失敗しました:', error)
+    } finally {
+      isLoadingRef.current = false
+      setIsLoading(false)
+    }
+  }, [auth.user, keiji?.keijitype, keiji?.genrecd, keiji?.seqNo])
+
+  const handleAttachmentClick = useCallback((attachment: { name: string; size: string }) => {
+    // 添付ファイルダウンロード処理（仮置き）
+    console.log('Downloading attachment:', attachment.name)
+    alert(`添付ファイル「${attachment.name}」のダウンロードを開始します。`)
+  }, [])
+
+  useEffect(() => {
+    if (isOpen && keiji) {
+      // 掲示が変わった時はコンテンツをリセット
+      setDetailContent(null)
+      fetchDetail()
+    }
+  }, [isOpen, keiji, fetchDetail])
+
+  // モーダルが閉じられた時にコンテンツをクリア
+  useEffect(() => {
+    if (!isOpen) {
+      setDetailContent(null)
+    }
+  }, [isOpen])
+
   if (!isOpen || !keiji) return null
 
   // 仮置きの詳細コンテンツ
@@ -42,12 +93,6 @@ Email: gakumu@university.ac.jp`
     { name: 'メンテナンス詳細.pdf', size: '256KB' },
     { name: '影響範囲一覧.xlsx', size: '128KB' }
   ]
-
-  const handleAttachmentClick = useCallback((attachment: { name: string; size: string }) => {
-    // 添付ファイルダウンロード処理（仮置き）
-    console.log('Downloading attachment:', attachment.name)
-    alert(`添付ファイル「${attachment.name}」のダウンロードを開始します。`)
-  }, [])
 
   return (
     <Box
@@ -83,7 +128,7 @@ Email: gakumu@university.ac.jp`
           </HStack>
         </Box>
 
-        <Box 
+        <Box
           p={6}
           overflowY="auto"
           maxH="calc(90vh - 80px)"
@@ -106,13 +151,13 @@ Email: gakumu@university.ac.jp`
 
             {/* 本文 */}
             <Box w="full">
-              <Text 
-                fontSize="md" 
-                lineHeight="tall" 
+              <Text
+                fontSize="md"
+                lineHeight="tall"
                 whiteSpace="pre-wrap"
                 color="gray.700"
               >
-                {mockContent}
+                {isLoading ? '詳細情報を取得中...' : (detailContent || mockContent)}
               </Text>
             </Box>
 
