@@ -7,7 +7,7 @@ import { SelectContent, SelectItem, SelectRoot, SelectTrigger, SelectValueText }
 import { activateSession, deactivateSession } from '@/context/Auth/authCookie'
 import { useAuth } from '@/hook/useAuth'
 import type { KeijiData, KeijiGenre } from './sqlDatabase'
-import { getKeijiData, getKeijiGenres } from './sqlDatabase'
+import { getKeijiData, getKeijiGenres, getKeijiDataPaged, getKeijiDataCount } from './sqlDatabase'
 import { shouldSkipAutoUpdate, recordLastUpdate } from './indexedDatabase'
 import { updateKeijiData } from './updateKeijiData'
 import { Detail } from './Detail'
@@ -29,6 +29,10 @@ export function AfterLogin() {
   const [selectedGenre, setSelectedGenre] = useState('')
   const [selectedKeiji, setSelectedKeiji] = useState<KeijiData | null>(null)
   const [isDetailOpen, setIsDetailOpen] = useState(false)
+  const [loadingMore, setLoadingMore] = useState(false)
+  const [hasMore, setHasMore] = useState(true)
+  const [totalCount, setTotalCount] = useState(0)
+  const PAGE_SIZE = 20
 
   const filters = useMemo<Filters | undefined>(() => {
     return searchTitle || selectedGenre 
@@ -39,14 +43,32 @@ export function AfterLogin() {
   const filtersRef = useRef(filters)
   filtersRef.current = filters
 
-  const loadFilteredData = useCallback(async (filters?: Filters) => {
+  const loadFilteredData = useCallback(async (filters?: Filters, reset = true) => {
     try {
-      const result = await getKeijiData(filters)
-      setData(result)
+      if (reset) {
+        // 初回読み込みまたはフィルター変更時
+        const [result, count] = await Promise.all([
+          getKeijiDataPaged(filters, 0, PAGE_SIZE),
+          getKeijiDataCount(filters)
+        ])
+        setData(result)
+        setTotalCount(count)
+        setHasMore(result.length === PAGE_SIZE && result.length < count)
+      } else {
+        // 追加読み込み時
+        setLoadingMore(true)
+        const offset = data.length
+        const result = await getKeijiDataPaged(filters, offset, PAGE_SIZE)
+        
+        setData(prev => [...prev, ...result])
+        setHasMore(result.length === PAGE_SIZE && (data.length + result.length) < totalCount)
+        setLoadingMore(false)
+      }
     } catch (error) {
       console.warn('データの取得に失敗しました:', error)
+      if (!reset) setLoadingMore(false)
     }
-  }, [])
+  }, [data.length, totalCount])
 
   const handleTitleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTitle(e.target.value)
@@ -75,7 +97,7 @@ export function AfterLogin() {
       const activated = await activateSession(auth.user)
       if (activated) {
         await updateKeijiData()
-        await loadFilteredData(filtersRef.current)
+        await loadFilteredData(filtersRef.current, true)
         // 手動更新完了後に最終更新時刻を記録
         await recordLastUpdate()
         await deactivateSession()
@@ -87,6 +109,21 @@ export function AfterLogin() {
     }
   }, [auth.user, updating, loadFilteredData])
 
+  const handleLoadMore = useCallback(() => {
+    if (!loadingMore && hasMore && !updating) {
+      loadFilteredData(filtersRef.current, false)
+    }
+  }, [loadingMore, hasMore, updating, loadFilteredData])
+
+  const handleScroll = useCallback((e: React.UIEvent<HTMLDivElement>) => {
+    const target = e.target as HTMLDivElement
+    const threshold = 100 // ピクセル
+    
+    if (target.scrollHeight - target.scrollTop <= target.clientHeight + threshold) {
+      handleLoadMore()
+    }
+  }, [handleLoadMore])
+
 
   useEffect(() => {
     if (!auth.user.id) return
@@ -96,11 +133,22 @@ export function AfterLogin() {
 
     const initializeData = async () => {
       try {
-        const [initialData, genreData] = await Promise.all([getKeijiData(), getKeijiGenres()])
+        const genreData = await getKeijiGenres()
         if (abortController.signal.aborted) return
         
-        setData(initialData)
         setGenres(genreData)
+        
+        // 初期データをページング読み込み
+        const [result, count] = await Promise.all([
+          getKeijiDataPaged(undefined, 0, PAGE_SIZE),
+          getKeijiDataCount(undefined)
+        ])
+        
+        if (abortController.signal.aborted) return
+        
+        setData(result)
+        setTotalCount(count)
+        setHasMore(result.length === PAGE_SIZE && result.length < count)
         setLoading(false)
 
         // 1時間以内の更新をスキップするかチェック
@@ -113,7 +161,14 @@ export function AfterLogin() {
             try {
               await updateKeijiData()
               if (!abortController.signal.aborted) {
-                await loadFilteredData(filtersRef.current)
+                // 更新後に再度データを取得
+                const [updatedResult, updatedCount] = await Promise.all([
+                  getKeijiDataPaged(filtersRef.current, 0, PAGE_SIZE),
+                  getKeijiDataCount(filtersRef.current)
+                ])
+                setData(updatedResult)
+                setTotalCount(updatedCount)
+                setHasMore(updatedResult.length === PAGE_SIZE && updatedResult.length < updatedCount)
                 // 更新完了後に最終更新時刻を記録
                 await recordLastUpdate()
               }
@@ -141,12 +196,27 @@ export function AfterLogin() {
       abortController.abort()
       if (sessionActivated) deactivateSession() 
     }
-  }, [auth.user, loadFilteredData])
+  }, [auth.user])
 
   useEffect(() => {
     if (loading) return
-    loadFilteredData(filters)
-  }, [filters, loadFilteredData, loading])
+    
+    const loadData = async () => {
+      try {
+        const [result, count] = await Promise.all([
+          getKeijiDataPaged(filters, 0, PAGE_SIZE),
+          getKeijiDataCount(filters)
+        ])
+        setData(result)
+        setTotalCount(count)
+        setHasMore(result.length === PAGE_SIZE && result.length < count)
+      } catch (error) {
+        console.warn('データの取得に失敗しました:', error)
+      }
+    }
+    
+    loadData()
+  }, [filters, loading])
 
   if (loading) return (
     <Center h="100vh" flexDirection="column" mx={4}>
@@ -191,7 +261,7 @@ export function AfterLogin() {
              w="full" flex="1" display="flex" flexDirection="column" minH="0">
           <Box p={4} borderBottom="1px" borderColor="gray.200" bg="gray.100">
             <VStack gap={3} alignItems="stretch">
-              <Text fontWeight="bold">掲示一覧 ({data.length}件)</Text>
+              <Text fontWeight="bold">掲示一覧 ({totalCount}件)</Text>
               <Box display="flex" flexDirection={{ base: "column", md: "row" }} gap={3} alignItems="stretch">
                 <Field flex={{ base: "none", md: "1" }}>
                   <Input
@@ -233,7 +303,7 @@ export function AfterLogin() {
             </VStack>
           </Box>
           
-          <Box overflowY="auto" flex="1">
+          <Box overflowY="auto" flex="1" onScroll={handleScroll}>
             {data.length === 0 ? (
               <Center p={8}>
                 <Text color="gray.500">
@@ -268,6 +338,19 @@ export function AfterLogin() {
                     </VStack>
                   </Box>
                 ))}
+                {loadingMore && (
+                  <Center p={4}>
+                    <HStack>
+                      <Spinner size="sm" />
+                      <Text fontSize="sm" color="gray.500">読み込み中...</Text>
+                    </HStack>
+                  </Center>
+                )}
+                {!hasMore && data.length > 0 && (
+                  <Center p={4}>
+                    <Text fontSize="sm" color="gray.500">全ての掲示を表示しました</Text>
+                  </Center>
+                )}
               </VStack>
             )}
           </Box>
