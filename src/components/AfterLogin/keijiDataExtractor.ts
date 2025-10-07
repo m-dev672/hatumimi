@@ -163,10 +163,23 @@ export const fetchKeijiDetail = async (keijitype: number, genrecd: number, seqNo
   const urlTables: KeijiUrlTable[] = []
   const tbodies = Array.from(doc.querySelectorAll('table.keiji-normal tbody'))
   
+  // 連続するth+tdテーブルを統合するための処理
+  let currentMergedTableRows: KeijiTableRow[] = []
+  
+  const addCurrentMergedTable = () => {
+    if (currentMergedTableRows.length > 0) {
+      tables.push({ rows: currentMergedTableRows })
+      currentMergedTableRows = []
+    }
+  }
+  
   tbodies.forEach(tbody => {
     const thElement = tbody.querySelector('th')
     
     if (thElement?.textContent === '添付ファイル') {
+      // 連続が途切れるので現在の統合テーブルを確定
+      addCurrentMergedTable()
+      
       // 添付ファイルの処理
       const attachmentLinks = Array.from(tbody.querySelectorAll('td a'))
       attachmentLinks.forEach(link => {
@@ -181,6 +194,9 @@ export const fetchKeijiDetail = async (keijitype: number, genrecd: number, seqNo
         }
       })
     } else if (thElement?.textContent === 'URL') {
+      // 連続が途切れるので現在の統合テーブルを確定
+      addCurrentMergedTable()
+      
       // URL専用の処理
       const urlList: string[] = []
       const tds = Array.from(tbody.querySelectorAll('td'))
@@ -202,38 +218,79 @@ export const fetchKeijiDetail = async (keijitype: number, genrecd: number, seqNo
         urlTables.push({ urls: urlList })
       }
     } else {
-      // その他の情報を個別のテーブルとして抽出
-      const tableRows: KeijiTableRow[] = []
+      // その他の情報を処理
       const rows = Array.from(tbody.querySelectorAll('tr'))
       
-      rows.forEach(row => {
-        const cells = Array.from(row.querySelectorAll('th, td'))
-        const rowData: string[] = []
-        
-        cells.forEach(cell => {
-          // HTMLを整形してからテキストを抽出
-          let text = cell.innerHTML
-            .replace(/<BR\s*\/?>/gi, '\n')
-            .replace(/<[^>]*>/g, '')
-            .replace(/&nbsp;/g, ' ')
-            .replace(/\s+/g, ' ')
-            .trim()
+      // 全ての行がth+td構造のテーブルかどうかを判定
+      const isThTdTable = rows.length > 0 && rows.every(row => {
+        const thCount = row.querySelectorAll('th').length
+        const tdCount = row.querySelectorAll('td').length
+        return thCount === 1 && tdCount === 1
+      })
+      
+      if (isThTdTable) {
+        // 連続するth+tdテーブルは統合対象に追加
+        rows.forEach(row => {
+          const cells = Array.from(row.querySelectorAll('th, td'))
+          const rowData: string[] = []
           
-          if (text && text.length > 0 && !text.match(/^[\s\n,]*$/)) {
-            rowData.push(text)
+          cells.forEach(cell => {
+            // HTMLを整形してからテキストを抽出
+            let text = cell.innerHTML
+              .replace(/<BR\s*\/?>/gi, '\n')
+              .replace(/<[^>]*>/g, '')
+              .replace(/&nbsp;/g, ' ')
+              .replace(/\s+/g, ' ')
+              .trim()
+            
+            if (text && text.length > 0 && !text.match(/^[\s\n,]*$/)) {
+              rowData.push(text)
+            }
+          })
+          
+          if (rowData.length > 0) {
+            currentMergedTableRows.push({ cells: rowData })
+          }
+        })
+      } else {
+        // 連続が途切れるので現在の統合テーブルを確定
+        addCurrentMergedTable()
+        
+        // 複数行のテーブルまたは異なる構造の場合は個別のテーブルとして処理
+        const tableRows: KeijiTableRow[] = []
+        
+        rows.forEach(row => {
+          const cells = Array.from(row.querySelectorAll('th, td'))
+          const rowData: string[] = []
+          
+          cells.forEach(cell => {
+            // HTMLを整形してからテキストを抽出
+            let text = cell.innerHTML
+              .replace(/<BR\s*\/?>/gi, '\n')
+              .replace(/<[^>]*>/g, '')
+              .replace(/&nbsp;/g, ' ')
+              .replace(/\s+/g, ' ')
+              .trim()
+            
+            if (text && text.length > 0 && !text.match(/^[\s\n,]*$/)) {
+              rowData.push(text)
+            }
+          })
+          
+          if (rowData.length > 0) {
+            tableRows.push({ cells: rowData })
           }
         })
         
-        if (rowData.length > 0) {
-          tableRows.push({ cells: rowData })
+        if (tableRows.length > 0) {
+          tables.push({ rows: tableRows })
         }
-      })
-      
-      if (tableRows.length > 0) {
-        tables.push({ rows: tableRows })
       }
     }
   })
+  
+  // 最後に残った統合テーブルがある場合は追加
+  addCurrentMergedTable()
 
   return { content, attachments, tables, urlTables }
 }

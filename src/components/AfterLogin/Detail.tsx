@@ -184,46 +184,48 @@ export function Detail({ keiji, isOpen, onClose }: DetailProps) {
                         </Text>
                       </Box>
                     )}
-                    <Table.Root size="sm" variant="line">
-                      <Table.Body>
-                        {urlTable.urls.map((url, urlIndex) => (
-                          <Table.Row 
-                            key={urlIndex} 
-                            bg={urlIndex % 2 === 0 ? 'gray.25' : 'white'}
-                            _hover={{ bg: 'blue.25' }}
-                            transition="background-color 0.2s"
-                          >
-                            <Table.Cell 
-                              fontSize="sm" 
-                              py={3}
-                              px={4}
-                              borderColor="gray.200"
+                      <Table.Root size="sm" variant="line">
+                        <Table.Body>
+                          {urlTable.urls.map((url, urlIndex) => (
+                            <Table.Row 
+                              key={urlIndex} 
+                              bg={urlIndex % 2 === 0 ? 'gray.25' : 'white'}
+                              _hover={{ bg: 'blue.25' }}
+                              transition="background-color 0.2s"
                             >
-                              <HStack gap={2}>
-                                <Text fontSize="sm" color="blue.500">🔗</Text>
-                                <Link
-                                  href={url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  color="blue.600"
-                                  textDecoration="underline"
-                                  _hover={{ color: 'blue.800' }}
-                                  fontSize="sm"
-                                  fontWeight="medium"
-                                  overflow="hidden"
-                                  textOverflow="ellipsis"
-                                  whiteSpace="nowrap"
-                                  flex="1"
-                                  title={url}
-                                >
-                                  {url}
-                                </Link>
-                              </HStack>
-                            </Table.Cell>
-                          </Table.Row>
-                        ))}
-                      </Table.Body>
-                    </Table.Root>
+                              <Table.Cell 
+                                fontSize="sm" 
+                                py={3}
+                                px={4}
+                                borderColor="gray.200"
+                                maxW="0"
+                                w="full"
+                              >
+                                <HStack gap={2} w="full">
+                                  <Text fontSize="sm" color="blue.500" flexShrink={0}>🔗</Text>
+                                  <Link
+                                    href={url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    color="blue.600"
+                                    textDecoration="underline"
+                                    _hover={{ color: 'blue.800' }}
+                                    fontSize="sm"
+                                    fontWeight="medium"
+                                    flex="1"
+                                    minW="0"
+                                    title={url}
+                                    truncate
+                                    display="block"
+                                  >
+                                    {url}
+                                  </Link>
+                                </HStack>
+                              </Table.Cell>
+                            </Table.Row>
+                          ))}
+                        </Table.Body>
+                      </Table.Root>
                   </Box>
                 ))}
               </VStack>
