@@ -7,7 +7,7 @@ import { SelectContent, SelectItem, SelectRoot, SelectTrigger, SelectValueText }
 import { activateSession, deactivateSession } from '@/context/Auth/authCookie'
 import { useAuth } from '@/hook/useAuth'
 import type { KeijiData, KeijiGenre } from './sqlDatabase'
-import { getKeijiData, getKeijiGenres, getKeijiDataPaged, getKeijiDataCount } from './sqlDatabase'
+import { getKeijiGenres, getKeijiDataPaged, getKeijiDataCount } from './sqlDatabase'
 import { shouldSkipAutoUpdate, recordLastUpdate } from './indexedDatabase'
 import { updateKeijiData } from './updateKeijiData'
 import { Detail } from './Detail'
