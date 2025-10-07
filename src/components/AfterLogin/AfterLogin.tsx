@@ -4,6 +4,7 @@ import {
 } from '@chakra-ui/react'
 import { Field } from '@/components/ui/field'
 import { SelectContent, SelectItem, SelectRoot, SelectTrigger, SelectValueText } from '@/components/ui/select'
+import { useColorModeValue } from '@/components/ui/color-mode'
 import { activateSession, deactivateSession } from '@/context/Auth/authCookie'
 import { useAuth } from '@/hook/useAuth'
 import type { KeijiData, KeijiGenre } from './sqlDatabase'
@@ -33,6 +34,14 @@ export function AfterLogin() {
   const [hasMore, setHasMore] = useState(true)
   const [totalCount, setTotalCount] = useState(0)
   const PAGE_SIZE = 20
+
+  // Color mode values
+  const bgColor = useColorModeValue('gray.50', 'gray.900')
+  const cardBgColor = useColorModeValue('white', 'gray.800')
+  const headerBgColor = useColorModeValue('gray.100', 'gray.700')
+  const borderColor = useColorModeValue('gray.200', 'gray.600')
+  const hoverBgColor = useColorModeValue('gray.50', 'gray.700')
+  const textColor = useColorModeValue('gray.500', 'gray.400')
 
   const filters = useMemo<Filters | undefined>(() => {
     return searchTitle || selectedGenre 
@@ -236,7 +245,7 @@ export function AfterLogin() {
   )
 
   return (
-    <Box bg="gray.50" minH="100vh" p={4}>
+    <Box bg={bgColor} minH="100vh" p={4}>
       <VStack h="100%" maxH="calc(100vh - 2rem)" gap={4}>
         <HStack justify="space-between" w="full" flex="0 0 auto">
           <Heading size="lg">HatuMiMi</Heading>
@@ -257,9 +266,9 @@ export function AfterLogin() {
           </HStack>
         </HStack>
 
-        <Box bg="white" borderRadius="lg" border="1px" borderColor="gray.200" overflow="hidden" 
+        <Box bg={cardBgColor} borderRadius="lg" border="1px" borderColor={borderColor} overflow="hidden" 
              w="full" flex="1" display="flex" flexDirection="column" minH="0">
-          <Box p={4} borderBottom="1px" borderColor="gray.200" bg="gray.100">
+          <Box p={4} borderBottom="1px" borderColor={borderColor} bg={headerBgColor}>
             <VStack gap={3} alignItems="stretch">
               <Text fontWeight="bold">掲示一覧 ({totalCount}件)</Text>
               <Box display="flex" flexDirection={{ base: "column", md: "row" }} gap={3} alignItems="stretch">
@@ -269,7 +278,7 @@ export function AfterLogin() {
                     value={searchTitle}
                     onChange={handleTitleChange}
                     size="sm"
-                    bg="white"
+                    bg={cardBgColor}
                   />
                 </Field>
                 <SelectRoot 
@@ -284,7 +293,7 @@ export function AfterLogin() {
                   size="sm"
                   width={{ base: "100%", md: "18rem" }}
                 >
-                  <SelectTrigger bg="white">
+                  <SelectTrigger bg={cardBgColor}>
                     <SelectValueText placeholder="全てのカテゴリ" />
                   </SelectTrigger>
                   <SelectContent>
@@ -306,7 +315,7 @@ export function AfterLogin() {
           <Box overflowY="auto" flex="1" onScroll={handleScroll}>
             {data.length === 0 ? (
               <Center p={8}>
-                <Text color="gray.500">
+                <Text color={textColor}>
                   {filters ? '検索条件に一致する掲示がありません' : '掲示がありません'}
                 </Text>
               </Center>
@@ -317,8 +326,8 @@ export function AfterLogin() {
                     key={item.id} 
                     p={4} 
                     borderBottom="1px" 
-                    borderColor="gray.200" 
-                    _hover={updating ? {} : { bg: 'gray.50' }} 
+                    borderColor={borderColor} 
+                    _hover={updating ? {} : { bg: hoverBgColor }} 
                     w="full"
                     cursor={updating ? "not-allowed" : "pointer"}
                     opacity={updating ? 0.6 : 1}
@@ -327,12 +336,12 @@ export function AfterLogin() {
                     <VStack alignItems="start" gap={2}>
                       <HStack justify="space-between" w="full" flexWrap="wrap" gap={2}>
                         <Badge colorScheme="blue" fontSize="xs">{item.genre_name}</Badge>
-                        <Text fontSize="xs" color="gray.500" textAlign="right" display={{ base: "none", md: "block" }}>
+                        <Text fontSize="xs" color={textColor} textAlign="right" display={{ base: "none", md: "block" }}>
                           {formatDate(item.published_at)}
                         </Text>
                       </HStack>
                       <Text fontWeight="semibold" fontSize="sm" lineHeight="short">{item.title}</Text>
-                      <Text fontSize="xs" color="gray.500" textAlign="right" w="full" display={{ base: "block", md: "none" }}>
+                      <Text fontSize="xs" color={textColor} textAlign="right" w="full" display={{ base: "block", md: "none" }}>
                         {formatDate(item.published_at)}
                       </Text>
                     </VStack>
@@ -342,13 +351,13 @@ export function AfterLogin() {
                   <Center p={4}>
                     <HStack>
                       <Spinner size="sm" />
-                      <Text fontSize="sm" color="gray.500">読み込み中...</Text>
+                      <Text fontSize="sm" color={textColor}>読み込み中...</Text>
                     </HStack>
                   </Center>
                 )}
                 {!hasMore && data.length > 0 && (
                   <Center p={4}>
-                    <Text fontSize="sm" color="gray.500">全ての掲示を表示しました</Text>
+                    <Text fontSize="sm" color={textColor}>全ての掲示を表示しました</Text>
                   </Center>
                 )}
               </VStack>

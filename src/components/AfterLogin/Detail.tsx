@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import {
   Badge, Box, Button, Heading, HStack, Link, Table, Text, VStack,
 } from '@chakra-ui/react'
+import { useColorModeValue } from '@/components/ui/color-mode'
 import { formatDate } from './utils'
 import type { KeijiData } from './sqlDatabase'
 import { fetchKeijiDetail, type KeijiAttachment, type KeijiTable, type KeijiUrlTable } from './keijiDataExtractor'
@@ -22,6 +23,20 @@ export function Detail({ keiji, isOpen, onClose }: DetailProps) {
   const [urlTables, setUrlTables] = useState<KeijiUrlTable[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const isLoadingRef = useRef(false)
+
+  // Color mode values
+  const overlayBg = useColorModeValue('rgba(0, 0, 0, 0.5)', 'rgba(0, 0, 0, 0.7)')
+  const modalBg = useColorModeValue('white', 'gray.800')
+  const headerBg = useColorModeValue('gray.50', 'gray.700')
+  const textColor = useColorModeValue('gray.700', 'gray.300')
+  const mutedTextColor = useColorModeValue('gray.500', 'gray.400')
+  const borderColor = useColorModeValue('gray.300', 'gray.600')
+  const tableBg = useColorModeValue('white', 'gray.800')
+  const tableHeaderBg = useColorModeValue('blue.50', 'blue.900')
+  const tableRowBg = useColorModeValue('gray.25', 'gray.700')
+  const tableHoverBg = useColorModeValue('blue.25', 'blue.800')
+  const attachmentBg = useColorModeValue('blue.25', 'blue.900')
+  const attachmentHoverBg = useColorModeValue('blue.50', 'blue.800')
 
   const fetchDetail = useCallback(async () => {
     if (!auth.user.id || isLoadingRef.current) return
@@ -100,7 +115,7 @@ export function Detail({ keiji, isOpen, onClose }: DetailProps) {
       left={0}
       w="100vw"
       h="100vh"
-      bg="rgba(0, 0, 0, 0.5)"
+      bg={overlayBg}
       zIndex={1000}
       display="flex"
       alignItems="center"
@@ -109,7 +124,7 @@ export function Detail({ keiji, isOpen, onClose }: DetailProps) {
       onClick={onClose}
     >
       <Box
-        bg="white"
+        bg={modalBg}
         borderRadius={{ base: "md", md: "lg" }}
         boxShadow="xl"
         w="full"
@@ -118,7 +133,7 @@ export function Detail({ keiji, isOpen, onClose }: DetailProps) {
         overflow="hidden"
         onClick={(e) => e.stopPropagation()}
       >
-        <Box bg="gray.50" p={{ base: 3, md: 4 }}>
+        <Box bg={headerBg} p={{ base: 3, md: 4 }}>
           <HStack w="full" gap={3}>
             <Button onClick={onClose} variant="outline" size="sm">
               ← 戻る
@@ -139,14 +154,14 @@ export function Detail({ keiji, isOpen, onClose }: DetailProps) {
                 <Badge colorScheme="red" fontSize="sm" px={3} py={1}>
                   {keiji.genre_name}
                 </Badge>
-                <Text fontSize="sm" color="gray.500" textAlign="right" display={{ base: "none", md: "block" }}>
+                <Text fontSize="sm" color={mutedTextColor} textAlign="right" display={{ base: "none", md: "block" }}>
                   {formatDate(keiji.published_at)}
                 </Text>
               </HStack>
               <Heading size="lg" lineHeight="tall">
                 {keiji.title}
               </Heading>
-              <Text fontSize="sm" color="gray.500" textAlign="right" w="full" display={{ base: "block", md: "none" }}>
+              <Text fontSize="sm" color={mutedTextColor} textAlign="right" w="full" display={{ base: "block", md: "none" }}>
                 {formatDate(keiji.published_at)}
               </Text>
             </VStack>
@@ -157,7 +172,7 @@ export function Detail({ keiji, isOpen, onClose }: DetailProps) {
                 fontSize="md"
                 lineHeight="tall"
                 whiteSpace="pre-wrap"
-                color="gray.700"
+                color={textColor}
               >
                 {isLoading ? '詳細情報を取得中...' : (detailContent || '詳細情報を取得できませんでした。')}
               </Text>
@@ -166,7 +181,7 @@ export function Detail({ keiji, isOpen, onClose }: DetailProps) {
             {/* URLテーブル */}
             {urlTables.length > 0 && (
               <VStack alignItems="start" gap={6} w="full">
-                <Heading size="md" color="gray.700">
+                <Heading size="md" color={textColor}>
                   関連リンク
                 </Heading>
                 {urlTables.map((urlTable, tableIndex) => (
@@ -174,14 +189,14 @@ export function Detail({ keiji, isOpen, onClose }: DetailProps) {
                     key={tableIndex} 
                     w="full" 
                     border="1px" 
-                    borderColor="gray.300" 
+                    borderColor={borderColor} 
                     borderRadius="lg" 
                     overflow="hidden"
                     boxShadow="sm"
-                    bg="white"
+                    bg={tableBg}
                   >
                     {urlTable.title && (
-                      <Box bg="blue.50" px={4} py={3} borderBottom="1px" borderColor="gray.200">
+                      <Box bg={tableHeaderBg} px={4} py={3} borderBottom="1px" borderColor={borderColor}>
                         <Text fontSize="sm" fontWeight="semibold" color="blue.700">
                           {urlTable.title}
                         </Text>
@@ -192,15 +207,15 @@ export function Detail({ keiji, isOpen, onClose }: DetailProps) {
                           {urlTable.urls.map((url, urlIndex) => (
                             <Table.Row 
                               key={urlIndex} 
-                              bg={urlIndex % 2 === 0 ? 'gray.25' : 'white'}
-                              _hover={{ bg: 'blue.25' }}
+                              bg={urlIndex % 2 === 0 ? tableRowBg : tableBg}
+                              _hover={{ bg: tableHoverBg }}
                               transition="background-color 0.2s"
                             >
                               <Table.Cell 
                                 fontSize="sm" 
                                 py={3}
                                 px={4}
-                                borderColor="gray.200"
+                                borderColor={borderColor}
                                 maxW="0"
                                 w="full"
                               >
@@ -237,7 +252,7 @@ export function Detail({ keiji, isOpen, onClose }: DetailProps) {
             {/* 添付ファイル */}
             {attachments.length > 0 && (
               <VStack alignItems="start" gap={4} w="full">
-                <Heading size="md" color="gray.700">
+                <Heading size="md" color={textColor}>
                   添付ファイル
                 </Heading>
                 <VStack gap={3} w="full" alignItems="start">
@@ -246,13 +261,13 @@ export function Detail({ keiji, isOpen, onClose }: DetailProps) {
                       key={index}
                       p={4}
                       border="1px"
-                      borderColor="gray.300"
+                      borderColor={borderColor}
                       borderRadius="lg"
-                      bg="blue.25"
+                      bg={attachmentBg}
                       w="full"
                       cursor="pointer"
                       _hover={{ 
-                        bg: 'blue.50', 
+                        bg: attachmentHoverBg, 
                         borderColor: 'blue.300',
                         transform: 'translateY(-1px)',
                         boxShadow: 'md'
@@ -264,10 +279,10 @@ export function Detail({ keiji, isOpen, onClose }: DetailProps) {
                       <HStack gap={3} w="full">
                         <Text fontSize="lg" color="blue.500">📎</Text>
                         <VStack alignItems="start" gap={1} flex="1">
-                          <Text fontSize="sm" fontWeight="medium" color="gray.700">
+                          <Text fontSize="sm" fontWeight="medium" color={textColor}>
                             {attachment.name}
                           </Text>
-                          <Text fontSize="xs" color="gray.500">
+                          <Text fontSize="xs" color={mutedTextColor}>
                             クリックしてダウンロード
                           </Text>
                         </VStack>
@@ -281,7 +296,7 @@ export function Detail({ keiji, isOpen, onClose }: DetailProps) {
             {/* 追加情報テーブル */}
             {tables.length > 0 && (
               <VStack alignItems="start" gap={6} w="full">
-                <Heading size="md" color="gray.700">
+                <Heading size="md" color={textColor}>
                   追加情報
                 </Heading>
                 {tables.map((table, tableIndex) => (
@@ -289,14 +304,14 @@ export function Detail({ keiji, isOpen, onClose }: DetailProps) {
                     key={tableIndex} 
                     w="full" 
                     border="1px" 
-                    borderColor="gray.300" 
+                    borderColor={borderColor} 
                     borderRadius="lg" 
                     overflow="hidden"
                     boxShadow="sm"
-                    bg="white"
+                    bg={tableBg}
                   >
                     {table.title && (
-                      <Box bg="blue.50" px={4} py={3} borderBottom="1px" borderColor="gray.200">
+                      <Box bg={tableHeaderBg} px={4} py={3} borderBottom="1px" borderColor={borderColor}>
                         <Text fontSize="sm" fontWeight="semibold" color="blue.700">
                           {table.title}
                         </Text>
@@ -307,8 +322,8 @@ export function Detail({ keiji, isOpen, onClose }: DetailProps) {
                         {table.rows.map((row, rowIndex) => (
                           <Table.Row 
                             key={rowIndex} 
-                            bg={rowIndex % 2 === 0 ? 'gray.25' : 'white'}
-                            _hover={{ bg: 'blue.25' }}
+                            bg={rowIndex % 2 === 0 ? tableRowBg : tableBg}
+                            _hover={{ bg: tableHoverBg }}
                             transition="background-color 0.2s"
                           >
                             {row.cells.map((cell, cellIndex) => (
@@ -317,8 +332,8 @@ export function Detail({ keiji, isOpen, onClose }: DetailProps) {
                                 fontSize="sm" 
                                 py={3}
                                 px={{ base: 2, md: 4 }}
-                                borderColor="gray.200"
-                                color={cellIndex === 0 ? 'gray.700' : 'gray.600'}
+                                borderColor={borderColor}
+                                color={cellIndex === 0 ? textColor : mutedTextColor}
                                 fontWeight={cellIndex === 0 ? 'medium' : 'normal'}
                                 width={cellIndex === 0 ? { base: "120px", md: "200px" } : "auto"}
                                 minW={cellIndex === 0 ? { base: "120px", md: "200px" } : { base: "200px", md: "300px" }}
