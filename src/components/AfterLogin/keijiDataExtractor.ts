@@ -262,7 +262,10 @@ export const fetchKeijiDetail = async (keijitype: number, genrecd: number, seqNo
             }
           })
           
-          if (rowData.length > 0) {
+          // 「掲載日時」が含まれる行は除外
+          const hasKeijiDateTime = rowData.some(cell => cell.includes('掲載日時'))
+          
+          if (rowData.length > 0 && !hasKeijiDateTime) {
             currentMergedTableRows.push({ cells: rowData })
           }
         })
@@ -290,7 +293,7 @@ export const fetchKeijiDetail = async (keijitype: number, genrecd: number, seqNo
           
           if (thText && tdText && 
               !thText.match(/^[\s\n,]*$/) && 
-              !tdText.match(/^[\s\n,]*$/)) {
+              !tdText.includes('掲載日時')) {
             currentMergedTableRows.push({ cells: [thText, tdText] })
           }
         }
@@ -321,7 +324,10 @@ export const fetchKeijiDetail = async (keijitype: number, genrecd: number, seqNo
             }
           })
           
-          if (rowData.length > 0) {
+          // 「掲載日時」が含まれる行は除外
+          const hasKeijiDateTime = rowData.some(cell => cell.includes('掲載日時'))
+          
+          if (rowData.length > 0 && !hasKeijiDateTime) {
             tableRows.push({ cells: rowData })
           }
         })
