@@ -255,11 +255,16 @@ export function AfterLogin() {
                     onClick={() => handleKeijiClick(item)}
                   >
                     <VStack alignItems="start" gap={2}>
-                      <HStack justify="space-between" w="full">
+                      <HStack justify="space-between" w="full" flexWrap="wrap" gap={2}>
                         <Badge colorScheme="blue" fontSize="xs">{item.genre_name}</Badge>
-                        <Text fontSize="xs" color="gray.500">{formatDate(item.published_at)}</Text>
+                        <Text fontSize="xs" color="gray.500" textAlign="right" display={{ base: "none", md: "block" }}>
+                          {formatDate(item.published_at)}
+                        </Text>
                       </HStack>
                       <Text fontWeight="semibold" fontSize="sm" lineHeight="short">{item.title}</Text>
+                      <Text fontSize="xs" color="gray.500" textAlign="right" w="full" display={{ base: "block", md: "none" }}>
+                        {formatDate(item.published_at)}
+                      </Text>
                     </VStack>
                   </Box>
                 ))}

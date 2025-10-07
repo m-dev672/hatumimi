@@ -105,47 +105,50 @@ export function Detail({ keiji, isOpen, onClose }: DetailProps) {
       display="flex"
       alignItems="center"
       justifyContent="center"
-      p={4}
+      p={{ base: 2, md: 4 }}
       onClick={onClose}
     >
       <Box
         bg="white"
-        borderRadius="lg"
+        borderRadius={{ base: "md", md: "lg" }}
         boxShadow="xl"
         w="full"
-        maxW="4xl"
-        maxH="90vh"
+        maxW={{ base: "100%", md: "4xl" }}
+        maxH={{ base: "95vh", md: "90vh" }}
         overflow="hidden"
         onClick={(e) => e.stopPropagation()}
       >
-        <Box bg="gray.50" p={4}>
+        <Box bg="gray.50" p={{ base: 3, md: 4 }}>
           <HStack w="full" gap={3}>
             <Button onClick={onClose} variant="outline" size="sm">
               ← 戻る
             </Button>
-            <Heading size="lg">掲示詳細</Heading>
+            <Heading size={{ base: "md", md: "lg" }}>掲示詳細</Heading>
           </HStack>
         </Box>
 
         <Box
-          p={6}
+          p={{ base: 4, md: 6 }}
           overflowY="auto"
-          maxH="calc(90vh - 80px)"
+          maxH={{ base: "calc(95vh - 70px)", md: "calc(90vh - 80px)" }}
         >
           <VStack alignItems="start" gap={6} w="full">
             {/* ヘッダー情報 */}
             <VStack alignItems="start" gap={3} w="full">
-              <HStack justify="space-between" w="full">
+              <HStack justify="space-between" w="full" flexWrap="wrap" gap={2}>
                 <Badge colorScheme="red" fontSize="sm" px={3} py={1}>
                   {keiji.genre_name}
                 </Badge>
-                <Text fontSize="sm" color="gray.500">
+                <Text fontSize="sm" color="gray.500" textAlign="right" display={{ base: "none", md: "block" }}>
                   {formatDate(keiji.published_at)}
                 </Text>
               </HStack>
               <Heading size="lg" lineHeight="tall">
                 {keiji.title}
               </Heading>
+              <Text fontSize="sm" color="gray.500" textAlign="right" w="full" display={{ base: "block", md: "none" }}>
+                {formatDate(keiji.published_at)}
+              </Text>
             </VStack>
 
             {/* 本文 */}

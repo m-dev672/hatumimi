@@ -221,12 +221,26 @@ export const fetchKeijiDetail = async (keijitype: number, genrecd: number, seqNo
       // その他の情報を処理
       const rows = Array.from(tbody.querySelectorAll('tr'))
       
-      // 全ての行がth+td構造のテーブルかどうかを判定
+      // th+td構造のテーブルかどうかを判定
       const isThTdTable = rows.length > 0 && rows.every(row => {
         const thCount = row.querySelectorAll('th').length
         const tdCount = row.querySelectorAll('td').length
         return thCount === 1 && tdCount === 1
       })
+      
+      // thとtdが交互に現れる行構造かどうかを判定
+      const isAlternatingThTdTable = rows.length > 0 && rows.length % 2 === 0 && 
+        rows.every((row, index) => {
+          const thCount = row.querySelectorAll('th').length
+          const tdCount = row.querySelectorAll('td').length
+          if (index % 2 === 0) {
+            // 偶数行はthのみ
+            return thCount === 1 && tdCount === 0
+          } else {
+            // 奇数行はtdのみ
+            return thCount === 0 && tdCount === 1
+          }
+        })
       
       if (isThTdTable) {
         // 連続するth+tdテーブルは統合対象に追加
@@ -252,6 +266,36 @@ export const fetchKeijiDetail = async (keijitype: number, genrecd: number, seqNo
             currentMergedTableRows.push({ cells: rowData })
           }
         })
+      } else if (isAlternatingThTdTable) {
+        // thとtdが交互に現れるテーブルをth+tdペアに変換
+        // 注意: 変換されたth+tdテーブルは他のth+tdテーブルとはマージされず、
+        // 個別のテーブルとして扱われる。これは意図的な動作。
+        for (let i = 0; i < rows.length; i += 2) {
+          const thRow = rows[i]
+          const tdRow = rows[i + 1]
+          
+          const thText = thRow.querySelector('th')?.innerHTML
+            .replace(/<BR\s*\/?>/gi, '\n')
+            .replace(/<[^>]*>/g, '')
+            .replace(/&nbsp;/g, ' ')
+            .replace(/\s+/g, ' ')
+            .trim()
+          
+          const tdText = tdRow.querySelector('td')?.innerHTML
+            .replace(/<BR\s*\/?>/gi, '\n')
+            .replace(/<[^>]*>/g, '')
+            .replace(/&nbsp;/g, ' ')
+            .replace(/\s+/g, ' ')
+            .trim()
+          
+          if (thText && tdText && 
+              !thText.match(/^[\s\n,]*$/) && 
+              !tdText.match(/^[\s\n,]*$/)) {
+            currentMergedTableRows.push({ cells: [thText, tdText] })
+          }
+        }
+        // 変換されたテーブルは個別のテーブルとして確定
+        addCurrentMergedTable()
       } else {
         // 連続が途切れるので現在の統合テーブルを確定
         addCurrentMergedTable()
