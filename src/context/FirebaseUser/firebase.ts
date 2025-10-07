@@ -7,7 +7,7 @@ import { getAuth } from "firebase/auth";
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCuIvToq6rKb3dqFW15P9cRIn78DPT_nW4",
-  authDomain: "hatumimi-dev.firebaseapp.com",
+  authDomain: "hatumimi.snowi.ng",
   projectId: "hatumimi-dev",
   storageBucket: "hatumimi-dev.firebasestorage.app",
   messagingSenderId: "733224170733",
