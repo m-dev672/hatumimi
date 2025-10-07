@@ -1,6 +1,6 @@
 schemaVersion: 2.2.0
 metadata:
-  name: nanitoru
+  name: hatumimi
 components:
   - name: devtools
     container:
@@ -17,5 +17,5 @@ commands:
     exec:
       component: devtools
       commandLine: |
-        . $NVM_DIR/nvm.sh && nvm install && nvm use && cd /projects/nanitoru && npm install &&
+        . $NVM_DIR/nvm.sh && nvm install && nvm use && cd /projects/hatumimi && npm install &&
         export VITE_HTTPS="false" && export VITE_DOMAIN=".$(echo $CHE_DASHBOARD_URL | cut -d'/' -f3)" && npm run dev
